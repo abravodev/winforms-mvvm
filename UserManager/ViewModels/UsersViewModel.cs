@@ -30,10 +30,15 @@ namespace UserManager.ViewModels
             Users.AddRange(users.Select(UserListItemDto.Map).ToList());
         }
 
-        public async Task CreateUser(CreateUserDto user)
+        public async Task<bool> CreateUser(CreateUserDto user)
         {
             try
             {
+                if(!GenericValidator.TryValidate(user, out var validationResults))
+                {
+                    _messageDialog.Show(validationResults);
+                    return false;
+                }
                 var newUser = new User
                 {
                     FirstName = user.FirstName,
@@ -43,10 +48,12 @@ namespace UserManager.ViewModels
                 var createdId = await _userRepository.CreateUser(newUser);
                 Users.Add(UserListItemDto.Map(newUser));
                 _messageDialog.Show(title: "User created", message: $"Name = {newUser.FirstName}, Id = {createdId}");
+                return true;
             }
             catch (Exception ex)
             {
-                _messageDialog.Show(title: "Error in validation", message: ex.Message);
+                _messageDialog.Show(title: "Error in creation", message: ex.Message);
+                return false;
             }
         }
     }

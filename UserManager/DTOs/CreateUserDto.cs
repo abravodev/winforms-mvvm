@@ -1,10 +1,12 @@
-﻿using UserManager.Components;
+﻿using System.ComponentModel.DataAnnotations;
+using UserManager.Components;
 
 namespace UserManager.DTOs
 {
     public class CreateUserDto : BindableObject
     {
         private string _firstName;
+        [Required]
         public string FirstName
         {
             get { return _firstName; }
@@ -12,6 +14,7 @@ namespace UserManager.DTOs
         }
 
         private string _lastName;
+        [Required]
         public string LastName
         {
             get { return _lastName; }
@@ -19,6 +22,7 @@ namespace UserManager.DTOs
         }
 
         private string _email;
+        [Required]
         public string Email
         {
             get { return _email; }
