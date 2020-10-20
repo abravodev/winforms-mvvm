@@ -1,6 +1,6 @@
-﻿namespace UserManager
+﻿namespace UserManager.Views
 {
-    partial class Form1
+    partial class UsersView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_users = new System.Windows.Forms.Button();
+            this.dgv_userlist = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_userlist)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn_users
+            // dgv_userlist
             // 
-            this.btn_users.Location = new System.Drawing.Point(348, 92);
-            this.btn_users.Name = "btn_users";
-            this.btn_users.Size = new System.Drawing.Size(75, 23);
-            this.btn_users.TabIndex = 0;
-            this.btn_users.Text = "Users";
-            this.btn_users.UseVisualStyleBackColor = true;
-            this.btn_users.Click += new System.EventHandler(this.btn_users_click);
+            this.dgv_userlist.AllowUserToAddRows = false;
+            this.dgv_userlist.AllowUserToDeleteRows = false;
+            this.dgv_userlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_userlist.Location = new System.Drawing.Point(265, 12);
+            this.dgv_userlist.Name = "dgv_userlist";
+            this.dgv_userlist.ReadOnly = true;
+            this.dgv_userlist.Size = new System.Drawing.Size(523, 426);
+            this.dgv_userlist.TabIndex = 0;
             // 
-            // Form1
+            // UsersView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_users);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.dgv_userlist);
+            this.Name = "UsersView";
+            this.Text = "UsersView";
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_userlist)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btn_users;
+        private System.Windows.Forms.DataGridView dgv_userlist;
     }
 }
-

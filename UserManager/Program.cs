@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserManager.BusinessLogic.Common;
+using UserManager.BusinessLogic.DataAccess;
+using UserManager.Startup;
 
 namespace UserManager
 {
@@ -16,7 +16,22 @@ namespace UserManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            Startup();
+
             Application.Run(new Form1());
+        }
+
+        private static void Startup()
+        {
+            IoCConfig.Config();
+            Seed();
+        }
+
+        private static void Seed()
+        {
+            var userSeed = IoCConfig.Container.GetInstance<UserSeed>();
+            AsyncHelpers.RunSync(() => userSeed.Execute());
         }
     }
 }
