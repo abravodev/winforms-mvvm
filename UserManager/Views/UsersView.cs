@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
+using UserManager.DTOs;
 using UserManager.Extensions;
 using UserManager.ViewModels;
 

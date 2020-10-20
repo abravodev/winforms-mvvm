@@ -71,7 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup\IoCConfig.cs" />
     <Compile Include="Startup\SimpleInjectorExtensions.cs" />
+    <Compile Include="DTOs\CreateUserDto.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="DTOs\UserListItemDto.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Views\UsersView.cs">
       <SubType>Form</SubType>
