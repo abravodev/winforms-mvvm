@@ -11,5 +11,10 @@ namespace UserManager.Extensions
             var bindingList = new BindingList<TSource>(items);
             dataGridView.DataSource = new BindingSource(bindingList, null);
         }
+
+        public static void ResetDataSourceBinding(this DataGridView dataGridView)
+        {
+            (dataGridView.DataSource as BindingSource).ResetBindings(false);
+        }
     }
 }
