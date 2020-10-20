@@ -16,5 +16,15 @@ namespace UserManager.Extensions
         {
             (dataGridView.DataSource as BindingSource).ResetBindings(false);
         }
+
+        public static void AddBinding<TSource>(this TextBox textBox, TSource dataSource, string dataMember)
+        {
+            textBox.DataBindings.Add(
+                propertyName: nameof(textBox.Text),
+                dataSource: dataSource,
+                dataMember: dataMember,
+                formattingEnabled: false,
+                updateMode: DataSourceUpdateMode.OnPropertyChanged);
+        }
     }
 }

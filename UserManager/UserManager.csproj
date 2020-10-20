@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\BindableObject.cs" />
     <Compile Include="Components\IMessageDialog.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />

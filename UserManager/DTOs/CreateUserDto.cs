@@ -1,11 +1,28 @@
-﻿namespace UserManager.DTOs
+﻿using UserManager.Components;
+
+namespace UserManager.DTOs
 {
-    public class CreateUserDto
+    public class CreateUserDto : BindableObject
     {
-        public string FirstName { get; set; }
+        private string _firstName;
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { SetProperty(ref _firstName, value); }
+        }
 
-        public string LastName { get; set; }
+        private string _lastName;
+        public string LastName
+        {
+            get { return _lastName; }
+            set { SetProperty(ref _lastName, value); }
+        }
 
-        public string Email { get; set; }
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set { SetProperty(ref _email, value); }
+        }
     }
 }
