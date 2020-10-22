@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleInjector;
+using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
 using UserManager.BusinessLogic.DataAccess;
@@ -19,18 +20,19 @@ namespace UserManager
             
             Startup();
 
-            Application.Run(new Form1());
+            var mainForm = IoCConfig.Container.GetInstance<Form1>();
+            Application.Run(mainForm);
         }
 
         private static void Startup()
         {
             IoCConfig.Config();
-            Seed();
+            Seed(IoCConfig.Container);
         }
 
-        private static void Seed()
+        private static void Seed(Container container)
         {
-            var userSeed = IoCConfig.Container.GetInstance<UserSeed>();
+            var userSeed = container.GetInstance<UserSeed>();
             AsyncHelpers.RunSync(() => userSeed.Execute());
         }
     }

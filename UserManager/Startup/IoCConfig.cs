@@ -13,7 +13,7 @@ namespace UserManager.Startup
     {
         public static Container Container { get; private set; }
 
-        public static void Config()
+        public static Container Config()
         {
             var container = new Container();
 
@@ -23,6 +23,7 @@ namespace UserManager.Startup
             RegisterViews(container);
 
             Container = container;
+            return container;
         }
 
         private static void RegisterMappers(Container container)
@@ -49,6 +50,7 @@ namespace UserManager.Startup
         private static void RegisterViews(Container container)
         {
             container.RegisterView<UsersView, UsersViewModel>();
+            container.RegisterView<Form1>();
         }
     }
 }
