@@ -1,9 +1,9 @@
-﻿using SimpleInjector;
+﻿using MvvmTools.Core;
+using SimpleInjector;
 using SimpleInjector.Diagnostics;
 using System.Windows.Forms;
-using UserManager.ViewModels;
 
-namespace UserManager.Startup
+namespace MvvmTools.Common
 {
     public static class SimpleInjectorExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace UserManager.ViewModels
+namespace MvvmTools.Core
 {
     public interface IViewModel
     {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UserManager.Components
+namespace MvvmTools.Components
 {
     public class MessageDialog : IMessageDialog
     {

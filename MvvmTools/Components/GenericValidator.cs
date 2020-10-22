@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace UserManager.Components
+namespace MvvmTools.Components
 {
     /// <summary>
     /// <see href="https://stackoverflow.com/a/52795517"/>

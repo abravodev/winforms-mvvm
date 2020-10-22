@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using SimpleInjector;
-using SimpleInjector.Diagnostics;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UserManager.BusinessLogic.DataAccess;
-using UserManager.Components;
+using MvvmTools.Components;
 using UserManager.Mappers;
 using UserManager.ViewModels;
 using UserManager.Views;
+using MvvmTools.Common;
 
 namespace UserManager.Startup
 {

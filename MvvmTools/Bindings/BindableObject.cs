@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace UserManager.Components
+namespace MvvmTools.Bindings
 {
     /// <summary>
     /// <see href="https://stackoverflow.com/a/33998023"/>

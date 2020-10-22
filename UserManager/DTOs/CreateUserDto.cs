@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UserManager.Components;
+using MvvmTools.Bindings;
 
 namespace UserManager.DTOs
 {

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess;
 using UserManager.BusinessLogic.Model;
-using UserManager.Components;
+using MvvmTools.Components;
 using UserManager.DTOs;
-using UserManager.Extensions;
+using MvvmTools.Bindings;
+using MvvmTools.Core;
 
 namespace UserManager.ViewModels
 {

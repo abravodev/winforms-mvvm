@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace UserManager.Extensions
+namespace MvvmTools.Bindings
 {
     public static class BindingExtensions
     {
