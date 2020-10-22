@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using UserManager.BusinessLogic.Model;
 
 namespace UserManager.DTOs
 {
@@ -16,16 +15,5 @@ namespace UserManager.DTOs
 
         [DisplayName("Email")]
         public string Email { get; set; }
-
-        public static UserListItemDto Map(User user)
-        {
-            return new UserListItemDto
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email?.ToString() ?? "-"
-            };
-        }
     }
 }
