@@ -23,7 +23,6 @@ namespace UserManager.Views
         {
             base.OnLoad(e);
             AsyncHelpers.RunSync(() => _viewModel.Load());
-            dgv_userlist.ResetDataSourceBinding();
         }
 
         private void InitializeDataBindings()
@@ -47,10 +46,7 @@ namespace UserManager.Views
 
         private async void btn_save_click(object sender, EventArgs e)
         {
-            await _viewModel.CreateUser(_creationUser);
-            
-            dgv_userlist.ResetDataSourceBinding();
-            
+            await _viewModel.CreateUser(_creationUser);            
             ClearCreateForm();
         }
 

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess;
 using UserManager.BusinessLogic.Model;
 using UserManager.Components;
 using UserManager.DTOs;
+using UserManager.Extensions;
 
 namespace UserManager.ViewModels
 {
@@ -14,13 +15,13 @@ namespace UserManager.ViewModels
         private readonly IUserRepository _userRepository;
         private readonly IMessageDialog _messageDialog;
 
-        public List<UserListItemDto> Users { get; set; }
+        public BindingList<UserListItemDto> Users { get; set; }
 
         public UsersViewModel(IUserRepository userRepository, IMessageDialog messageDialog)
         {
             _userRepository = userRepository;
             _messageDialog = messageDialog;
-            this.Users = new List<UserListItemDto>();
+            this.Users = new BindingList<UserListItemDto>();
         }
 
         public async Task Load()
