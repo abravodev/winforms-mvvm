@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bindings\Bind.cs" />
     <Compile Include="Bindings\BindableObject.cs" />
     <Compile Include="Components\GenericValidator.cs" />
     <Compile Include="Components\IMessageDialog.cs" />

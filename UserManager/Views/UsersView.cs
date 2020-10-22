@@ -34,9 +34,10 @@ namespace UserManager.Views
 
         private void BindCreateUserForm()
         {
-            this.tb_firstName.AddBinding(_creationUser, nameof(_creationUser.FirstName));
-            this.tb_lastName.AddBinding(_creationUser, nameof(_creationUser.LastName));
-            this.tb_email.AddBinding(_creationUser, nameof(_creationUser.Email));
+            this.BindTo(_creationUser)
+                .For(this.tb_firstName, _ => _.FirstName)
+                .For(this.tb_lastName, _ => _.LastName)
+                .For(this.tb_email, _ => _.Email);
         }
 
         private void BindingUserList()
