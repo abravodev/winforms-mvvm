@@ -1,4 +1,5 @@
-﻿using SimpleInjector;
+﻿using Serilog;
+using SimpleInjector;
 using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
@@ -22,10 +23,12 @@ namespace UserManager
 
             var mainForm = IoCConfig.Container.GetInstance<Form1>();
             Application.Run(mainForm);
+            Log.CloseAndFlush();
         }
 
         private static void Startup()
         {
+            LogConfig.Config();
             ExceptionHandling.Config();
             IoCConfig.Config();
             Seed(IoCConfig.Container);
@@ -33,7 +36,6 @@ namespace UserManager
 
         private static void Seed(Container container)
         {
-            container = null;
             var userSeed = container.GetInstance<UserSeed>();
             AsyncHelpers.RunSync(() => userSeed.Execute());
         }

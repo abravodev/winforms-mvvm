@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -19,12 +20,23 @@ namespace UserManager.Startup
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            Exception exception = e.ExceptionObject as Exception;
+            LogError(exception);
             MessageBox.Show((e.ExceptionObject as Exception).Message, "Unhandled UI Exception");
         }
-
+        
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
+            LogError(e.Exception);
             MessageBox.Show(e.Exception.Message, "Unhandled Thread Exception");
         }
+
+        private static void LogError(Exception exception)
+        {
+            Log.ForContext(typeof(ExceptionHandling))
+                .Error(exception, "{ExceptionMessage}", exception.Message);
+            Log.CloseAndFlush();
+        }
+
     }
 }
