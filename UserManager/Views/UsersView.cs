@@ -27,14 +27,16 @@ namespace UserManager.Views
         {
             this.BindTo(_viewModel)
                 .For(this.dgv_userlist, _ => _.Users)
-                .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo);
+                .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo)
+                .Click(this.bt_save, CreateUser)
+                .Click(this.bt_cancel, ClearCreateForm);
             this.BindTo(_viewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)
                 .For(this.tb_email, _ => _.Email);
         }
 
-        private async void btn_save_click(object sender, EventArgs e)
+        private async void CreateUser()
         {
             await _viewModel.CreateUser();
             ClearCreateForm();
@@ -45,11 +47,6 @@ namespace UserManager.Views
             _viewModel.CreateUserInfo.FirstName = string.Empty;
             _viewModel.CreateUserInfo.LastName = string.Empty;
             _viewModel.CreateUserInfo.Email = string.Empty;
-        }
-
-        private void bt_cancel_click(object sender, EventArgs e)
-        {
-            ClearCreateForm();
         }
     }
 }
