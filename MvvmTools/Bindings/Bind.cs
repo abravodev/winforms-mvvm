@@ -14,10 +14,25 @@ namespace MvvmTools.Bindings
             _item = item;
         }
 
-        public Bind<TBinding> For<TControl>(TControl control, string propertyName, string dataMember, bool formattingEnabled, DataSourceUpdateMode updateMode)
+        public Bind<TBinding> For<TControl>(TControl control, string propertyName, string dataMember)
             where TControl : Control
         {
-            control.DataBindings.Add(propertyName, _item, dataMember, formattingEnabled, updateMode);
+            control.DataBindings.Add(propertyName, _item, dataMember);
+            return this;
+        }
+
+        public Bind<TBinding> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty, Expression<Func<TBinding, TProperty>> member)
+            where TControl : Control
+        {
+            control.DataBindings.Add(GetPropertyName(controlProperty), _item, GetPropertyName(member));
+            return this;
+        }
+
+        public Bind<TBinding> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty, Expression<Func<TBinding, TProperty>> member, Func<TBinding, BindableObject> dependsOn)
+            where TControl : Control
+        {
+            var binding = control.DataBindings.Add(GetPropertyName(controlProperty), _item, GetPropertyName(member));
+            dependsOn(_item).PropertyChanged += (sender, args) => binding.ReadValue();
             return this;
         }
 
@@ -25,13 +40,6 @@ namespace MvvmTools.Bindings
             where TDataGridView : DataGridView
         {
             datagridView.AddBinding(items(_item));
-            return this;
-        }
-
-        public Bind<TBinding> For<TControl>(TControl control, Expression<Func<TControl, object>> controlProperty, string dataMember, bool formattingEnabled, DataSourceUpdateMode updateMode)
-            where TControl : Control
-        {
-            control.DataBindings.Add(GetPropertyName(controlProperty), _item, dataMember, formattingEnabled, updateMode);
             return this;
         }
 
@@ -53,12 +61,13 @@ namespace MvvmTools.Bindings
         /// <param name="textBox"></param>
         /// <param name="member"></param>
         /// <returns></returns>
-        public Bind<TBinding> For(TextBox textBox, Expression<Func<TBinding, object>> member)
+        public Bind<TBinding> For(TextBox textBox, Expression<Func<TBinding, string>> member)
         {
-            return For(textBox, GetPropertyName(member));
+            textBox.AddBinding(_item, GetPropertyName(member));
+            return this;
         }
 
-        private string GetPropertyName<T>(Expression<Func<T, object>> action)
+        private string GetPropertyName<TSource, TProperty>(Expression<Func<TSource, TProperty>> action)
         {
             var body = (MemberExpression)action.Body;
             return body.Member.Name;

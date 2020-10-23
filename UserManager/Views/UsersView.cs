@@ -26,7 +26,8 @@ namespace UserManager.Views
         private void InitializeDataBindings()
         {
             this.BindTo(_viewModel)
-                .For(this.dgv_userlist, _ => _.Users);
+                .For(this.dgv_userlist, _ => _.Users)
+                .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo);
             this.BindTo(_viewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)

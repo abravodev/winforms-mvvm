@@ -38,6 +38,8 @@ namespace UserManager.ViewModels
             Users.AddRange(users.Select(_mapper.Map<UserListItemDto>).ToList());
         }
 
+        public bool CanCreateUser => GenericValidator.TryValidate(CreateUserInfo, out _);
+
         public async Task<bool> CreateUser()
         {
             try
