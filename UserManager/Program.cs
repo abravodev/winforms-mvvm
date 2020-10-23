@@ -26,12 +26,14 @@ namespace UserManager
 
         private static void Startup()
         {
+            ExceptionHandling.Config();
             IoCConfig.Config();
             Seed(IoCConfig.Container);
         }
 
         private static void Seed(Container container)
         {
+            container = null;
             var userSeed = container.GetInstance<UserSeed>();
             AsyncHelpers.RunSync(() => userSeed.Execute());
         }

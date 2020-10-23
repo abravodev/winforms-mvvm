@@ -71,6 +71,7 @@
     <Compile Include="Mappers\UserProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup\ExceptionHandling.cs" />
     <Compile Include="Startup\IoCConfig.cs" />
     <Compile Include="DTOs\CreateUserDto.cs" />
     <Compile Include="DTOs\UserListItemDto.cs" />
