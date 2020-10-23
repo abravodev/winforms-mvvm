@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 
@@ -17,6 +18,13 @@ namespace MvvmTools.Bindings
             where TControl : Control
         {
             control.DataBindings.Add(propertyName, _item, dataMember, formattingEnabled, updateMode);
+            return this;
+        }
+
+        public Bind<TBinding> For<TDataGridView, TSource>(TDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+            where TDataGridView : DataGridView
+        {
+            datagridView.AddBinding(items(_item));
             return this;
         }
 

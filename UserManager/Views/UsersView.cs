@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
-using UserManager.DTOs;
 using UserManager.ViewModels;
 using MvvmTools.Bindings;
 
@@ -10,12 +9,11 @@ namespace UserManager.Views
     public partial class UsersView : Form
     {
         private UsersViewModel _viewModel;
-        private CreateUserDto _creationUser;
 
         public UsersView(UsersViewModel viewModel)
         {
-            _viewModel = viewModel;
             InitializeComponent();
+            _viewModel = viewModel;
             InitializeDataBindings();
         }
 
@@ -27,35 +25,25 @@ namespace UserManager.Views
 
         private void InitializeDataBindings()
         {
-            _creationUser = new CreateUserDto();
-            BindCreateUserForm();
-            BindingUserList();
-        }
-
-        private void BindCreateUserForm()
-        {
-            this.BindTo(_creationUser)
+            this.BindTo(_viewModel)
+                .For(this.dgv_userlist, _ => _.Users);
+            this.BindTo(_viewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)
                 .For(this.tb_email, _ => _.Email);
         }
 
-        private void BindingUserList()
-        {
-            dgv_userlist.AddBinding(_viewModel.Users);
-        }
-
         private async void btn_save_click(object sender, EventArgs e)
         {
-            await _viewModel.CreateUser(_creationUser);            
+            await _viewModel.CreateUser();
             ClearCreateForm();
         }
 
         private void ClearCreateForm()
         {
-            _creationUser.FirstName = string.Empty;
-            _creationUser.LastName = string.Empty;
-            _creationUser.Email = string.Empty;
+            _viewModel.CreateUserInfo.FirstName = string.Empty;
+            _viewModel.CreateUserInfo.LastName = string.Empty;
+            _viewModel.CreateUserInfo.Email = string.Empty;
         }
 
         private void bt_cancel_click(object sender, EventArgs e)

@@ -18,7 +18,9 @@ namespace UserManager.ViewModels
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
 
-        public BindingList<UserListItemDto> Users { get; set; }
+        public BindingList<UserListItemDto> Users { get; }
+
+        public CreateUserDto CreateUserInfo { get; }
 
         public UsersViewModel(IUserRepository userRepository, IMessageDialog messageDialog, IMapper mapper)
         {
@@ -26,6 +28,7 @@ namespace UserManager.ViewModels
             _messageDialog = messageDialog;
             _mapper = mapper;
             this.Users = new BindingList<UserListItemDto>();
+            this.CreateUserInfo = new CreateUserDto();
         }
 
         public async Task Load()
@@ -35,16 +38,16 @@ namespace UserManager.ViewModels
             Users.AddRange(users.Select(_mapper.Map<UserListItemDto>).ToList());
         }
 
-        public async Task<bool> CreateUser(CreateUserDto user)
+        public async Task<bool> CreateUser()
         {
             try
             {
-                if(!GenericValidator.TryValidate(user, out var validationResults))
+                if(!GenericValidator.TryValidate(CreateUserInfo, out var validationResults))
                 {
                     _messageDialog.Show(validationResults);
                     return false;
                 }
-                var newUser = _mapper.Map<User>(user);
+                var newUser = _mapper.Map<User>(CreateUserInfo);
                 var createdId = await _userRepository.CreateUser(newUser);
                 Users.Add(_mapper.Map<UserListItemDto>(newUser));
                 _messageDialog.Show(title: "User created", message: $"Name = {newUser.FirstName}, Id = {createdId}");
