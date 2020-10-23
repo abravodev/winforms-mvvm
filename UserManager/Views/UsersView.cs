@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
 using UserManager.ViewModels;
 using MvvmTools.Bindings;
+using MvvmTools.Validations;
 
 namespace UserManager.Views
 {
@@ -34,6 +35,10 @@ namespace UserManager.Views
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)
                 .For(this.tb_email, _ => _.Email);
+            this.WithValidation(ep_createUser)
+                .On(this.tb_firstName).FieldRequired()
+                .On(this.tb_lastName).FieldRequired()
+                .On(this.tb_email).FieldRequired();
         }
 
         private async void CreateUser()

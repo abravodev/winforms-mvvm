@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgv_userlist = new System.Windows.Forms.DataGridView();
             this.tb_email = new System.Windows.Forms.TextBox();
             this.tlp_createView = new System.Windows.Forms.TableLayoutPanel();
-            this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.tlp_createFields = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_firstName = new System.Windows.Forms.Label();
             this.lbl_email = new System.Windows.Forms.Label();
             this.tb_firstName = new System.Windows.Forms.TextBox();
             this.tb_lastName = new System.Windows.Forms.TextBox();
             this.lbl_lastName = new System.Windows.Forms.Label();
-            this.lbl_firstName = new System.Windows.Forms.Label();
-            this.bt_cancel = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
             this.tlp_createActions = new System.Windows.Forms.TableLayoutPanel();
+            this.bt_save = new System.Windows.Forms.Button();
+            this.bt_cancel = new System.Windows.Forms.Button();
+            this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
+            this.ep_createUser = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_userlist)).BeginInit();
             this.tlp_createView.SuspendLayout();
-            this.tlp_view.SuspendLayout();
             this.tlp_createFields.SuspendLayout();
             this.tlp_createActions.SuspendLayout();
+            this.tlp_view.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ep_createUser)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_userlist
@@ -89,23 +92,6 @@
             this.tlp_createView.Size = new System.Drawing.Size(250, 434);
             this.tlp_createView.TabIndex = 8;
             // 
-            // tlp_view
-            // 
-            this.tlp_view.ColumnCount = 2;
-            this.tlp_view.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlp_view.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlp_view.Controls.Add(this.dgv_userlist, 1, 0);
-            this.tlp_view.Controls.Add(this.tlp_createView, 0, 0);
-            this.tlp_view.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_view.Location = new System.Drawing.Point(0, 0);
-            this.tlp_view.Margin = new System.Windows.Forms.Padding(0);
-            this.tlp_view.Name = "tlp_view";
-            this.tlp_view.Padding = new System.Windows.Forms.Padding(5);
-            this.tlp_view.RowCount = 1;
-            this.tlp_view.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_view.Size = new System.Drawing.Size(800, 450);
-            this.tlp_view.TabIndex = 9;
-            // 
             // tlp_createFields
             // 
             this.tlp_createFields.AutoSize = true;
@@ -129,6 +115,16 @@
             this.tlp_createFields.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createFields.Size = new System.Drawing.Size(250, 78);
             this.tlp_createFields.TabIndex = 9;
+            // 
+            // lbl_firstName
+            // 
+            this.lbl_firstName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lbl_firstName.AutoSize = true;
+            this.lbl_firstName.Location = new System.Drawing.Point(3, 6);
+            this.lbl_firstName.Name = "lbl_firstName";
+            this.lbl_firstName.Size = new System.Drawing.Size(55, 13);
+            this.lbl_firstName.TabIndex = 1;
+            this.lbl_firstName.Text = "First name";
             // 
             // lbl_email
             // 
@@ -166,36 +162,6 @@
             this.lbl_lastName.TabIndex = 2;
             this.lbl_lastName.Text = "Last name";
             // 
-            // lbl_firstName
-            // 
-            this.lbl_firstName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lbl_firstName.AutoSize = true;
-            this.lbl_firstName.Location = new System.Drawing.Point(3, 6);
-            this.lbl_firstName.Name = "lbl_firstName";
-            this.lbl_firstName.Size = new System.Drawing.Size(55, 13);
-            this.lbl_firstName.TabIndex = 1;
-            this.lbl_firstName.Text = "First name";
-            // 
-            // bt_cancel
-            // 
-            this.bt_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_cancel.Location = new System.Drawing.Point(128, 3);
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.Size = new System.Drawing.Size(119, 23);
-            this.bt_cancel.TabIndex = 8;
-            this.bt_cancel.Text = "Cancel";
-            this.bt_cancel.UseVisualStyleBackColor = true;
-            // 
-            // bt_save
-            // 
-            this.bt_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_save.Location = new System.Drawing.Point(3, 3);
-            this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(119, 23);
-            this.bt_save.TabIndex = 7;
-            this.bt_save.Text = "Save";
-            this.bt_save.UseVisualStyleBackColor = true;
-            // 
             // tlp_createActions
             // 
             this.tlp_createActions.AutoSize = true;
@@ -214,6 +180,48 @@
             this.tlp_createActions.Size = new System.Drawing.Size(250, 29);
             this.tlp_createActions.TabIndex = 8;
             // 
+            // bt_save
+            // 
+            this.bt_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_save.Location = new System.Drawing.Point(3, 3);
+            this.bt_save.Name = "bt_save";
+            this.bt_save.Size = new System.Drawing.Size(119, 23);
+            this.bt_save.TabIndex = 7;
+            this.bt_save.Text = "Save";
+            this.bt_save.UseVisualStyleBackColor = true;
+            // 
+            // bt_cancel
+            // 
+            this.bt_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_cancel.Location = new System.Drawing.Point(128, 3);
+            this.bt_cancel.Name = "bt_cancel";
+            this.bt_cancel.Size = new System.Drawing.Size(119, 23);
+            this.bt_cancel.TabIndex = 8;
+            this.bt_cancel.Text = "Cancel";
+            this.bt_cancel.UseVisualStyleBackColor = true;
+            // 
+            // tlp_view
+            // 
+            this.tlp_view.ColumnCount = 2;
+            this.tlp_view.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_view.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_view.Controls.Add(this.dgv_userlist, 1, 0);
+            this.tlp_view.Controls.Add(this.tlp_createView, 0, 0);
+            this.tlp_view.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_view.Location = new System.Drawing.Point(0, 0);
+            this.tlp_view.Margin = new System.Windows.Forms.Padding(0);
+            this.tlp_view.Name = "tlp_view";
+            this.tlp_view.Padding = new System.Windows.Forms.Padding(5);
+            this.tlp_view.RowCount = 1;
+            this.tlp_view.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_view.Size = new System.Drawing.Size(800, 450);
+            this.tlp_view.TabIndex = 9;
+            // 
+            // ep_createUser
+            // 
+            this.ep_createUser.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.ep_createUser.ContainerControl = this;
+            // 
             // UsersView
             // 
             this.AcceptButton = this.bt_save;
@@ -226,11 +234,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_userlist)).EndInit();
             this.tlp_createView.ResumeLayout(false);
             this.tlp_createView.PerformLayout();
-            this.tlp_view.ResumeLayout(false);
-            this.tlp_view.PerformLayout();
             this.tlp_createFields.ResumeLayout(false);
             this.tlp_createFields.PerformLayout();
             this.tlp_createActions.ResumeLayout(false);
+            this.tlp_view.ResumeLayout(false);
+            this.tlp_view.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ep_createUser)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -250,5 +259,6 @@
         private System.Windows.Forms.TableLayoutPanel tlp_createActions;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_cancel;
+        private System.Windows.Forms.ErrorProvider ep_createUser;
     }
 }
