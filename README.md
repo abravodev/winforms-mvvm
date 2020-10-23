@@ -12,7 +12,7 @@ My advice is to use it in new views and, after gaining confidence, starting movi
 
 
 ## Technologies
-- **MVVM** - Custom made actually, but inspired by [mareklinka/WFBind](https://github.com/mareklinka/WFBind) and [MvvmFx/MvvmFx](https://github.com/MvvmFx/MvvmFx)
-- **SimpleInjector** - Simple way to have dependency injection in the app and with little trouble to make changes in code structure
-- **Automapper** - Useful for doing silly mapping between different objects (class for the model, class for the view...)
-- **Dapper** - If you have a legacy project you may be still using SqlConnection, SqlDataReader, DataRows... You know the hassle, you may not know your savior.
+- **MVVM** - Custom made actually, but inspired by [WFBind](https://github.com/mareklinka/WFBind), [MvvmFx](https://github.com/MvvmFx/MvvmFx), [Prism.WinForms](https://github.com/imasm/Prism.WinForms), [CompositeWPFContrib](http://compositewpfcontrib.codeplex.com/)
+- **[SimpleInjector](https://simpleinjector.org/)** - Simple way to have dependency injection in the app and with little trouble to make changes in code structure
+- **[Automapper](https://automapper.org/)** - Useful for doing silly mapping between different objects (class for the model, class for the view...)
+- **[Dapper](https://stackexchange.github.io/Dapper/)** - If you have a legacy project you may be still using SqlConnection, SqlDataReader, DataRows... You know the hassle, you may not know your savior.
