@@ -10,7 +10,10 @@ namespace UserManager.Startup
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File(ConfigurationManager.AppSettings["LogPath"], rollingInterval: RollingInterval.Day)
+                .WriteTo.File(
+                    path: ConfigurationManager.AppSettings["LogPath"], 
+                    rollingInterval: RollingInterval.Day, 
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}\t{Properties:j}{NewLine}{Exception}")
                 .CreateLogger();
         }
     }
