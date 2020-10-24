@@ -22,6 +22,10 @@ namespace UserManager.ViewModels
 
         public CreateUserDto CreateUserInfo { get; }
 
+        public ICommand CreateUserCommand { get; }
+
+        public ICommand CancelUserCreationCommand { get; }
+
         public UsersViewModel(IUserRepository userRepository, IMessageDialog messageDialog, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -29,6 +33,8 @@ namespace UserManager.ViewModels
             _mapper = mapper;
             this.Users = new BindingList<UserListItemDto>();
             this.CreateUserInfo = new CreateUserDto();
+            this.CreateUserCommand = Command.From(CreateUser);
+            this.CancelUserCreationCommand = Command.From(ClearCreateForm);
         }
 
         public async Task Load()
@@ -59,7 +65,18 @@ namespace UserManager.ViewModels
             {
                 _messageDialog.Show(title: "Error in creation", message: ex.Message);
                 return false;
+            } 
+            finally
+            {
+                ClearCreateForm();
             }
+        }
+
+        private void ClearCreateForm()
+        {
+            CreateUserInfo.FirstName = string.Empty;
+            CreateUserInfo.LastName = string.Empty;
+            CreateUserInfo.Email = string.Empty;
         }
     }
 }

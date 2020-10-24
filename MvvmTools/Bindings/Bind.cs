@@ -79,6 +79,18 @@ namespace MvvmTools.Bindings
             return this;
         }
 
+        public Bind<TBinding> Click(Control control, Func<TBinding, Core.ICommand> command)
+        {
+            control.Click += (sender, e) => command(_item).Execute();
+            return this;
+        }
+
+        public Bind<TBinding> Click<TParameter>(Control control, Func<TBinding, Core.ICommand<TParameter>> command, Func<TParameter> parameter)
+        {
+            control.Click += (sender, e) => command(_item).Execute(parameter());
+            return this;
+        }
+
         private string GetPropertyName<TSource, TProperty>(Expression<Func<TSource, TProperty>> action)
         {
             var body = (MemberExpression)action.Body;
