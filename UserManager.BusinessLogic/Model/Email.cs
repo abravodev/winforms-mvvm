@@ -19,12 +19,17 @@ namespace UserManager.BusinessLogic.Model
     {
         public void Validate(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(email);
-            if (!match.Success)
+            if (!IsValid(email))
             {
                 throw new ValidationException($"Invalid Email: {email}");
             }
+        }
+
+        public bool IsValid(string email)
+        {
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(email);
+            return match.Success;
         }
     }
 }

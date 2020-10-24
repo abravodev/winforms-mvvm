@@ -23,6 +23,7 @@ namespace UserManager.DTOs
 
         private string _email;
         [Required]
+        [EmailAddress]
         public string Email
         {
             get { return _email; }
