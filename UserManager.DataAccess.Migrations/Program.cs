@@ -44,9 +44,7 @@ namespace UserManager.DataAccess.Migrations
 
         private static void ExecuteCommand(IServiceProvider services, string command)
         {
-            Command.FromName(command)
-                .When(Command.MigrateToLatest)
-                    .Then(() => UpdateDatabase(services));
+            Command.FromName(command).Execute(services);
         }
 
         private static void CreateDatabase(string connectionString)
@@ -65,18 +63,6 @@ namespace UserManager.DataAccess.Migrations
                     Console.WriteLine($"Database [{databaseToCreate}] created");
                 }
             }
-        }
-
-        /// <summary>
-        /// Update the database
-        /// </summary>
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
-        {
-            // Instantiate the runner
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            // Execute the migrations
-            runner.MigrateUp();
         }
 
         private static IServiceProvider CreateServices(string connectionString)
