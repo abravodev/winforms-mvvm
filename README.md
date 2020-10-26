@@ -16,3 +16,9 @@ My advice is to use it in new views and, after gaining confidence, starting movi
 - **[SimpleInjector](https://simpleinjector.org/)** - Simple way to have dependency injection in the app and with little trouble to make changes in code structure
 - **[Automapper](https://automapper.org/)** - Useful for doing silly mapping between different objects (class for the model, class for the view...)
 - **[Dapper](https://stackexchange.github.io/Dapper/)** - If you have a legacy project you may be still using SqlConnection, SqlDataReader, DataRows... You know the hassle, you may not know your savior.
+
+## Rest of toolbox
+- **[FluentMigrator](https://fluentmigrator.github.io/)** - Version your database migrations. As said in [Paul Stovell's blog](https://paulstovell.com/database-deployment/), « if your database isn't in source control, you don't deserve one. Go use Excel ».
+- **[SmartEnum](https://github.com/ardalis/SmartEnum)** - Type-safe enums to include behaviour and avoid switch-cases
+- **[Serilog](https://serilog.net/)** - For logging
+- There might be more... check the nuget packages.
