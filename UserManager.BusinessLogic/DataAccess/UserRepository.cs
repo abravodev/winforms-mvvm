@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Dapper;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.Model;
 
@@ -7,42 +7,53 @@ namespace UserManager.BusinessLogic.DataAccess
 {
     public class UserRepository : IUserRepository
     {
-        private readonly List<User> _users;
-        private int _nextGeneratedId;
+        private readonly DatabaseContext _context;
 
-        public UserRepository()
+        public UserRepository(DatabaseContext context)
         {
-            _users = new List<User>();
-            _nextGeneratedId = 1;
+            _context = context;
         }
 
-        public Task<int> CreateUser(User user)
+        public async Task<int> CreateUser(User user)
         {
-            user.Id = _nextGeneratedId++;
-            _users.Add(user);
-            return Task.FromResult(user.Id);
+            using (var connection = _context.GetOpenedConnection())
+            {
+                return await connection.QueryFirstAsync<int>(@"
+                    INSERT INTO [USER] (FirstName, LastName, Email) 
+                    OUTPUT INSERTED.Id
+                    VALUES(@FirstName, @LastName, @Email)", 
+                    new { user.FirstName, user.LastName, user.Email });
+            }
         }
 
-        public Task<IList<User>> GetAll()
+        public async Task<List<User>> GetAll()
         {
-            return Task.FromResult<IList<User>>(_users);
+            using (var connection = _context.GetOpenedConnection())
+            {
+                return await connection.QueryAsync<User>("SELECT * FROM [User]").ToListAsync();
+            }
         }
 
-        public Task<User> GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            return Task.FromResult(_users.First(x => x.Id == id));
+            using (var connection = _context.GetOpenedConnection())
+            {
+                return await connection
+                    .GetFirstAsync<User>("SELECT * FROM [User] WHERE Id = @Id", new { Id = id });
+            }
         }
 
-        public Task UpdateUser(User user)
+        public async Task UpdateUser(User user)
         {
             // Nothing, this is updated by reference
-            return Task.CompletedTask;
         }
 
         public async Task Remove(int id)
         {
-            var user = await GetById(id);
-            _users.Remove(user);
+            using (var connection = _context.GetOpenedConnection())
+            {
+                await connection.ExecuteAsync("DELETE FROM [User] WHERE Id = @Id", new { Id = id });
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Serilog;
-using SimpleInjector;
 using System;
 using System.Windows.Forms;
-using UserManager.BusinessLogic.Common;
 using UserManager.BusinessLogic.DataAccess;
 using UserManager.Startup;
 
@@ -31,13 +29,7 @@ namespace UserManager
             LogConfig.Config();
             ExceptionHandling.Config();
             IoCConfig.Config();
-            Seed(IoCConfig.Container);
-        }
-
-        private static void Seed(Container container)
-        {
-            var userSeed = container.GetInstance<UserSeed>();
-            AsyncHelpers.RunSync(() => userSeed.Execute());
+            ConfigureDapper.Config();
         }
     }
 }

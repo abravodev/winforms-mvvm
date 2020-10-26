@@ -9,6 +9,8 @@ using MvvmTools.Components;
 using UserManager.DTOs;
 using MvvmTools.Bindings;
 using MvvmTools.Core;
+using Serilog;
+using UserManager.BusinessLogic.Extensions;
 
 namespace UserManager.ViewModels
 {
@@ -17,6 +19,7 @@ namespace UserManager.ViewModels
         private readonly IUserRepository _userRepository;
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
+        private static ILogger _logger = Log.ForContext<UsersViewModel>();
 
         public BindingList<UserListItemDto> Users { get; }
 
@@ -63,6 +66,7 @@ namespace UserManager.ViewModels
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 _messageDialog.Show(title: "Error in creation", message: ex.Message);
                 return false;
             } 

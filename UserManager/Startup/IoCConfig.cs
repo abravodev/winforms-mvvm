@@ -6,6 +6,7 @@ using UserManager.Mappers;
 using UserManager.ViewModels;
 using UserManager.Views;
 using MvvmTools.Common;
+using System.Configuration;
 
 namespace UserManager.Startup
 {
@@ -43,8 +44,11 @@ namespace UserManager.Startup
 
         private static void RegisterDataAccess(Container container)
         {
-            container.Register<IUserRepository, UserRepository>(Lifestyle.Singleton);
-            container.Register(() => new UserSeed(container.GetInstance<IUserRepository>()));
+            var databaseConfig = new DatabaseContext(
+                conectionString: ConfigurationManager.ConnectionStrings["UsersDatabase"].ConnectionString
+            );
+            container.RegisterInstance(databaseConfig);
+            container.Register<IUserRepository, UserRepository>();
         }
 
         private static void RegisterViews(Container container)
