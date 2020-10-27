@@ -7,6 +7,8 @@ using UserManager.ViewModels;
 using UserManager.Views;
 using MvvmTools.Common;
 using System.Configuration;
+using System;
+using UserManager.Providers;
 
 namespace UserManager.Startup
 {
@@ -21,11 +23,12 @@ namespace UserManager.Startup
             RegisterMappers(container);
             RegisterComponents(container);
             RegisterDataAccess(container);
+            RegisterProviders(container);
             RegisterViews(container);
 
             Container = container;
             return container;
-        }
+        }      
 
         private static void RegisterMappers(Container container)
         {
@@ -51,10 +54,16 @@ namespace UserManager.Startup
             container.Register<IUserRepository, UserRepository>();
         }
 
+        private static void RegisterProviders(Container container)
+        {
+            container.Register<ISettingProvider, SettingProvider>();
+            container.Register<IViewNavigator, ViewNavigator>();
+        }
+
         private static void RegisterViews(Container container)
         {
             container.RegisterView<UsersView, UsersViewModel>();
-            container.RegisterView<Form1>();
+            container.RegisterView<MainView, MainViewModel>();
         }
     }
 }

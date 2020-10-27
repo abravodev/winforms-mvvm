@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Threading;
-using UserManager.Properties;
+using UserManager.Providers;
 
 namespace UserManager.Startup
 {
@@ -8,7 +8,7 @@ namespace UserManager.Startup
     {
         public static void Config()
         {
-            ConfigureCulture(new CultureInfo(Settings.Default.UserCulture));
+            ConfigureCulture(SettingProvider.Instance.GetCurrentCulture());
         }
 
         private static void ConfigureCulture(CultureInfo culture)

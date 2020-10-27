@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.DataAccess;
 using UserManager.Startup;
+using UserManager.Views;
 
 namespace UserManager
 {
@@ -19,8 +20,8 @@ namespace UserManager
             
             Startup();
 
-            var mainForm = IoCConfig.Container.GetInstance<Form1>();
-            Application.Run(mainForm);
+            var mainView = IoCConfig.Container.GetInstance<MainView>();
+            Application.Run(mainView);
             Log.CloseAndFlush();
         }
 

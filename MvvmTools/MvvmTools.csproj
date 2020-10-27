@@ -59,11 +59,14 @@
     <Compile Include="Bindings\BindableObject.cs" />
     <Compile Include="Components\GenericValidator.cs" />
     <Compile Include="Components\IMessageDialog.cs" />
+    <Compile Include="Components\IViewNavigator.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
     <Compile Include="Common\SimpleInjectorExtensions.cs" />
+    <Compile Include="Components\ViewNavigator.cs" />
     <Compile Include="Core\Command.cs" />
     <Compile Include="Core\ICommand.cs" />
+    <Compile Include="Core\IView.cs" />
     <Compile Include="Core\IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\Validation.cs" />

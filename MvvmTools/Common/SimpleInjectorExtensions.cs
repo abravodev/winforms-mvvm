@@ -9,11 +9,13 @@ namespace MvvmTools.Common
     public static class SimpleInjectorExtensions
     {
         public static void RegisterView<TView, TViewModel>(this Container container)
-            where TView : ContainerControl
+            where TView : ContainerControl, IView<TViewModel>
             where TViewModel : IViewModel
         {
             container.Register(typeof(TViewModel));
             container.RegisterView<TView>();
+            container.Register<Func<IView<TViewModel>>>(() => () => container.GetInstance<TView>());
+            SupressTransientWarning<Func<IView<TViewModel>>>(container);
         }
         
         public static void RegisterView<TView>(this Container container)

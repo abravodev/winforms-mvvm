@@ -1,6 +1,6 @@
-﻿namespace UserManager
+﻿namespace UserManager.Views
 {
-    partial class Form1
+    partial class MainView
     {
         /// <summary>
         /// Required designer variable.
@@ -69,7 +69,7 @@
             this.tsmi_language.Size = new System.Drawing.Size(180, 22);
             this.tsmi_language.Text = "Language";
             // 
-            // Form1
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,8 +77,8 @@
             this.Controls.Add(this.btn_users);
             this.Controls.Add(this.ms_menu);
             this.MainMenuStrip = this.ms_menu;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainView";
+            this.Text = "UserManager | winforms-mvvm";
             this.ms_menu.ResumeLayout(false);
             this.ms_menu.PerformLayout();
             this.ResumeLayout(false);

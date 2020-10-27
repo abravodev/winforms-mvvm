@@ -4,10 +4,11 @@ using UserManager.BusinessLogic.Common;
 using UserManager.ViewModels;
 using MvvmTools.Bindings;
 using MvvmTools.Validations;
+using MvvmTools.Core;
 
 namespace UserManager.Views
 {
-    public partial class UsersView : Form
+    public partial class UsersView : Form, IView<UsersViewModel>
     {
         private UsersViewModel _viewModel;
 
