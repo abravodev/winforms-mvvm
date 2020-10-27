@@ -11,6 +11,7 @@ using MvvmTools.Bindings;
 using MvvmTools.Core;
 using Serilog;
 using UserManager.BusinessLogic.Extensions;
+using UserManager.Resources;
 
 namespace UserManager.ViewModels
 {
@@ -61,13 +62,15 @@ namespace UserManager.ViewModels
                 var newUser = _mapper.Map<User>(CreateUserInfo);
                 var createdId = await _userRepository.CreateUser(newUser);
                 Users.Add(_mapper.Map<UserListItemDto>(newUser));
-                _messageDialog.Show(title: "User created", message: $"Name = {newUser.FirstName}, Id = {createdId}");
+                _messageDialog.Show(
+                    title: General.UserCreatedTitle,
+                    message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdId));
                 return true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                _messageDialog.Show(title: "Error in creation", message: ex.Message);
+                _messageDialog.Show(title: General.UserCreationFailedTitle, message: ex.Message);
                 return false;
             } 
             finally

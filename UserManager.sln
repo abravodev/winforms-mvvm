@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTools", "MvvmTools\Mvvm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.DataAccess.Migrations", "UserManager.DataAccess.Migrations\UserManager.DataAccess.Migrations.csproj", "{2CB3FA12-FA7C-4A07-8475-8F7CCEC282D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Resources", "UserManager.Resources\UserManager.Resources.csproj", "{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{2CB3FA12-FA7C-4A07-8475-8F7CCEC282D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CB3FA12-FA7C-4A07-8475-8F7CCEC282D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CB3FA12-FA7C-4A07-8475-8F7CCEC282D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

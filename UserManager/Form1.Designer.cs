@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.btn_users = new System.Windows.Forms.Button();
+            this.ms_menu = new System.Windows.Forms.MenuStrip();
+            this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_language = new System.Windows.Forms.ToolStripMenuItem();
+            this.ms_menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_users
@@ -41,21 +45,53 @@
             this.btn_users.UseVisualStyleBackColor = true;
             this.btn_users.Click += new System.EventHandler(this.btn_users_click);
             // 
+            // ms_menu
+            // 
+            this.ms_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi_settings});
+            this.ms_menu.Location = new System.Drawing.Point(0, 0);
+            this.ms_menu.Name = "ms_menu";
+            this.ms_menu.Size = new System.Drawing.Size(800, 24);
+            this.ms_menu.TabIndex = 1;
+            this.ms_menu.Text = "menuStrip1";
+            // 
+            // tsmi_settings
+            // 
+            this.tsmi_settings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmi_language});
+            this.tsmi_settings.Name = "tsmi_settings";
+            this.tsmi_settings.Size = new System.Drawing.Size(61, 20);
+            this.tsmi_settings.Text = "Settings";
+            // 
+            // tsmi_language
+            // 
+            this.tsmi_language.Name = "tsmi_language";
+            this.tsmi_language.Size = new System.Drawing.Size(180, 22);
+            this.tsmi_language.Text = "Language";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_users);
+            this.Controls.Add(this.ms_menu);
+            this.MainMenuStrip = this.ms_menu;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.ms_menu.ResumeLayout(false);
+            this.ms_menu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btn_users;
+        private System.Windows.Forms.MenuStrip ms_menu;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_language;
     }
 }
 

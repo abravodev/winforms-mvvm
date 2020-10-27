@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ms_menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="LanguageChangeMessage" xml:space="preserve">
+    <value>Change was saved. Restart the application to have the new language</value>
+  </data>
+  <data name="LanguageChangeTitle" xml:space="preserve">
+    <value>Language change saved</value>
+  </data>
+  <data name="UserCreatedMessage" xml:space="preserve">
+    <value>Name = {0}, Id = {1}</value>
+  </data>
+  <data name="UserCreatedTitle" xml:space="preserve">
+    <value>User created</value>
+  </data>
+  <data name="UserCreationFailedTitle" xml:space="preserve">
+    <value>Error in creation</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

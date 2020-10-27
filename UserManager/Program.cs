@@ -30,6 +30,7 @@ namespace UserManager
             ExceptionHandling.Config();
             IoCConfig.Config();
             ConfigureDapper.Config();
+            GlobalizationConfig.Config();
         }
     }
 }

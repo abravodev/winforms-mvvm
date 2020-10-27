@@ -21,7 +21,7 @@ namespace UserManager.Views
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            AsyncHelpers.RunSync(() => _viewModel.Load());
+            AsyncHelpers.RunSync(_viewModel.Load);
         }
 
         private void InitializeDataBindings()
