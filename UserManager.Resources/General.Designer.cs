@@ -61,6 +61,15 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading users.
+        /// </summary>
+        public static string ErrorLoadingUsersTitle {
+            get {
+                return ResourceManager.GetString("ErrorLoadingUsersTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change was saved. Restart the application to have the new language.
         /// </summary>
         public static string LanguageChangeMessage {

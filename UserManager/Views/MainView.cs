@@ -1,7 +1,6 @@
 ﻿using MvvmTools.Core;
 using System;
 using System.Windows.Forms;
-using UserManager.BusinessLogic.Common;
 using UserManager.DTOs;
 using UserManager.Resources;
 using UserManager.ViewModels;
@@ -10,18 +9,17 @@ namespace UserManager.Views
 {
     public partial class MainView : Form, IView<MainViewModel>
     {
-        private readonly MainViewModel _viewModel;
+        public MainViewModel ViewModel { get; }
 
         public MainView(MainViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = viewModel;
+            ViewModel = viewModel;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            AsyncHelpers.RunSync(_viewModel.Load);
             LoadLanguageMenu();
             SetTranslations();
         }
@@ -29,9 +27,9 @@ namespace UserManager.Views
         private void LoadLanguageMenu()
         {
             this.tsmi_language.AddBinding(
-                source: _viewModel.AvailableLanguages,
+                source: ViewModel.AvailableLanguages,
                 mapToMenuItem: MapToMenuItem,
-                onClicked: _viewModel.ChangeCurrentCulture);
+                onClicked: ViewModel.ChangeCurrentCulture);
         }
 
         private ToolStripMenuItem MapToMenuItem(LanguageDto x)
@@ -48,6 +46,6 @@ namespace UserManager.Views
             this.btn_users.Text = General.Users;
         }
 
-        private void btn_users_click(object sender, EventArgs e) => _viewModel.NavigateToUsersView();
+        private void btn_users_click(object sender, EventArgs e) => ViewModel.NavigateToUsersView();
     }
 }

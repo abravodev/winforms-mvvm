@@ -1,9 +1,10 @@
-﻿using Serilog;
+﻿using MvvmTools.Components;
+using Serilog;
 using System;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.DataAccess;
 using UserManager.Startup;
-using UserManager.Views;
+using UserManager.ViewModels;
 
 namespace UserManager
 {
@@ -20,7 +21,8 @@ namespace UserManager
             
             Startup();
 
-            var mainView = IoCConfig.Container.GetInstance<MainView>();
+            var navigator = IoCConfig.Container.GetInstance<IViewNavigator>();
+            var mainView = navigator.Get<MainViewModel>() as Form;
             Application.Run(mainView);
             Log.CloseAndFlush();
         }

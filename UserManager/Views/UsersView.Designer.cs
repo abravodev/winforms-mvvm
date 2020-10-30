@@ -43,6 +43,7 @@
             this.bt_cancel = new System.Windows.Forms.Button();
             this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.ep_createUser = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pb_loading = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_userlist)).BeginInit();
             this.tlp_createView.SuspendLayout();
             this.tlp_createFields.SuspendLayout();
@@ -222,12 +223,24 @@
             this.ep_createUser.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.ep_createUser.ContainerControl = this;
             // 
+            // pb_loading
+            // 
+            this.pb_loading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_loading.Location = new System.Drawing.Point(0, 0);
+            this.pb_loading.MarqueeAnimationSpeed = 10;
+            this.pb_loading.Name = "pb_loading";
+            this.pb_loading.Size = new System.Drawing.Size(800, 15);
+            this.pb_loading.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pb_loading.TabIndex = 10;
+            // 
             // UsersView
             // 
             this.AcceptButton = this.bt_save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pb_loading);
             this.Controls.Add(this.tlp_view);
             this.Name = "UsersView";
             this.Text = "UsersView";
@@ -260,5 +273,6 @@
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_cancel;
         private System.Windows.Forms.ErrorProvider ep_createUser;
+        private System.Windows.Forms.ProgressBar pb_loading;
     }
 }

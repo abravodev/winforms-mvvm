@@ -28,6 +28,14 @@ namespace MvvmTools.Bindings
             return this;
         }
 
+        public Bind<TBinding> WithLoading<TControl>(TControl topControl, ProgressBar progressBar, Expression<Func<TBinding, bool>> member)
+            where TControl: Control
+        {
+            For(progressBar, _ => _.Visible, member);
+            topControl.AddInverseBinding(nameof(topControl.Enabled), _item, GetPropertyName(member));
+            return this;
+        }
+
         public Bind<TBinding> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty, Expression<Func<TBinding, TProperty>> member, Func<TBinding, BindableObject> dependsOn)
             where TControl : Control
         {

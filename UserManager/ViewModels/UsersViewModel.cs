@@ -15,12 +15,19 @@ using UserManager.Resources;
 
 namespace UserManager.ViewModels
 {
-    public class UsersViewModel : IViewModel
+    public class UsersViewModel : BindableObject, IViewModel
     {
         private readonly IUserRepository _userRepository;
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
         private static ILogger _logger = Log.ForContext<UsersViewModel>();
+
+        private bool _loading;
+        public bool Loading
+        {
+            get { return _loading; }
+            private set { SetProperty(ref _loading, value); }
+        }
 
         public BindingList<UserListItemDto> Users { get; }
 
@@ -43,9 +50,21 @@ namespace UserManager.ViewModels
 
         public async Task Load()
         {
-            Users.Clear();
-            var users = await _userRepository.GetAll();
-            Users.AddRange(users.Select(_mapper.Map<UserListItemDto>).ToList());
+            try
+            {
+                this.Loading = true;
+                Users.Clear();
+                var users = await _userRepository.GetAll();
+                Users.AddRange(users.Select(_mapper.Map<UserListItemDto>).ToList());
+            }
+            catch (Exception ex)
+            {
+                _messageDialog.Show(title:General.ErrorLoadingUsersTitle, message: ex.Message);
+            }
+            finally
+            {
+                this.Loading = false;
+            }
         }
 
         public bool CanCreateUser => GenericValidator.TryValidate(CreateUserInfo, out _);

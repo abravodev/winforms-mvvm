@@ -21,6 +21,12 @@ namespace MvvmTools.Bindings
                 updateMode: DataSourceUpdateMode.OnPropertyChanged);
         }
 
+        public static void AddInverseBinding<TControl>(this TControl control, string propertyName, object dataSource, string dataMember) 
+            where TControl : Control
+        {
+            control.DataBindings.Add(new InverseBinding(propertyName, dataSource, dataMember));
+        }
+
         /// <summary>
         /// Adds the elements of the specified collection to the end of the <paramref name="source"/>
         /// </summary>

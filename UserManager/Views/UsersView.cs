@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using UserManager.BusinessLogic.Common;
+﻿using System.Windows.Forms;
 using UserManager.ViewModels;
 using MvvmTools.Bindings;
 using MvvmTools.Validations;
@@ -10,29 +8,24 @@ namespace UserManager.Views
 {
     public partial class UsersView : Form, IView<UsersViewModel>
     {
-        private UsersViewModel _viewModel;
+        public UsersViewModel ViewModel { get; }
 
         public UsersView(UsersViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = viewModel;
+            ViewModel = viewModel;
             InitializeDataBindings();
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            AsyncHelpers.RunSync(_viewModel.Load);
         }
 
         private void InitializeDataBindings()
         {
-            this.BindTo(_viewModel)
+            this.BindTo(ViewModel)
                 .For(this.dgv_userlist, _ => _.Users)
                 .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo)
+                .WithLoading(this.tlp_view, this.pb_loading, _ => _.Loading)
                 .Click(this.bt_save, _ => _.CreateUserCommand)
                 .Click(this.bt_cancel, _ => _.CancelUserCreationCommand);
-            this.BindTo(_viewModel.CreateUserInfo)
+            this.BindTo(ViewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)
                 .For(this.tb_email, _ => _.Email);

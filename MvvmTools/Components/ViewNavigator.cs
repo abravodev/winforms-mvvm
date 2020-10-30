@@ -13,11 +13,14 @@ namespace MvvmTools.Components
             _container = container;
         }
 
-        public void Open<TViewModel>() where TViewModel : IViewModel
+        public void Open<TViewModel>() where TViewModel : IViewModel => Get<TViewModel>().Show();
+
+        public IView<TViewModel> Get<TViewModel>() where TViewModel : IViewModel
         {
             var viewCreator = _container.GetInstance<Func<IView<TViewModel>>>();
             var view = viewCreator();
-            view.Show();
+            view.Load += async (sender, e) => await view.ViewModel.Load();
+            return view;
         }
     }
 }

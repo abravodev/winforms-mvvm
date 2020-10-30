@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorLoadingUsersTitle" xml:space="preserve">
+    <value>Error cargando los usuarios</value>
+  </data>
   <data name="LanguageChangeMessage" xml:space="preserve">
     <value>El cambio fue guardado. Reinicia la aplicación para tener el nuevo idioma</value>
   </data>
