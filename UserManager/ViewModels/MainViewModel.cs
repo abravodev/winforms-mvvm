@@ -1,8 +1,11 @@
-﻿using MvvmTools.Components;
+﻿using AutoMapper.Internal;
+using MvvmTools.Bindings;
+using MvvmTools.Components;
 using MvvmTools.Core;
-using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using UserManager.DTOs;
 using UserManager.Providers;
@@ -16,16 +19,14 @@ namespace UserManager.ViewModels
         private readonly IMessageDialog _messageDialog;
         private readonly IViewNavigator _viewNavigator;
 
-        public List<LanguageDto> AvailableLanguages { get; }
-
-        public event EventHandler<LanguageChangedEventArgs> LanguageChanged;
+        public BindingList<LanguageDto> AvailableLanguages { get; }
 
         public MainViewModel(ISettingProvider settingProvider, IMessageDialog messageDialog, IViewNavigator viewNavigator)
         {
             _settingProvider = settingProvider;
             _messageDialog = messageDialog;
             _viewNavigator = viewNavigator;
-            AvailableLanguages = new List<LanguageDto>();
+            AvailableLanguages = new BindingList<LanguageDto>();
         }
 
         public async Task Load() 
@@ -55,17 +56,18 @@ namespace UserManager.ViewModels
             };
         }
 
-        public void ChangeCurrentCulture(LanguageDto selectedLanguage)
+        public void ChangeCurrentCulture(LanguageDto selected)
         {
+            var selectedLanguage = this.AvailableLanguages.FirstOrDefault(x => x.Culture.Equals(selected.Culture));
             if (selectedLanguage.Current)
             {
                 return;
             }
 
+            this.AvailableLanguages.ForAll(x => x.Current = false);
             selectedLanguage.Current = true;
 
             _settingProvider.SetCurrentCulture(selectedLanguage.Culture);
-            LanguageChanged?.Invoke(this, new LanguageChangedEventArgs(selectedLanguage));
 
             _messageDialog.Show(
                 title: General.LanguageChangeTitle,
@@ -73,15 +75,5 @@ namespace UserManager.ViewModels
         }
 
         public void NavigateToUsersView() => _viewNavigator.Open<UsersViewModel>();
-    }
-
-    public class LanguageChangedEventArgs : EventArgs
-    {
-        public LanguageChangedEventArgs(LanguageDto language)
-        {
-            SelectedLanguage = language;
-        }
-
-        public LanguageDto SelectedLanguage { get; set; }
     }
 }

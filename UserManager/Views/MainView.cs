@@ -1,7 +1,5 @@
-﻿using AutoMapper.Internal;
-using MvvmTools.Core;
+﻿using MvvmTools.Core;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.Common;
 using UserManager.DTOs;
@@ -30,13 +28,10 @@ namespace UserManager.Views
 
         private void LoadLanguageMenu()
         {
-            var menuItems = _viewModel
-                .AvailableLanguages
-                .Select(MapToMenuItem)
-                .ToArray();
-            this.tsmi_language.DropDownItems.AddRange(menuItems);
-            this.tsmi_language.DropDownItemClicked += OnLanguageSelected;
-            _viewModel.LanguageChanged += _viewModel_LanguageChanged;
+            this.tsmi_language.AddBinding(
+                source: _viewModel.AvailableLanguages,
+                mapToMenuItem: MapToMenuItem,
+                onClicked: _viewModel.ChangeCurrentCulture);
         }
 
         private ToolStripMenuItem MapToMenuItem(LanguageDto x)
@@ -44,21 +39,8 @@ namespace UserManager.Views
             return new ToolStripMenuItem
             {
                 Text = x.Culture.EnglishName,
-                Tag = x,
                 Checked = x.Current
             };
-        }
-
-        private void _viewModel_LanguageChanged(object sender, LanguageChangedEventArgs e)
-        {
-            var menuOptions = this.tsmi_language.DropDownItems.Cast<ToolStripMenuItem>();
-            menuOptions.ForAll(x =>
-            {
-                x.Checked = false;
-                (x.Tag as LanguageDto).Current = false; 
-            });
-            var menuItem = menuOptions.FirstOrDefault(x => x.Tag.Equals(e.SelectedLanguage));
-            menuItem.Checked = true;
         }
 
         private void SetTranslations()
@@ -67,11 +49,5 @@ namespace UserManager.Views
         }
 
         private void btn_users_click(object sender, EventArgs e) => _viewModel.NavigateToUsersView();
-
-        private void OnLanguageSelected(object sender, EventArgs e)
-        {
-            var selectedItem = (e as ToolStripItemClickedEventArgs).ClickedItem as ToolStripMenuItem;
-            _viewModel.ChangeCurrentCulture(selectedItem.Tag as LanguageDto);
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace UserManager.Views
+﻿using MvvmTools.Controls;
+
+namespace UserManager.Views
 {
     partial class MainView
     {
@@ -31,7 +33,7 @@
             this.btn_users = new System.Windows.Forms.Button();
             this.ms_menu = new System.Windows.Forms.MenuStrip();
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_language = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_language = new MvvmTools.Controls.BindableToolStripMenuItem();
             this.ms_menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +69,7 @@
             // 
             this.tsmi_language.Name = "tsmi_language";
             this.tsmi_language.Size = new System.Drawing.Size(180, 22);
-            this.tsmi_language.Text = "Language";
+            this.tsmi_language.Text = "Language:";
             // 
             // MainView
             // 
@@ -91,7 +93,7 @@
         private System.Windows.Forms.Button btn_users;
         private System.Windows.Forms.MenuStrip ms_menu;
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_language;
+        private BindableToolStripMenuItem tsmi_language;
     }
 }
 
