@@ -1,6 +1,7 @@
 ﻿using MvvmTools.Core;
 using SimpleInjector;
 using System;
+using System.Windows.Forms;
 
 namespace MvvmTools.Components
 {
@@ -19,7 +20,10 @@ namespace MvvmTools.Components
         {
             var viewCreator = _container.GetInstance<Func<IView<TViewModel>>>();
             var view = viewCreator();
+
+            ApplicationDispatcher.Configure(WindowsFormsSynchronizationContext.Current);
             view.Load += async (sender, e) => await view.ViewModel.Load();
+
             return view;
         }
     }

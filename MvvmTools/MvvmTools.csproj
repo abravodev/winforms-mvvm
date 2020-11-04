@@ -54,6 +54,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\Bind.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
     <Compile Include="Common\SimpleInjectorExtensions.cs" />
+    <Compile Include="Components\ApplicationDispatcher.cs" />
     <Compile Include="Components\ViewNavigator.cs" />
     <Compile Include="Controls\BindableToolStripMenuItem.cs">
       <SubType>Component</SubType>
