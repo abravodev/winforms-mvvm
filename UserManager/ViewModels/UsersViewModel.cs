@@ -52,7 +52,7 @@ namespace UserManager.ViewModels
         {
             try
             {
-                ApplicationDispatcher.Invoke(() => this.Loading = true);
+                this.Loading = true;
                 var users = await _userRepository.GetAll();
                 var mappedUsers = users.Select(_mapper.Map<UserListItemDto>).ToList();
                 ApplicationDispatcher.Invoke(() => Users.AddRange(mappedUsers));
@@ -63,7 +63,7 @@ namespace UserManager.ViewModels
             }
             finally
             {
-                ApplicationDispatcher.Invoke(() => this.Loading = false);
+                this.Loading = false;
             }
         }
 
@@ -100,12 +100,9 @@ namespace UserManager.ViewModels
 
         private void ClearCreateForm()
         {
-            ApplicationDispatcher.Invoke(() =>
-            {
-                CreateUserInfo.FirstName = string.Empty;
-                CreateUserInfo.LastName = string.Empty;
-                CreateUserInfo.Email = string.Empty;
-            });
+            CreateUserInfo.FirstName = string.Empty;
+            CreateUserInfo.LastName = string.Empty;
+            CreateUserInfo.Email = string.Empty;
         }
     }
 }

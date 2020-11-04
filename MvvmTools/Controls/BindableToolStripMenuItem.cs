@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmTools.Components;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,7 +12,8 @@ namespace MvvmTools.Controls
         public void AddBinding<TSource>(BindingList<TSource> source)
             where TSource : IMenuOption
         {
-            source.ListChanged += (object sender, ListChangedEventArgs e) => BindingChanged(e, source);
+            source.ListChanged += (object sender, ListChangedEventArgs e) 
+                => ApplicationDispatcher.Invoke(() => BindingChanged(e, source));
             var menuItems = source.Select(MapToItem).ToArray();
             this.DropDownItems.AddRange(menuItems);
         }
