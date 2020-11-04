@@ -18,9 +18,9 @@ namespace UserManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            Startup();
+            ApplicationDispatcher.Configure();
 
+            Startup();
             var navigator = IoCConfig.Container.GetInstance<IViewNavigator>();
             var mainView = navigator.Get<MainViewModel>() as Form;
             Application.Run(mainView);

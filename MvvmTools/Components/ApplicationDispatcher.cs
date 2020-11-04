@@ -1,41 +1,28 @@
 ﻿using System;
-using System.Threading;
+using System.Windows.Threading;
 
 namespace MvvmTools.Components
 {
     /// <summary>
     /// Object to hold the main thread (UI Thread) in case you have to do something coming from a different thread
-    /// <see href="https://stackoverflow.com/a/26020749"/>
+    /// It's a wrapper over <see cref="Dispatcher.CurrentDispatcher"/> to return always the main/UI thread
     /// </summary>
     public static class ApplicationDispatcher
     {
-        private static SynchronizationContext _context;
+        private static Dispatcher _dispatcher;
 
-        public static void Configure(SynchronizationContext context)
+        private static Dispatcher Dispatcher => _dispatcher ?? Dispatcher.CurrentDispatcher;
+
+        /// <summary>
+        /// Call this method at the startup of the application
+        /// </summary>
+        public static void Configure()
         {
-            _context = context;
+            _dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        public static void Invoke(Action action)
-        {
-            if (_context == null)
-            {
-                action();
-                return;
-            }
+        public static void Invoke(Action action) => Dispatcher.Invoke(action);
 
-            _context.Send(_ => action(), null);
-        }
-
-        public static void BeginInvoke(Action action)
-        {
-            if (_context == null)
-            {
-                action();
-                return;
-            }
-
-            _context.Post(_ => action(), null);
-        }
+        public static DispatcherOperation BeginInvoke(Action action) => Dispatcher.BeginInvoke(action);
     }
 }
