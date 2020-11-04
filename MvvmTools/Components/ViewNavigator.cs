@@ -1,6 +1,7 @@
 ﻿using MvvmTools.Core;
 using SimpleInjector;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MvvmTools.Components
@@ -22,7 +23,7 @@ namespace MvvmTools.Components
             var view = viewCreator();
 
             ApplicationDispatcher.Configure(WindowsFormsSynchronizationContext.Current);
-            view.Load += async (sender, e) => await view.ViewModel.Load();
+            view.Load += async (sender, e) => await Task.Run(view.ViewModel.Load);
 
             return view;
         }

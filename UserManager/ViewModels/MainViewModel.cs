@@ -32,8 +32,7 @@ namespace UserManager.ViewModels
         public async Task Load() 
         {
             var languages = GetAvailableLanguages();
-            AvailableLanguages.Clear();
-            AvailableLanguages.AddRange(languages);
+            ApplicationDispatcher.Invoke(() => AvailableLanguages.AddRange(languages));
         }
 
         private List<LanguageDto> GetAvailableLanguages()
