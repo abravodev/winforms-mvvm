@@ -5,10 +5,9 @@ using MvvmTools.Components;
 using UserManager.Mappers;
 using UserManager.ViewModels;
 using UserManager.Views;
-using MvvmTools.Common;
 using System.Configuration;
-using System;
 using UserManager.Providers;
+using MvvmTools.DependencyInjection;
 
 namespace UserManager.Startup
 {
@@ -19,6 +18,8 @@ namespace UserManager.Startup
         public static Container Config()
         {
             var container = new Container();
+            container.Options.ConstructorResolutionBehavior =
+                new GreediestConstructorBehavior();
 
             RegisterMappers(container);
             RegisterComponents(container);
@@ -28,7 +29,7 @@ namespace UserManager.Startup
 
             Container = container;
             return container;
-        }      
+        }
 
         private static void RegisterMappers(Container container)
         {
@@ -64,6 +65,7 @@ namespace UserManager.Startup
         {
             container.RegisterView<UsersView, UsersViewModel>();
             container.RegisterView<MainView, MainViewModel>();
+            container.RegisterView<CreateUserView, CreateUserViewModel>();
         }
     }
 }

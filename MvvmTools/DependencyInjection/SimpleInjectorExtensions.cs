@@ -4,7 +4,7 @@ using SimpleInjector.Diagnostics;
 using System;
 using System.Windows.Forms;
 
-namespace MvvmTools.Common
+namespace MvvmTools.DependencyInjection
 {
     public static class SimpleInjectorExtensions
     {
@@ -17,7 +17,7 @@ namespace MvvmTools.Common
             container.Register<Func<IView<TViewModel>>>(() => () => container.GetInstance<TView>());
             SupressTransientWarning<Func<IView<TViewModel>>>(container);
         }
-        
+
         public static void RegisterView<TView>(this Container container)
             where TView : ContainerControl
         {

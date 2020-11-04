@@ -65,7 +65,8 @@
     <Compile Include="Components\IViewNavigator.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
-    <Compile Include="Common\SimpleInjectorExtensions.cs" />
+    <Compile Include="DependencyInjection\GreediestConstructorBehavior.cs" />
+    <Compile Include="DependencyInjection\SimpleInjectorExtensions.cs" />
     <Compile Include="Components\ApplicationDispatcher.cs" />
     <Compile Include="Components\ViewNavigator.cs" />
     <Compile Include="Controls\BindableToolStripMenuItem.cs">
