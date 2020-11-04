@@ -1,12 +1,14 @@
 ﻿using MvvmTools.Bindings;
+using MvvmTools.Controls;
 using System.Globalization;
 
 namespace UserManager.DTOs
 {
-    public class LanguageDto : BindableObject
+    public class LanguageDto : BindableObject, IMenuOption
     {
         private CultureInfo _cultureInfo;
-        public CultureInfo Culture {
+        public CultureInfo Culture 
+        {
             get { return _cultureInfo; }
             set { SetProperty(ref _cultureInfo, value); }
         }
@@ -17,5 +19,9 @@ namespace UserManager.DTOs
             get { return _current; }
             set { SetProperty(ref _current, value); }
         }
+
+        public string Text => this.Culture.EnglishName;
+
+        public bool Checked => this.Current;
     }
 }

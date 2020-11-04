@@ -1,7 +1,6 @@
 ﻿using MvvmTools.Core;
 using System;
 using System.Windows.Forms;
-using UserManager.DTOs;
 using UserManager.Resources;
 using UserManager.ViewModels;
 
@@ -28,17 +27,7 @@ namespace UserManager.Views
         {
             this.tsmi_language.AddBinding(
                 source: ViewModel.AvailableLanguages,
-                mapToMenuItem: MapToMenuItem,
                 onClicked: ViewModel.ChangeCurrentCulture);
-        }
-
-        private ToolStripMenuItem MapToMenuItem(LanguageDto x)
-        {
-            return new ToolStripMenuItem
-            {
-                Text = x.Culture.EnglishName,
-                Checked = x.Current
-            };
         }
 
         private void SetTranslations()

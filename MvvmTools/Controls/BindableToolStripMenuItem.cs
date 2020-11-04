@@ -8,16 +8,23 @@ namespace MvvmTools.Controls
     [Designer(typeof(BindableToolStripMenuItem), typeof(ToolStripMenuItem))]
     public class BindableToolStripMenuItem : ToolStripMenuItem
     {
-        public void AddBinding<TSource>(BindingList<TSource> source, Func<TSource, ToolStripMenuItem> mapToMenuItem)
+        public void AddBinding<TSource>(BindingList<TSource> source)
+            where TSource : IMenuOption
         {
-            source.ListChanged += (object sender, ListChangedEventArgs e) => BindingChanged(e, source, MapToItem(mapToMenuItem));
-            var menuItems = source.Select(MapToItem(mapToMenuItem)).ToArray();
+            source.ListChanged += (object sender, ListChangedEventArgs e) => BindingChanged(e, source);
+            var menuItems = source.Select(MapToItem).ToArray();
             this.DropDownItems.AddRange(menuItems);
         }
 
-        public void AddBinding<TSource>(BindingList<TSource> source, Func<TSource, ToolStripMenuItem> mapToMenuItem, Action<TSource> onClicked)
+        public void AddBinding<TSource>(BindingList<TSource> source, Action<TSource> onClicked)
+            where TSource: IMenuOption
         {
-            AddBinding(source, mapToMenuItem);
+            AddBinding(source);
+            AddClickAction(onClicked);
+        }
+
+        public void AddClickAction<TSource>(Action<TSource> onClicked)
+        {
             this.DropDownItemClicked += (sender, e) => onClicked(GetClickedItem<TSource>(e));
         }
 
@@ -27,25 +34,27 @@ namespace MvvmTools.Controls
             return (TSource) selectedItem.Tag;
         }
 
-        private Func<TSource, ToolStripMenuItem> MapToItem<TSource>(Func<TSource, ToolStripMenuItem> mapToMenuItem)
+        private ToolStripMenuItem MapToItem<TSource>(TSource sourceItem)
+            where TSource : IMenuOption
         {
-            return sourceItem =>
+            return new ToolStripMenuItem
             {
-                var menuItem = mapToMenuItem(sourceItem);
-                menuItem.Tag = sourceItem;
-                return menuItem;
+                Text = sourceItem.Text,
+                Checked = sourceItem.Checked,
+                Tag = sourceItem
             };
         }
 
-        private void BindingChanged<TSource>(ListChangedEventArgs e, BindingList<TSource> source, Func<TSource, ToolStripMenuItem> mapToMenuItem)
+        private void BindingChanged<TSource>(ListChangedEventArgs e, BindingList<TSource> source)
+            where TSource : IMenuOption
         {
             switch (e.ListChangedType)
             {
                 case ListChangedType.ItemAdded:
-                    this.DropDownItems.Add(mapToMenuItem(source[e.NewIndex]));
+                    this.DropDownItems.Add(MapToItem(source[e.NewIndex]));
                     break;
                 case ListChangedType.ItemChanged: // TODO: Will this break something ? (instead of update the proper values)
-                    var item = mapToMenuItem(source[e.NewIndex]);
+                    var item = MapToItem(source[e.NewIndex]);
                     this.DropDownItems.RemoveAt(e.OldIndex);
                     this.DropDownItems.Insert(e.NewIndex, item);
                     break;
@@ -55,7 +64,7 @@ namespace MvvmTools.Controls
                 case ListChangedType.Reset: // TODO: Will this break something ?
                     this.DropDownItems.Clear();
                     this.DropDownItems.AddRange(source
-                        .Select(mapToMenuItem)
+                        .Select(MapToItem)
                         .ToArray());
                     break;
                 default: throw new NotImplementedException();

@@ -71,6 +71,7 @@
     <Compile Include="Controls\BindableToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\IMenuOption.cs" />
     <Compile Include="Core\Command.cs" />
     <Compile Include="Core\ICommand.cs" />
     <Compile Include="Core\IView.cs" />
