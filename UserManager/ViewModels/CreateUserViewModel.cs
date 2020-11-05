@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Easy.MessageHub;
 using MvvmTools.Components;
 using MvvmTools.Core;
 using Serilog;
@@ -8,6 +9,7 @@ using UserManager.BusinessLogic.DataAccess;
 using UserManager.BusinessLogic.Extensions;
 using UserManager.BusinessLogic.Model;
 using UserManager.DTOs;
+using UserManager.Events;
 using UserManager.Resources;
 
 namespace UserManager.ViewModels
@@ -19,6 +21,7 @@ namespace UserManager.ViewModels
         private readonly IUserRepository _userRepository;
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
+        private readonly IMessageHub _eventAggregator;
 
         public CreateUserDto CreateUserInfo { get; }
 
@@ -26,11 +29,17 @@ namespace UserManager.ViewModels
 
         public ICommand CancelUserCreationCommand { get; }
 
-        public CreateUserViewModel(IUserRepository userRepository, IMessageDialog messageDialog, IMapper mapper)
+        public CreateUserViewModel(
+            IUserRepository userRepository, 
+            IMessageDialog messageDialog, 
+            IMapper mapper,
+            IMessageHub eventAggregator)
         {
             _userRepository = userRepository;
             _messageDialog = messageDialog;
             _mapper = mapper;
+            _eventAggregator = eventAggregator;
+
             this.CreateUserInfo = new CreateUserDto();
             this.CreateUserCommand = Command.From(CreateUser);
             this.CancelUserCreationCommand = Command.From(ClearCreateForm);
@@ -51,7 +60,7 @@ namespace UserManager.ViewModels
                 }
                 var newUser = _mapper.Map<User>(CreateUserInfo);
                 var createdId = await _userRepository.CreateUser(newUser);
-                // TODO: How to add the new user or signal refresh? Users.Add(_mapper.Map<UserListItemDto>(newUser));
+                _eventAggregator.Publish(new UserCreatedEvent(newUser));
                 _messageDialog.Show(
                     title: General.UserCreatedTitle,
                     message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdId));

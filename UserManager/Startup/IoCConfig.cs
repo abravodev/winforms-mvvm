@@ -8,6 +8,7 @@ using UserManager.Views;
 using System.Configuration;
 using UserManager.Providers;
 using MvvmTools.DependencyInjection;
+using Easy.MessageHub;
 
 namespace UserManager.Startup
 {
@@ -21,6 +22,7 @@ namespace UserManager.Startup
             container.Options.ConstructorResolutionBehavior =
                 new GreediestConstructorBehavior();
 
+            RegisterMessageHub(container);
             RegisterMappers(container);
             RegisterComponents(container);
             RegisterDataAccess(container);
@@ -29,6 +31,11 @@ namespace UserManager.Startup
 
             Container = container;
             return container;
+        }
+
+        private static void RegisterMessageHub(Container container)
+        {
+            container.RegisterSingleton<IMessageHub, MessageHub>();
         }
 
         private static void RegisterMappers(Container container)
