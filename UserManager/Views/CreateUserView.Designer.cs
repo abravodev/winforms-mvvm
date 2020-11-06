@@ -113,6 +113,7 @@
             // 
             // tb_email
             // 
+            this.tb_email.AccessibleName = "Email";
             this.tb_email.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tb_email.Location = new System.Drawing.Point(65, 55);
             this.tb_email.Name = "tb_email";
@@ -131,6 +132,7 @@
             // 
             // tb_firstName
             // 
+            this.tb_firstName.AccessibleName = "First name";
             this.tb_firstName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tb_firstName.Location = new System.Drawing.Point(65, 3);
             this.tb_firstName.Name = "tb_firstName";
@@ -139,6 +141,7 @@
             // 
             // tb_lastName
             // 
+            this.tb_lastName.AccessibleName = "Last name";
             this.tb_lastName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tb_lastName.Location = new System.Drawing.Point(65, 29);
             this.tb_lastName.Name = "tb_lastName";
@@ -190,6 +193,7 @@
             // 
             // CreateUserView
             // 
+            this.AccessibleName = "Create User Form";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
