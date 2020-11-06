@@ -69,7 +69,7 @@ namespace UserManager.ViewModels
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                _messageDialog.Show(title: General.UserCreationFailedTitle, message: ex.Message);
+                _messageDialog.ShowError(title: General.UserCreationFailedTitle, message: ex.Message);
                 return false;
             }
             finally
