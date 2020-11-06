@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MvvmTools.Bindings;
+using UserManager.BusinessLogic.Model;
 
 namespace UserManager.DTOs
 {
@@ -23,7 +24,7 @@ namespace UserManager.DTOs
 
         private string _email;
         [Required]
-        [EmailAddress]
+        [Email]
         public string Email
         {
             get { return _email; }
