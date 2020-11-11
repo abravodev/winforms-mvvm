@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmTools.Controls.DataGridViewControl;
+using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Forms;
@@ -48,6 +49,14 @@ namespace MvvmTools.Bindings
             where TDataGridView : DataGridView
         {
             datagridView.AddBinding(items(_item));
+            return this;
+        }
+
+        public Bind<TBinding> For<TSource>(BindedAdvancedDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+        {
+            var list = items(_item);
+            datagridView.Bind(list);
+            datagridView.AddBinding(list);
             return this;
         }
 

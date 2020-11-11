@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+
+namespace MvvmTools.Extensions
+{
+    public static class CollectionExtensions
+    {
+        /// <summary>
+        /// Adds the elements of the specified collection to the end of the <paramref name="source"/>
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="collection">The collection whose elements should be added to the end of the <paramref name="source"/></param>
+        public static void AddRange<TSource>(this ICollection<TSource> source, IEnumerable<TSource> collection)
+        {
+            foreach (var item in collection)
+            {
+                source.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Replaces the content of <paramref name="source"/> with <paramref name="collection"/>, 
+        /// using <see cref="ICollection{T}.Clear"/> and <see cref="ICollection{T}.Add(T)"/>
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="collection"></param>
+        public static void Replace<TSource>(this ICollection<TSource> source, IEnumerable<TSource> collection)
+        {
+            source.Clear();
+            source.AddRange(collection);
+        }
+    }
+}

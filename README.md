@@ -24,6 +24,7 @@ My advice is to use it in new views and, after gaining confidence, starting movi
 - **[SmartEnum](https://github.com/ardalis/SmartEnum)** - Type-safe enums to include behaviour and avoid switch-cases
 - **[Serilog](https://serilog.net/)** - For logging
 - **[FlaUI](https://github.com/FlaUI/FlaUI)** - Successor of [TestStack/White](https://github.com/TestStack/White), it is used to automate UI tests
+- **[AdvancedDataGridView](https://github.com/davidegironi/advanceddatagridview)** - It adds Excel-like filtering and sorting to the tables
 - There might be more... check the nuget packages.
 
 ## Inspiration

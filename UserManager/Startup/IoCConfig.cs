@@ -19,6 +19,7 @@ namespace UserManager.Startup
         public static Container Config()
         {
             var container = new Container();
+            container.Options.EnableAutoVerification = false;
             container.Options.ConstructorResolutionBehavior =
                 new GreediestConstructorBehavior();
 

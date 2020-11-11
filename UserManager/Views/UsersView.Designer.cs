@@ -1,4 +1,6 @@
-﻿namespace UserManager.Views
+﻿using MvvmTools.Controls.DataGridViewControl;
+
+namespace UserManager.Views
 {
     partial class UsersView
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_userlist = new System.Windows.Forms.DataGridView();
+            this.dgv_userlist = new BindedAdvancedDataGridView();
             this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.createUserView = new UserManager.Views.CreateUserView();
             this.pb_loading = new System.Windows.Forms.ProgressBar();
@@ -38,15 +40,18 @@
             // 
             // dgv_userlist
             // 
+            this.dgv_userlist.AccessibleName = "Users list";
             this.dgv_userlist.AllowUserToAddRows = false;
             this.dgv_userlist.AllowUserToDeleteRows = false;
             this.dgv_userlist.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_userlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_userlist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_userlist.FilterAndSortEnabled = true;
             this.dgv_userlist.Location = new System.Drawing.Point(264, 8);
             this.dgv_userlist.Name = "dgv_userlist";
             this.dgv_userlist.ReadOnly = true;
-            this.dgv_userlist.Size = new System.Drawing.Size(628, 434);
+            this.dgv_userlist.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgv_userlist.Size = new System.Drawing.Size(528, 434);
             this.dgv_userlist.TabIndex = 0;
             // 
             // tlp_view
@@ -68,6 +73,7 @@
             // 
             // createUserView
             // 
+            this.createUserView.AccessibleName = "Create User Form";
             this.createUserView.AutoSize = true;
             this.createUserView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.createUserView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -105,7 +111,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv_userlist;
+        private BindedAdvancedDataGridView dgv_userlist;
         private System.Windows.Forms.TableLayoutPanel tlp_view;
         private System.Windows.Forms.ProgressBar pb_loading;
         private CreateUserView createUserView;
