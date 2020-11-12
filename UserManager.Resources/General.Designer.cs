@@ -61,6 +61,15 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete user &apos;{0}&apos;?.
         /// </summary>
         public static string DeleteUserQuestion {

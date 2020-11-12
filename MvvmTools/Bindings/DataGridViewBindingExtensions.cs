@@ -14,6 +14,7 @@ namespace MvvmTools.Bindings
         public static void WithContextMenu<T>(this DataGridView dataGridView, params (string Name, ICommand<T> Command)[] menuItems)
         {
             dataGridView.ContextMenuStrip = new ContextMenuStrip();
+            dataGridView.ContextMenuStrip.AccessibleName = $"Context menu of {dataGridView.AccessibleName}";
             foreach (var menuItem in menuItems)
             {
                 dataGridView.ContextMenuStrip.Items.Add(menuItem.Name, null, new System.EventHandler((sender, e) =>

@@ -1,9 +1,10 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
+using FlaUI.Core.Input;
 using FlaUI.Core.Tools;
-using System;
-using System.Collections.Generic;
+using FlaUI.Core.WindowsAPI;
 using System.Linq;
+using UserManager.IntegrationTests.TestUtils.Elements;
 
 namespace UserManager.IntegrationTests.TestUtils.Extensions
 {
@@ -21,15 +22,21 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
 
         public static AutomationElement GetModalByTitle(this Window window, string name)
         {
-            return window.ModalWindows.GetWithRetry(x => x.Title.Equals(name));
+            return Retry.WhileNull(() => window.ModalWindows.SingleOrDefault(x => x.Title.Equals(name))).Result;
+        }
+
+        public static void SelectMenuItem(this Menu menu, string menuItem)
+        {
+            menu.Items[menuItem].Focus();
+            Keyboard.Type(VirtualKeyShort.ENTER);
+            // Here, it should be "menu.Items[menuItem].Click()", but it's not working. Documented at:
+            // https://github.com/FlaUI/FlaUI/issues/82
+            // https://github.com/FlaUI/FlaUI/pull/153
+            // https://github.com/FlaUI/FlaUI/issues/203
         }
 
         public static VisualForm AsForm(this AutomationElement context) => new VisualForm(context);
 
-        private static TSource GetWithRetry<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            Retry.WhileFalse(() => source.Any(predicate));
-            return source.First(predicate);
-        }
+        public static ModalElement AsModal(this AutomationElement context) => context != null ? new ModalElement(context) : null;
     }
 }

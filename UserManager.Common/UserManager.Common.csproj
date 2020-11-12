@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}</ProjectGuid>
+    <ProjectGuid>{60420A36-6C7E-475C-9018-BDDD205798E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserManager.Resources</RootNamespace>
-    <AssemblyName>UserManager.Resources</AssemblyName>
+    <RootNamespace>UserManager.Common</RootNamespace>
+    <AssemblyName>UserManager.Common</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,29 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="General.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>General.resx</DependentUpon>
-    </Compile>
-    <Compile Include="General.es.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>General.es.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Helpers\AsyncHelpers.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="General.es.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>General.es.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="General.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>General.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

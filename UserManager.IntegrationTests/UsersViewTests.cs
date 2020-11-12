@@ -1,9 +1,11 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
-using FlaUI.Core.Tools;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
+using System.Windows.Forms;
+using UserManager.Common.Extensions;
 using UserManager.IntegrationTests.TestUtils;
 using UserManager.IntegrationTests.TestUtils.Extensions;
 
@@ -16,38 +18,85 @@ namespace UserManager.IntegrationTests
         public void User_can_view_a_list_of_users()
         {
             var usersView = NavigatetoUsersView();
-            var usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView();
-            Retry.WhileEmpty(() => usersTable.Rows);
-            usersTable.Rows.Should().NotBeEmpty();
+            var userRows = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+            userRows.Should().NotBeEmpty();
         }
 
         [TestMethod]
         public void User_can_create_a_new_user()
         {
             var usersView = NavigatetoUsersView();
-            var creationForm = usersView.FindFirstDescendant(x => x.ByName("Create User Form")).AsForm();
-            var user = new
+            var user = new UserInfo
             {
                 FirstName = "John",
                 LastName = "Doe",
                 Email = $"john.doe_{DateTime.Now.Ticks}@mail.com"
             };
+            CreateUser(usersView, user);
+
+            var usersTableRows = usersView
+                .FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView()
+                .GetRows().ToDictionary();
+            usersTableRows.Should().Contain(row =>
+                row["First name"].Value == user.FirstName &&
+                row["Last name"].Value == user.LastName &&
+                row["Email"].Value == user.Email);
+        }
+
+        [TestMethod]
+        public void User_can_delete_an_existing_user()
+        {
+            var usersView = NavigatetoUsersView();
+            var usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+            if (usersTable.IsEmpty())
+            {
+                CreateRandomUser(usersView);
+                usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+            }
+
+            var initialNumberOfUsers = usersTable.Length;
+            var firstUser = usersTable.First();
+            firstUser.RightClick();
+            usersView.FindFirstDescendant(x => x.ByName("Context menu of Users list")).AsMenu().SelectMenuItem("Delete");
+            usersView.GetModalByTitle("Delete user").AsModal().Choose(DialogResult.Yes);
+            usersView.GetModalByTitle("User deleted").AsModal().Choose(DialogResult.OK);
+
+            var finalNumberOfUsers = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows().Length;
+            finalNumberOfUsers.Should().BeLessThan(initialNumberOfUsers);
+        }
+
+        private UserInfo CreateRandomUser(Window usersView)
+        {
+            var user = new UserInfo
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = $"john.doe_{DateTime.Now.Ticks}@mail.com"
+            };
+            return CreateUser(usersView, user);
+        }
+
+        private UserInfo CreateUser(Window usersView, UserInfo user)
+        {
+            var creationForm = usersView.FindFirstDescendant(x => x.ByName("Create User Form")).AsForm();
             creationForm
                 .Fill("First name", user.FirstName)
                 .Fill("Last name", user.LastName)
                 .Fill("Email", user.Email);
             creationForm.GetButtonByName("Save").Click();
 
-            var userCreatedModal = usersView.GetModalByTitle("User created");
-            userCreatedModal.GetFirstButton().Click();
+            usersView.GetModalByTitle("User created").AsModal().Choose(DialogResult.OK);
 
-            var usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView();
-            Retry.WhileEmpty(() => usersTable.Rows);
-            var rows = usersTable.ToDictionary();
-            rows.Should().Contain(row =>
-                row["First name"].Value == user.FirstName &&
-                row["Last name"].Value == user.LastName &&
-                row["Email"].Value == user.Email);
+            return user;
+        }
+
+        private class UserInfo
+        {
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
+
+            public string Email { get; set; }
         }
 
         private Window NavigatetoUsersView()

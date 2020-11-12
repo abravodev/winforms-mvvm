@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UserManager.BusinessLogic.Common
+namespace UserManager.Common.Helpers
 {
     /// <summary>
     /// <see href="https://social.msdn.microsoft.com/Forums/en-US/163ef755-ff7b-4ea5-b226-bbe8ef5f4796/is-there-a-pattern-for-calling-an-async-method-synchronously?forum=async"/>
@@ -51,7 +51,7 @@ namespace UserManager.BusinessLogic.Common
             var oldContext = SynchronizationContext.Current;
             var synch = new ExclusiveSynchronizationContext();
             SynchronizationContext.SetSynchronizationContext(synch);
-            T ret = default(T);
+            T ret = default;
             synch.Post(async _ =>
             {
                 try

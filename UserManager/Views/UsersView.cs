@@ -2,6 +2,7 @@
 using UserManager.ViewModels;
 using MvvmTools.Bindings;
 using MvvmTools.Core;
+using UserManager.Resources;
 
 namespace UserManager.Views
 {
@@ -22,7 +23,7 @@ namespace UserManager.Views
             this.BindTo(ViewModel)
                 .For(this.dgv_userlist, _ => _.Users)
                 .WithContextMenu(this.dgv_userlist,
-                    ("Delete", ViewModel.DeleteUserCommand))
+                    (General.Delete, ViewModel.DeleteUserCommand))
                 .WithLoading(this.tlp_view, this.pb_loading, _ => _.Loading);
         }
     }

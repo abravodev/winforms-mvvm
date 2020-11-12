@@ -1,7 +1,7 @@
 ﻿using AutoMapper.Internal;
 using MvvmTools.Components;
 using MvvmTools.Core;
-using MvvmTools.Extensions;
+using UserManager.Common.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;

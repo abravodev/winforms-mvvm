@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Resources", "Us
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.IntegrationTests", "UserManager.IntegrationTests\UserManager.IntegrationTests.csproj", "{54DB615C-B529-4858-A122-619AAB7F3473}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Common", "UserManager.Common\UserManager.Common.csproj", "{60420A36-6C7E-475C-9018-BDDD205798E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{54DB615C-B529-4858-A122-619AAB7F3473}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54DB615C-B529-4858-A122-619AAB7F3473}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54DB615C-B529-4858-A122-619AAB7F3473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60420A36-6C7E-475C-9018-BDDD205798E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60420A36-6C7E-475C-9018-BDDD205798E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60420A36-6C7E-475C-9018-BDDD205798E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60420A36-6C7E-475C-9018-BDDD205798E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

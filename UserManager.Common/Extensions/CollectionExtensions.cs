@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
-namespace MvvmTools.Extensions
+namespace UserManager.Common.Extensions
 {
     public static class CollectionExtensions
     {
@@ -30,5 +31,7 @@ namespace MvvmTools.Extensions
             source.Clear();
             source.AddRange(collection);
         }
+
+        public static bool IsEmpty<TSource>(this IEnumerable<TSource> source) => !source.Any();
     }
 }

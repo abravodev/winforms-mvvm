@@ -88,7 +88,6 @@
     <Compile Include="Core\ICommand.cs" />
     <Compile Include="Core\IView.cs" />
     <Compile Include="Core\IViewModel.cs" />
-    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\Validation.cs" />
   </ItemGroup>

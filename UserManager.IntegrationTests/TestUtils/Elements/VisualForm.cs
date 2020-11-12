@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 
-namespace UserManager.IntegrationTests
+namespace UserManager.IntegrationTests.TestUtils.Elements
 {
     /// <summary>
     /// Represents the idea of a form with user inputs
