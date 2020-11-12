@@ -41,6 +41,7 @@
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_cancel = new System.Windows.Forms.Button();
             this.ep_createUser = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lbl_createUser = new System.Windows.Forms.Label();
             this.tlp_createView.SuspendLayout();
             this.tlp_createFields.SuspendLayout();
             this.tlp_createActions.SuspendLayout();
@@ -53,18 +54,20 @@
             this.tlp_createView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tlp_createView.ColumnCount = 1;
             this.tlp_createView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlp_createView.Controls.Add(this.tlp_createFields, 0, 0);
-            this.tlp_createView.Controls.Add(this.tlp_createActions, 0, 1);
+            this.tlp_createView.Controls.Add(this.tlp_createFields, 0, 1);
+            this.tlp_createView.Controls.Add(this.tlp_createActions, 0, 2);
+            this.tlp_createView.Controls.Add(this.lbl_createUser, 0, 0);
             this.tlp_createView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_createView.Location = new System.Drawing.Point(0, 0);
             this.tlp_createView.MaximumSize = new System.Drawing.Size(250, 0);
             this.tlp_createView.MinimumSize = new System.Drawing.Size(250, 0);
             this.tlp_createView.Name = "tlp_createView";
-            this.tlp_createView.RowCount = 3;
+            this.tlp_createView.RowCount = 4;
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlp_createView.Size = new System.Drawing.Size(250, 107);
+            this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_createView.Size = new System.Drawing.Size(250, 132);
             this.tlp_createView.TabIndex = 9;
             // 
             // tlp_createFields
@@ -81,7 +84,7 @@
             this.tlp_createFields.Controls.Add(this.tb_firstName, 1, 0);
             this.tlp_createFields.Controls.Add(this.tb_lastName, 1, 1);
             this.tlp_createFields.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_createFields.Location = new System.Drawing.Point(0, 0);
+            this.tlp_createFields.Location = new System.Drawing.Point(0, 25);
             this.tlp_createFields.Margin = new System.Windows.Forms.Padding(0);
             this.tlp_createFields.Name = "tlp_createFields";
             this.tlp_createFields.RowCount = 3;
@@ -158,7 +161,7 @@
             this.tlp_createActions.Controls.Add(this.bt_save, 0, 0);
             this.tlp_createActions.Controls.Add(this.bt_cancel, 1, 0);
             this.tlp_createActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_createActions.Location = new System.Drawing.Point(0, 78);
+            this.tlp_createActions.Location = new System.Drawing.Point(0, 103);
             this.tlp_createActions.Margin = new System.Windows.Forms.Padding(0);
             this.tlp_createActions.Name = "tlp_createActions";
             this.tlp_createActions.RowCount = 1;
@@ -191,6 +194,16 @@
             this.ep_createUser.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.ep_createUser.ContainerControl = this;
             // 
+            // lbl_createUser
+            // 
+            this.lbl_createUser.AutoSize = true;
+            this.lbl_createUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_createUser.Location = new System.Drawing.Point(3, 0);
+            this.lbl_createUser.Name = "lbl_createUser";
+            this.lbl_createUser.Size = new System.Drawing.Size(155, 25);
+            this.lbl_createUser.TabIndex = 10;
+            this.lbl_createUser.Text = "Add new user";
+            // 
             // CreateUserView
             // 
             this.AccessibleName = "Create User Form";
@@ -200,7 +213,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tlp_createView);
             this.Name = "CreateUserView";
-            this.Size = new System.Drawing.Size(250, 107);
+            this.Size = new System.Drawing.Size(250, 132);
             this.tlp_createView.ResumeLayout(false);
             this.tlp_createView.PerformLayout();
             this.tlp_createFields.ResumeLayout(false);
@@ -226,5 +239,6 @@
         private System.Windows.Forms.TableLayoutPanel tlp_createActions;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_cancel;
+        private System.Windows.Forms.Label lbl_createUser;
     }
 }

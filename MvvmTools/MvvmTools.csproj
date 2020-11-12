@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Bindings\Bind.cs" />
     <Compile Include="Bindings\BindableObject.cs" />
+    <Compile Include="Bindings\DataGridViewBindingExtensions.cs" />
     <Compile Include="Bindings\InverseBinding.cs" />
     <Compile Include="Components\GenericValidator.cs" />
     <Compile Include="Components\IMessageDialog.cs" />

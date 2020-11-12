@@ -61,6 +61,24 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete user &apos;{0}&apos;?.
+        /// </summary>
+        public static string DeleteUserQuestion {
+            get {
+                return ResourceManager.GetString("DeleteUserQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete user.
+        /// </summary>
+        public static string DeleteUserTitle {
+            get {
+                return ResourceManager.GetString("DeleteUserTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading users.
         /// </summary>
         public static string ErrorLoadingUsersTitle {
@@ -111,6 +129,24 @@ namespace UserManager.Resources {
         public static string UserCreationFailedTitle {
             get {
                 return ResourceManager.GetString("UserCreationFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User &apos;{0}&apos; was deleted.
+        /// </summary>
+        public static string UserDeletedMessage {
+            get {
+                return ResourceManager.GetString("UserDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User deleted.
+        /// </summary>
+        public static string UserDeletedTitle {
+            get {
+                return ResourceManager.GetString("UserDeletedTitle", resourceCulture);
             }
         }
         

@@ -6,11 +6,6 @@ namespace MvvmTools.Bindings
 {
     public static class BindingExtensions
     {
-        public static void AddBinding<TSource>(this DataGridView dataGridView, BindingList<TSource> items)
-        {
-            dataGridView.DataSource = new BindingSource(items, null);
-        }
-
         public static void AddBinding<TSource>(this TextBox textBox, TSource dataSource, string dataMember)
         {
             textBox.DataBindings.Add(

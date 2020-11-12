@@ -13,6 +13,9 @@ namespace UserManager.DTOs
         [DisplayName("Last name")]
         public string LastName { get; set; }
 
+        [Browsable(false)]
+        public string Fullname => $"{FirstName} {LastName}";
+
         [DisplayName("Email")]
         public string Email { get; set; }
     }

@@ -11,6 +11,7 @@ using MvvmTools.Core;
 using UserManager.Resources;
 using Easy.MessageHub;
 using UserManager.Events;
+using System.Windows.Forms;
 
 namespace UserManager.ViewModels
 {
@@ -31,6 +32,8 @@ namespace UserManager.ViewModels
 
         public BindingList<UserListItemDto> Users { get; }
 
+        public ICommand<UserListItemDto> DeleteUserCommand { get; }
+
         public UsersViewModel(
             IUserRepository userRepository,
             IMessageDialog messageDialog,
@@ -40,14 +43,36 @@ namespace UserManager.ViewModels
             _userRepository = userRepository;
             _messageDialog = messageDialog;
             _mapper = mapper;
-            this.Users = new BindingList<UserListItemDto>();
             _eventAggregator = eventAggregator;
+
+            this.Users = new BindingList<UserListItemDto>();
+            this.DeleteUserCommand = Command.From<UserListItemDto>(DeleteUser);
             SubscribeToEvents();
         }
 
         private void SubscribeToEvents()
         {
             _eventAggregator.Subscribe<UserCreatedEvent>(OnUserCreated);
+        }
+
+        private async Task DeleteUser(UserListItemDto user)
+        {
+            var result = _messageDialog.Show(
+                title: General.DeleteUserTitle,
+                message: string.Format(General.DeleteUserQuestion, user.Fullname),
+                buttons: MessageBoxButtons.YesNo,
+                icon: MessageBoxIcon.Warning);
+            
+            if(result == DialogResult.No)
+            {
+                return;
+            }
+
+            await _userRepository.Remove(user.Id);
+            Users.Remove(user);
+            _messageDialog.Show(
+                title: General.UserDeletedTitle,
+                message: string.Format(General.UserDeletedMessage, user.Fullname));
         }
 
         public async Task Load()

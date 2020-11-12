@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeleteUserQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete user '{0}'?</value>
+  </data>
+  <data name="DeleteUserTitle" xml:space="preserve">
+    <value>Delete user</value>
+  </data>
   <data name="ErrorLoadingUsersTitle" xml:space="preserve">
     <value>Error loading users</value>
   </data>
@@ -134,6 +140,12 @@
   </data>
   <data name="UserCreationFailedTitle" xml:space="preserve">
     <value>Error in creation</value>
+  </data>
+  <data name="UserDeletedMessage" xml:space="preserve">
+    <value>User '{0}' was deleted</value>
+  </data>
+  <data name="UserDeletedTitle" xml:space="preserve">
+    <value>User deleted</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>

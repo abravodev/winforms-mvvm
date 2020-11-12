@@ -1,4 +1,5 @@
 ﻿using MvvmTools.Controls.DataGridViewControl;
+using MvvmTools.Core;
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -57,6 +58,12 @@ namespace MvvmTools.Bindings
             var list = items(_item);
             datagridView.Bind(list);
             datagridView.AddBinding(list);
+            return this;
+        }
+
+        public Bind<TBinding> WithContextMenu<TSource>(DataGridView dataGridView, params (string Name, ICommand<TSource> Command)[] menuItems)
+        {
+            dataGridView.WithContextMenu(menuItems);
             return this;
         }
 

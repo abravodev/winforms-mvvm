@@ -7,48 +7,48 @@ namespace MvvmTools.Components
 {
     public class MessageDialog : IMessageDialog
     {
-        public void Show(string message) => MessageBox.Show(text: message);
+        public DialogResult Show(string message) => MessageBox.Show(text: message);
 
-        public void Show(string title, string message) => MessageBox.Show(text: message, caption: title);
+        public DialogResult Show(string title, string message) => MessageBox.Show(text: message, caption: title);
 
-        public void Show(string title, string message, MessageBoxIcon icon)
+        public DialogResult Show(string title, string message, MessageBoxIcon icon)
             => MessageBox.Show(
                 caption: title,
                 text: message,
                 icon: icon,
                 buttons: MessageBoxButtons.OK);
 
-        public void Show(string title, string message, MessageBoxButtons buttons)
+        public DialogResult Show(string title, string message, MessageBoxButtons buttons)
             => MessageBox.Show(
                 caption: title,
                 text: message,
                 icon: MessageBoxIcon.Information,
                 buttons: buttons);
 
-        public void Show(string title, string message, MessageBoxButtons buttons, MessageBoxIcon icon)
+        public DialogResult Show(string title, string message, MessageBoxButtons buttons, MessageBoxIcon icon)
             => MessageBox.Show(
                 caption: title,
                 text: message,
                 icon: icon,
                 buttons: buttons);
 
-        public void ShowError(string title, string message)
+        public DialogResult ShowError(string title, string message)
             => MessageBox.Show(
                 caption: title,
                 text: message,
                 icon: MessageBoxIcon.Error,
                 buttons: MessageBoxButtons.OK);
 
-        public void Show(string title, ICollection<ValidationResult> validationResults)
+        public DialogResult Show(string title, ICollection<ValidationResult> validationResults)
         {
             var message = string.Join("\n", validationResults.Select(x => x.ErrorMessage));
-            ShowError(title, message);
+            return ShowError(title, message);
         }
 
-        public void Show(ICollection<ValidationResult> validationResults)
+        public DialogResult Show(ICollection<ValidationResult> validationResults)
         {
             var message = string.Join("\n", validationResults.Select(x => x.ErrorMessage));
-            ShowError(title: "Validation errors", message);
+            return ShowError(title: "Validation errors", message);
         }
     }
 }

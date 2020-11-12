@@ -6,16 +6,16 @@ namespace MvvmTools.Components
 {
     public interface IMessageDialog
     {
-        void Show(string message);
-        void Show(string title, string message);
+        DialogResult Show(string message);
+        DialogResult Show(string title, string message);
 
-        void Show(string title, string message, MessageBoxIcon icon);
-        void Show(string title, string message, MessageBoxButtons buttons);
-        void Show(string title, string message, MessageBoxButtons buttons, MessageBoxIcon icon);
+        DialogResult Show(string title, string message, MessageBoxIcon icon);
+        DialogResult Show(string title, string message, MessageBoxButtons buttons);
+        DialogResult Show(string title, string message, MessageBoxButtons buttons, MessageBoxIcon icon);
 
-        void ShowError(string title, string message);
+        DialogResult ShowError(string title, string message);
 
-        void Show(string title, ICollection<ValidationResult> validationResults);
-        void Show(ICollection<ValidationResult> validationResults);
+        DialogResult Show(string title, ICollection<ValidationResult> validationResults);
+        DialogResult Show(ICollection<ValidationResult> validationResults);
     }
 }

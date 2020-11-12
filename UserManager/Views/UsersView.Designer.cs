@@ -30,7 +30,7 @@ namespace UserManager.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_userlist = new BindedAdvancedDataGridView();
+            this.dgv_userlist = new MvvmTools.Controls.DataGridViewControl.BindedAdvancedDataGridView();
             this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.createUserView = new UserManager.Views.CreateUserView();
             this.pb_loading = new System.Windows.Forms.ProgressBar();
@@ -48,9 +48,11 @@ namespace UserManager.Views
             this.dgv_userlist.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_userlist.FilterAndSortEnabled = true;
             this.dgv_userlist.Location = new System.Drawing.Point(264, 8);
+            this.dgv_userlist.MultiSelect = false;
             this.dgv_userlist.Name = "dgv_userlist";
             this.dgv_userlist.ReadOnly = true;
             this.dgv_userlist.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgv_userlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_userlist.Size = new System.Drawing.Size(528, 434);
             this.dgv_userlist.TabIndex = 0;
             // 
