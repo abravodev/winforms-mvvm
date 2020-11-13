@@ -144,6 +144,7 @@
     <Compile Include="FluentMigratorExtensions.cs" />
     <Compile Include="Migrations\20201024202704_InitialMigration.cs" />
     <Compile Include="Migrations\20201024202825_AddUserTable.cs" />
+    <Compile Include="Migrations\20201113194828_AddRoleToUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

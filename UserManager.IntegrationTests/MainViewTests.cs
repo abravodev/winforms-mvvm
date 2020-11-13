@@ -17,8 +17,8 @@ namespace UserManager.IntegrationTests
             var window = App.GetMainWindow();
             window.Title.Should().Contain("UserManager");
 
-            var usersButton = window.GetButtonByName("Users");
-            usersButton.Should().NotBeNull();
+            window.GetButtonByName("Users").Should().NotBeNull();
+            window.GetButtonByName("Roles").Should().NotBeNull();
         }
 
         [TestMethod]

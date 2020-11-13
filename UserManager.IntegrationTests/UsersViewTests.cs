@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using UserManager.BusinessLogic.Model;
 using System.Windows.Forms;
 using UserManager.Common.Extensions;
 using UserManager.IntegrationTests.TestUtils;
@@ -32,6 +33,10 @@ namespace UserManager.IntegrationTests
                 LastName = "Doe",
                 Email = $"john.doe_{DateTime.Now.Ticks}@mail.com"
             };
+            var defaultRole = Role.Basic.Name;
+            var creationForm = usersView.FindFirstDescendant(x => x.ByName("Create User Form")).AsForm();
+            var roleSelector = creationForm.FindFirstDescendant(x => x.ByControlType(ControlType.ComboBox).And(x.ByName("User role"))).AsComboBox();
+            roleSelector.Value.Should().Be(defaultRole);
             CreateUser(usersView, user);
 
             var usersTableRows = usersView
@@ -40,7 +45,8 @@ namespace UserManager.IntegrationTests
             usersTableRows.Should().Contain(row =>
                 row["First name"].Value == user.FirstName &&
                 row["Last name"].Value == user.LastName &&
-                row["Email"].Value == user.Email);
+                row["Email"].Value == user.Email &&
+                row["Role"].Value == defaultRole);
         }
 
         [TestMethod]

@@ -19,10 +19,10 @@ namespace UserManager.BusinessLogic.DataAccess.Repositories
             using (var connection = _context.GetOpenedConnection())
             {
                 return await connection.QueryFirstAsync<int>(@"
-                    INSERT INTO [USER] (FirstName, LastName, Email) 
+                    INSERT INTO [USER] (FirstName, LastName, Email, Role) 
                     OUTPUT INSERTED.Id
-                    VALUES(@FirstName, @LastName, @Email)",
-                    new { user.FirstName, user.LastName, user.Email });
+                    VALUES(@FirstName, @LastName, @Email, @Role)",
+                    new { user.FirstName, user.LastName, user.Email, user.Role });
             }
         }
 

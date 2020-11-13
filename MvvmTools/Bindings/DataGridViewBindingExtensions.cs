@@ -1,4 +1,6 @@
-﻿using MvvmTools.Core;
+﻿using MvvmTools.Controls.DataGridViewControl;
+using MvvmTools.Core;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -33,6 +35,27 @@ namespace MvvmTools.Bindings
                     dataGridView.ContextMenuStrip.Show(dataGridView, e.Location);
                 }
             });
+        }
+
+        public static Bind<TBinding> For<TBinding, TDataGridView, TSource>(this Bind<TBinding> item, TDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+            where TDataGridView : DataGridView
+        {
+            datagridView.AddBinding(items(item._item));
+            return item;
+        }
+
+        public static Bind<TBinding> For<TBinding, TSource>(this Bind<TBinding> item, BindedAdvancedDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+        {
+            var list = items(item._item);
+            datagridView.Bind(list);
+            datagridView.AddBinding(list);
+            return item;
+        }
+
+        public static Bind<TBinding> WithContextMenu<TBinding, TSource>(this Bind<TBinding> item, DataGridView dataGridView, params (string Name, ICommand<TSource> Command)[] menuItems)
+        {
+            dataGridView.WithContextMenu(menuItems);
+            return item;
         }
     }
 }

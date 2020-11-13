@@ -4,21 +4,25 @@ using MvvmTools.Components;
 using MvvmTools.Core;
 using Serilog;
 using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess.Repositories;
 using UserManager.BusinessLogic.Extensions;
 using UserManager.BusinessLogic.Model;
+using UserManager.Common.Extensions;
 using UserManager.DTOs;
 using UserManager.Events;
 using UserManager.Resources;
 
 namespace UserManager.ViewModels
 {
-    public class CreateUserViewModel: IViewModel
+    public class CreateUserViewModel : IViewModel
     {
         private static ILogger _logger = Log.ForContext<CreateUserViewModel>();
 
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
         private readonly IMessageHub _eventAggregator;
@@ -29,13 +33,17 @@ namespace UserManager.ViewModels
 
         public ICommand CancelUserCreationCommand { get; }
 
+        public BindingList<RoleSelectDto> Roles { get; }
+
         public CreateUserViewModel(
-            IUserRepository userRepository, 
-            IMessageDialog messageDialog, 
+            IUserRepository userRepository,
+            IRoleRepository roleRepository,
+            IMessageDialog messageDialog,
             IMapper mapper,
             IMessageHub eventAggregator)
         {
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
             _messageDialog = messageDialog;
             _mapper = mapper;
             _eventAggregator = eventAggregator;
@@ -43,9 +51,16 @@ namespace UserManager.ViewModels
             this.CreateUserInfo = new CreateUserDto();
             this.CreateUserCommand = Command.From(CreateUser);
             this.CancelUserCreationCommand = Command.From(ClearCreateForm);
+
+            this.Roles = new BindingList<RoleSelectDto>();
         }
 
-        public async Task Load() { }
+        public async Task Load()
+        {
+            var roles = await _roleRepository.GetAll();
+            var mappedRoles = roles.Select(_mapper.Map<RoleSelectDto>);
+            ApplicationDispatcher.Invoke(() => this.Roles.AddRange(mappedRoles));
+        }
 
         public bool CanCreateUser => GenericValidator.TryValidate(CreateUserInfo, out _);
 
@@ -83,6 +98,7 @@ namespace UserManager.ViewModels
             CreateUserInfo.FirstName = string.Empty;
             CreateUserInfo.LastName = string.Empty;
             CreateUserInfo.Email = string.Empty;
+            CreateUserInfo.Role = this.Roles.First(x => x.Id == Role.Basic.Id);
         }
     }
 }

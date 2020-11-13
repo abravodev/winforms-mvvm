@@ -9,5 +9,7 @@
         public string LastName { get; set; }
 
         public Email Email { get; set; }
+
+        public Role Role { get; set; }
     }
 }

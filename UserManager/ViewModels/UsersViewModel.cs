@@ -12,11 +12,15 @@ using Easy.MessageHub;
 using UserManager.Events;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.DataAccess.Repositories;
+using Serilog;
+using UserManager.BusinessLogic.Extensions;
+using UserManager.Common.Extensions;
 
 namespace UserManager.ViewModels
 {
     public class UsersViewModel : BindableObject, IViewModel
     {
+        private static ILogger _logger = Log.ForContext<UsersViewModel>();
         private readonly IUserRepository _userRepository;
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
@@ -86,6 +90,7 @@ namespace UserManager.ViewModels
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 _messageDialog.ShowError(title:General.ErrorLoadingUsersTitle, message: ex.Message);
             }
             finally

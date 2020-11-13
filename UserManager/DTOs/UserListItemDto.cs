@@ -18,5 +18,8 @@ namespace UserManager.DTOs
 
         [DisplayName("Email")]
         public string Email { get; set; }
+
+        [DisplayName("Role")]
+        public string Role { get; set; }
     }
 }

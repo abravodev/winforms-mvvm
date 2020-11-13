@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UserManager.BusinessLogic\UserManager.BusinessLogic.csproj">
+      <Project>{ce9a2929-ed77-489b-b161-6c10fd8a5d3a}</Project>
+      <Name>UserManager.BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManager.Common\UserManager.Common.csproj">
       <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
       <Name>UserManager.Common</Name>

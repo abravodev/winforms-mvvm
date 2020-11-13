@@ -13,6 +13,7 @@ namespace UserManager.BusinessLogic.DataAccess
         private static void ConfigureMappers()
         {
             SqlMapper.AddTypeHandler(new EmailMapper());
+            SqlMapper.AddTypeHandler(new RoleMapper());
         }
     }
 }

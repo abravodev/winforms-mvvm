@@ -30,5 +30,13 @@ namespace UserManager.DTOs
             get { return _email; }
             set { SetProperty(ref _email, value); }
         }
+
+        private RoleSelectDto _roleId;
+        [Required]
+        public RoleSelectDto Role
+        {
+            get { return _roleId; }
+            set { SetProperty(ref _roleId, value); }
+        }
     }
 }

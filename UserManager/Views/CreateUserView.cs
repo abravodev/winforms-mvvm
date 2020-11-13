@@ -3,6 +3,8 @@ using UserManager.ViewModels;
 using MvvmTools.Bindings;
 using MvvmTools.Validations;
 using MvvmTools.Core;
+using System.Threading.Tasks;
+using UserManager.BusinessLogic.Model;
 
 namespace UserManager.Views
 {
@@ -18,6 +20,7 @@ namespace UserManager.Views
         public void SetViewModel(CreateUserViewModel viewModel)
         {
             ViewModel = viewModel;
+            Task.Run(async () => await ViewModel.Load());
             InitializeDataBindings();
         }
 
@@ -32,7 +35,12 @@ namespace UserManager.Views
             this.BindTo(ViewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)
-                .For(this.tb_email, _ => _.Email);
+                .For(this.tb_email, _ => _.Email)
+                .For(this.cb_role, _ => _.Role, 
+                    ComboBoxSource.From(ViewModel.Roles)
+                        .Display(_ => _.Name)
+                        .Value(_ => _.Id)
+                        .Default(_ => _.Id == Role.Basic.Id));
             this.WithValidation(ep_createUser)
                 .On(this.tb_firstName).FieldRequired()
                 .On(this.tb_lastName).FieldRequired()

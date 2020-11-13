@@ -9,5 +9,4 @@ namespace UserManager.BusinessLogic.DataAccess.Mappers
 
         protected override Email Parse(string email) => new Email(email);
     }
-
 }

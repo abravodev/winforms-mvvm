@@ -9,6 +9,9 @@ namespace UserManager.Mappers
         public RoleProfile()
         {
             CreateMap<Role, RoleListItemDto>();
+            CreateMap<Role, RoleSelectDto>();
+            CreateMap<RoleSelectDto, Role>()
+                .ConstructUsing(x => Role.FromId(x.Id));
         }
     }
 }
