@@ -117,46 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteUserQuestion" xml:space="preserve">
-    <value>Are you sure you want to delete user '{0}'?</value>
-  </data>
-  <data name="DeleteUserTitle" xml:space="preserve">
-    <value>Delete user</value>
-  </data>
-  <data name="ErrorLoadingRolesTitle" xml:space="preserve">
-    <value>Error loading roles</value>
-  </data>
-  <data name="ErrorLoadingUsersTitle" xml:space="preserve">
-    <value>Error loading users</value>
-  </data>
-  <data name="LanguageChangeMessage" xml:space="preserve">
-    <value>Change was saved. Restart the application to have the new language</value>
-  </data>
-  <data name="LanguageChangeTitle" xml:space="preserve">
-    <value>Language change saved</value>
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Roles</value>
-  </data>
-  <data name="UserCreatedMessage" xml:space="preserve">
-    <value>Name = {0}, Id = {1}</value>
-  </data>
-  <data name="UserCreatedTitle" xml:space="preserve">
-    <value>User created</value>
-  </data>
-  <data name="UserCreationFailedTitle" xml:space="preserve">
-    <value>Error in creation</value>
-  </data>
-  <data name="UserDeletedMessage" xml:space="preserve">
-    <value>User '{0}' was deleted</value>
-  </data>
-  <data name="UserDeletedTitle" xml:space="preserve">
-    <value>User deleted</value>
-  </data>
-  <data name="Users" xml:space="preserve">
-    <value>Users</value>
-  </data>
 </root>

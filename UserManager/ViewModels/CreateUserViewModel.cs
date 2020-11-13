@@ -5,7 +5,7 @@ using MvvmTools.Core;
 using Serilog;
 using System;
 using System.Threading.Tasks;
-using UserManager.BusinessLogic.DataAccess;
+using UserManager.BusinessLogic.DataAccess.Repositories;
 using UserManager.BusinessLogic.Extensions;
 using UserManager.BusinessLogic.Model;
 using UserManager.DTOs;

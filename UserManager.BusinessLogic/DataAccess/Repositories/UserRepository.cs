@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.Model;
 
-namespace UserManager.BusinessLogic.DataAccess
+namespace UserManager.BusinessLogic.DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -21,7 +21,7 @@ namespace UserManager.BusinessLogic.DataAccess
                 return await connection.QueryFirstAsync<int>(@"
                     INSERT INTO [USER] (FirstName, LastName, Email) 
                     OUTPUT INSERTED.Id
-                    VALUES(@FirstName, @LastName, @Email)", 
+                    VALUES(@FirstName, @LastName, @Email)",
                     new { user.FirstName, user.LastName, user.Email });
             }
         }

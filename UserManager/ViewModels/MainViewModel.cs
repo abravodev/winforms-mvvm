@@ -74,5 +74,7 @@ namespace UserManager.ViewModels
         }
 
         public void NavigateToUsersView() => _viewNavigator.Open<UsersViewModel>();
+
+        public void NavigateToRolesView() => _viewNavigator.Open<RolesViewModel>();
     }
 }

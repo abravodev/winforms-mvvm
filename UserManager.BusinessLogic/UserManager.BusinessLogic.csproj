@@ -54,12 +54,15 @@
     <Compile Include="DataAccess\DapperExtensions.cs" />
     <Compile Include="DataAccess\DatabaseContext.cs" />
     <Compile Include="DataAccess\ConfigureDapper.cs" />
+    <Compile Include="DataAccess\Repositories\IRoleRepository.cs" />
     <Compile Include="DataAccess\Mappers\EmailMapper.cs" />
-    <Compile Include="DataAccess\IUserRepository.cs" />
+    <Compile Include="DataAccess\Repositories\IUserRepository.cs" />
+    <Compile Include="DataAccess\Repositories\RoleRepository.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
-    <Compile Include="DataAccess\UserRepository.cs" />
+    <Compile Include="DataAccess\Repositories\UserRepository.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Model\Email.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

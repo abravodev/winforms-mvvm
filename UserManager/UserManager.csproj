@@ -79,8 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\LanguageDto.cs" />
+    <Compile Include="Mappers\RoleProfile.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="Events\UserCreatedEvent.cs" />
+    <Compile Include="DTOs\RoleListItemDto.cs" />
+    <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="Views\CreateUserView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +109,12 @@
     <Compile Include="Startup\LogConfig.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="Views\RolesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RolesView.Designer.cs">
+      <DependentUpon>RolesView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UsersView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +137,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\RolesView.resx">
+      <DependentUpon>RolesView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UsersView.resx">
       <DependentUpon>UsersView.cs</DependentUpon>
       <SubType>Designer</SubType>

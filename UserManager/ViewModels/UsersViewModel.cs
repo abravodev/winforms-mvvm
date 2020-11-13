@@ -3,7 +3,6 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using UserManager.BusinessLogic.DataAccess;
 using MvvmTools.Components;
 using UserManager.DTOs;
 using MvvmTools.Bindings;
@@ -12,6 +11,7 @@ using UserManager.Resources;
 using Easy.MessageHub;
 using UserManager.Events;
 using System.Windows.Forms;
+using UserManager.BusinessLogic.DataAccess.Repositories;
 
 namespace UserManager.ViewModels
 {

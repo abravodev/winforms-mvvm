@@ -1,4 +1,5 @@
-﻿using MvvmTools.Core;
+﻿using MvvmTools.Bindings;
+using MvvmTools.Core;
 using System;
 using System.Windows.Forms;
 using UserManager.Resources;
@@ -14,13 +15,16 @@ namespace UserManager.Views
         {
             InitializeComponent();
             ViewModel = viewModel;
+            InitializeDataBindings();
+            SetTranslations();
         }
 
-        protected override void OnLoad(EventArgs e)
+        private void InitializeDataBindings()
         {
-            base.OnLoad(e);
+            this.BindTo(ViewModel)
+                .Click(this.btn_users, ViewModel.NavigateToUsersView)
+                .Click(this.btn_roles, ViewModel.NavigateToRolesView);
             LoadLanguageMenu();
-            SetTranslations();
         }
 
         private void LoadLanguageMenu()
@@ -33,8 +37,7 @@ namespace UserManager.Views
         private void SetTranslations()
         {
             this.btn_users.Text = General.Users;
+            this.btn_roles.Text = General.Roles;
         }
-
-        private void btn_users_click(object sender, EventArgs e) => ViewModel.NavigateToUsersView();
     }
 }

@@ -8,6 +8,15 @@ namespace MvvmTools.DependencyInjection
 {
     public static class SimpleInjectorExtensions
     {
+        public static void RegisterAsInterfaces<TService>(this Container container)
+        {
+            var serviceType = typeof(TService);
+            foreach (var interfaceType in serviceType.GetInterfaces())
+            {
+                container.Register(interfaceType, serviceType);
+            }
+        }
+
         public static void RegisterView<TView, TViewModel>(this Container container)
             where TView : ContainerControl, IView<TViewModel>
             where TViewModel : IViewModel

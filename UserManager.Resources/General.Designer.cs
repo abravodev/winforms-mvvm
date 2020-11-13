@@ -88,6 +88,15 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading roles.
+        /// </summary>
+        public static string ErrorLoadingRolesTitle {
+            get {
+                return ResourceManager.GetString("ErrorLoadingRolesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading users.
         /// </summary>
         public static string ErrorLoadingUsersTitle {
@@ -111,6 +120,15 @@ namespace UserManager.Resources {
         public static string LanguageChangeTitle {
             get {
                 return ResourceManager.GetString("LanguageChangeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles.
+        /// </summary>
+        public static string Roles {
+            get {
+                return ResourceManager.GetString("Roles", resourceCulture);
             }
         }
         

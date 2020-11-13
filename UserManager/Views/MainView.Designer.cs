@@ -34,6 +34,7 @@ namespace UserManager.Views
             this.ms_menu = new System.Windows.Forms.MenuStrip();
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_language = new MvvmTools.Controls.BindableToolStripMenuItem();
+            this.btn_roles = new System.Windows.Forms.Button();
             this.ms_menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +46,6 @@ namespace UserManager.Views
             this.btn_users.TabIndex = 0;
             this.btn_users.Text = "Users";
             this.btn_users.UseVisualStyleBackColor = true;
-            this.btn_users.Click += new System.EventHandler(this.btn_users_click);
             // 
             // ms_menu
             // 
@@ -68,14 +68,24 @@ namespace UserManager.Views
             // tsmi_language
             // 
             this.tsmi_language.Name = "tsmi_language";
-            this.tsmi_language.Size = new System.Drawing.Size(180, 22);
+            this.tsmi_language.Size = new System.Drawing.Size(129, 22);
             this.tsmi_language.Text = "Language:";
+            // 
+            // btn_roles
+            // 
+            this.btn_roles.Location = new System.Drawing.Point(348, 121);
+            this.btn_roles.Name = "btn_roles";
+            this.btn_roles.Size = new System.Drawing.Size(75, 23);
+            this.btn_roles.TabIndex = 2;
+            this.btn_roles.Text = "Roles";
+            this.btn_roles.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_roles);
             this.Controls.Add(this.btn_users);
             this.Controls.Add(this.ms_menu);
             this.MainMenuStrip = this.ms_menu;
@@ -94,6 +104,7 @@ namespace UserManager.Views
         private System.Windows.Forms.MenuStrip ms_menu;
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
         private BindableToolStripMenuItem tsmi_language;
+        private System.Windows.Forms.Button btn_roles;
     }
 }
 

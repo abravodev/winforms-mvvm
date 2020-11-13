@@ -126,6 +126,9 @@
   <data name="DeleteUserTitle" xml:space="preserve">
     <value>Borrar usuario</value>
   </data>
+  <data name="ErrorLoadingRolesTitle" xml:space="preserve">
+    <value>Error cargando los roles</value>
+  </data>
   <data name="ErrorLoadingUsersTitle" xml:space="preserve">
     <value>Error cargando los usuarios</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="LanguageChangeTitle" xml:space="preserve">
     <value>Cambio de idioma guardado</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
   </data>
   <data name="UserCreatedMessage" xml:space="preserve">
     <value>Nombre = {0}, Id = {1}</value>

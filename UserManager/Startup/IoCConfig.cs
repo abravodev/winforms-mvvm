@@ -9,6 +9,7 @@ using System.Configuration;
 using UserManager.Providers;
 using MvvmTools.DependencyInjection;
 using Easy.MessageHub;
+using UserManager.BusinessLogic.DataAccess.Repositories;
 
 namespace UserManager.Startup
 {
@@ -20,8 +21,7 @@ namespace UserManager.Startup
         {
             var container = new Container();
             container.Options.EnableAutoVerification = false;
-            container.Options.ConstructorResolutionBehavior =
-                new GreediestConstructorBehavior();
+            container.Options.ConstructorResolutionBehavior = new GreediestConstructorBehavior();
 
             RegisterMessageHub(container);
             RegisterMappers(container);
@@ -44,6 +44,7 @@ namespace UserManager.Startup
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<RoleProfile>();
             });
 
             container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
@@ -51,7 +52,7 @@ namespace UserManager.Startup
 
         private static void RegisterComponents(Container container)
         {
-            container.Register<IMessageDialog, MessageDialog>();
+            container.RegisterAsInterfaces<MessageDialog>();
         }
 
         private static void RegisterDataAccess(Container container)
@@ -60,13 +61,14 @@ namespace UserManager.Startup
                 conectionString: ConfigurationManager.ConnectionStrings["UsersDatabase"].ConnectionString
             );
             container.RegisterInstance(databaseConfig);
-            container.Register<IUserRepository, UserRepository>();
+            container.RegisterAsInterfaces<UserRepository>();
+            container.RegisterAsInterfaces<RoleRepository>();
         }
 
         private static void RegisterProviders(Container container)
         {
-            container.Register<ISettingProvider, SettingProvider>();
-            container.Register<IViewNavigator, ViewNavigator>();
+            container.RegisterAsInterfaces<SettingProvider>();
+            container.RegisterAsInterfaces<ViewNavigator>();
         }
 
         private static void RegisterViews(Container container)
@@ -74,6 +76,7 @@ namespace UserManager.Startup
             container.RegisterView<UsersView, UsersViewModel>();
             container.RegisterView<MainView, MainViewModel>();
             container.RegisterView<CreateUserView, CreateUserViewModel>();
+            container.RegisterView<RolesView, RolesViewModel>();
         }
     }
 }

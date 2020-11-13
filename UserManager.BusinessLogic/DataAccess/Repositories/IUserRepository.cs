@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.Model;
 
-namespace UserManager.BusinessLogic.DataAccess
+namespace UserManager.BusinessLogic.DataAccess.Repositories
 {
     public interface IUserRepository
     {
