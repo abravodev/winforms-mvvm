@@ -1,30 +1,12 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
 using FlaUI.Core.Input;
-using FlaUI.Core.Tools;
 using FlaUI.Core.WindowsAPI;
-using System.Linq;
 using UserManager.IntegrationTests.TestUtils.Elements;
 
 namespace UserManager.IntegrationTests.TestUtils.Extensions
 {
     public static class FlaUiExtensions
     {
-        public static Button GetButtonByName(this AutomationElement context, string buttonName)
-        {
-            return context.FindFirstDescendant(x => x.ByControlType(ControlType.Button).And(x.ByName(buttonName))).AsButton();
-        }
-
-        public static Button GetFirstButton(this AutomationElement context)
-        {
-            return context.FindFirstDescendant(x => x.ByControlType(ControlType.Button)).AsButton();
-        }
-
-        public static AutomationElement GetModalByTitle(this Window window, string name)
-        {
-            return Retry.WhileNull(() => window.ModalWindows.SingleOrDefault(x => x.Title.Equals(name))).Result;
-        }
-
         public static void SelectMenuItem(this Menu menu, string menuItem)
         {
             menu.Items[menuItem].Focus();

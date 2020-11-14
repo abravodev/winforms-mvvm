@@ -1,5 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
+using UserManager.IntegrationTests.TestUtils.Extensions;
 
 namespace UserManager.IntegrationTests.TestUtils.Elements
 {
@@ -17,7 +18,7 @@ namespace UserManager.IntegrationTests.TestUtils.Elements
 
         public VisualForm Fill(string inputName, string value)
         {
-            var input = _form.FindFirstDescendant(x => x.ByControlType(ControlType.Edit).And(x.ByName(inputName))).AsTextBox();
+            var input = _form.Get<TextBox>(inputName, ControlType.Edit);
             input.Text = value;
             return this;
         }

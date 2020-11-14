@@ -19,9 +19,7 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
 
         public List<FlaUI.Core.AutomationElements.Button> GetButtons()
         {
-            return FindAllChildren(x => x.ByControlType(FlaUI.Core.Definitions.ControlType.Button))
-                .Select(x => x.AsButton())
-                .ToList();
+            return this.GetAllChildren<FlaUI.Core.AutomationElements.Button>().ToList();
         }
 
         public DialogResult[] GetOptions()

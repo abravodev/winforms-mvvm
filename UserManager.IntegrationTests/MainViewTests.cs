@@ -1,5 +1,4 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -17,8 +16,8 @@ namespace UserManager.IntegrationTests
             var window = App.GetMainWindow();
             window.Title.Should().Contain("UserManager");
 
-            window.GetButtonByName("Users").Should().NotBeNull();
-            window.GetButtonByName("Roles").Should().NotBeNull();
+            window.Get<Button>("Users").Should().NotBeNull();
+            window.Get<Button>("Roles").Should().NotBeNull();
         }
 
         [TestMethod]
@@ -26,7 +25,7 @@ namespace UserManager.IntegrationTests
         {
             var window = App.GetMainWindow();
 
-            var settingsOption = window.FindFirstDescendant(x => x.ByControlType(ControlType.MenuItem).And(x.ByName("Settings"))).AsMenuItem();
+            var settingsOption = window.Get<MenuItem>("Settings");
             var languageOption = settingsOption.Items.First(x => x.Name.Contains("Language"));
 
             languageOption.Should().NotBeNull();

@@ -1,14 +1,15 @@
 ﻿using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Definitions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using DialogResult = System.Windows.Forms.DialogResult;
 using UserManager.BusinessLogic.Model;
-using System.Windows.Forms;
 using UserManager.Common.Extensions;
 using UserManager.IntegrationTests.TestUtils;
 using UserManager.IntegrationTests.TestUtils.Extensions;
+using UserManager.IntegrationTests.TestUtils.Elements;
+using FlaUI.Core.Definitions;
 
 namespace UserManager.IntegrationTests
 {
@@ -19,7 +20,7 @@ namespace UserManager.IntegrationTests
         public void User_can_view_a_list_of_users()
         {
             var usersView = NavigatetoUsersView();
-            var userRows = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+            var userRows = GetUserRows(usersView);
             userRows.Should().NotBeEmpty();
         }
 
@@ -34,14 +35,12 @@ namespace UserManager.IntegrationTests
                 Email = $"john.doe_{DateTime.Now.Ticks}@mail.com"
             };
             var defaultRole = Role.Basic.Name;
-            var creationForm = usersView.FindFirstDescendant(x => x.ByName("Create User Form")).AsForm();
-            var roleSelector = creationForm.FindFirstDescendant(x => x.ByControlType(ControlType.ComboBox).And(x.ByName("User role"))).AsComboBox();
+            var creationForm = usersView.Get<VisualForm>("Create User Form");
+            var roleSelector = creationForm.Get<ComboBox>("User role");
             roleSelector.Value.Should().Be(defaultRole);
             CreateUser(usersView, user);
 
-            var usersTableRows = usersView
-                .FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView()
-                .GetRows().ToDictionary();
+            var usersTableRows = GetUserRows(usersView).ToDictionary();
             usersTableRows.Should().Contain(row =>
                 row["First name"].Value == user.FirstName &&
                 row["Last name"].Value == user.LastName &&
@@ -53,23 +52,25 @@ namespace UserManager.IntegrationTests
         public void User_can_delete_an_existing_user()
         {
             var usersView = NavigatetoUsersView();
-            var usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+            var usersTable = GetUserRows(usersView);
             if (usersTable.IsEmpty())
             {
                 CreateRandomUser(usersView);
-                usersTable = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows();
+                usersTable = GetUserRows(usersView);
             }
 
             var initialNumberOfUsers = usersTable.Length;
             var firstUser = usersTable.First();
             firstUser.RightClick();
-            usersView.FindFirstDescendant(x => x.ByName("Context menu of Users list")).AsMenu().SelectMenuItem("Delete");
-            usersView.GetModalByTitle("Delete user").AsModal().Choose(DialogResult.Yes);
-            usersView.GetModalByTitle("User deleted").AsModal().Choose(DialogResult.OK);
+            usersView.Get<Menu>("Context menu of Users list", ControlType.ToolBar).SelectMenuItem("Delete");
+            usersView.GetModalByTitle("Delete user").Choose(DialogResult.Yes);
+            usersView.GetModalByTitle("User deleted").Choose(DialogResult.OK);
 
-            var finalNumberOfUsers = usersView.FindFirstDescendant(x => x.ByControlType(ControlType.Table)).AsDataGridView().GetRows().Length;
+            var finalNumberOfUsers = GetUserRows(usersView).Length;
             finalNumberOfUsers.Should().BeLessThan(initialNumberOfUsers);
         }
+
+        private static DataGridViewRow[] GetUserRows(Window usersView) => usersView.Get<DataGridView>("Users list").GetRows();
 
         private UserInfo CreateRandomUser(Window usersView)
         {
@@ -84,14 +85,14 @@ namespace UserManager.IntegrationTests
 
         private UserInfo CreateUser(Window usersView, UserInfo user)
         {
-            var creationForm = usersView.FindFirstDescendant(x => x.ByName("Create User Form")).AsForm();
+            var creationForm = usersView.Get<VisualForm>("Create User Form");
             creationForm
                 .Fill("First name", user.FirstName)
                 .Fill("Last name", user.LastName)
                 .Fill("Email", user.Email);
-            creationForm.GetButtonByName("Save").Click();
+            creationForm.Get<Button>("Save").Click();
 
-            usersView.GetModalByTitle("User created").AsModal().Choose(DialogResult.OK);
+            usersView.GetModalByTitle("User created").Choose(DialogResult.OK);
 
             return user;
         }
@@ -108,7 +109,7 @@ namespace UserManager.IntegrationTests
         private Window NavigatetoUsersView()
         {
             var window = App.GetMainWindow();
-            window.GetButtonByName("Users").Click();
+            window.Get<Button>("Users").Click();
             return App.GetUsersWindow();
         }
     }

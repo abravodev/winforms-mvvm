@@ -73,6 +73,7 @@
     <Compile Include="TestUtils.Tests\DialogResultMapperTests.cs" />
     <Compile Include="TestUtils\Elements\DialogResultMapper.cs" />
     <Compile Include="TestUtils\Elements\ModalElement.cs" />
+    <Compile Include="TestUtils\Extensions\AutomationElementQueryExtensions.cs" />
     <Compile Include="TestUtils\TestBase.cs" />
     <Compile Include="TestUtils\Extensions\DataGridViewExtensions.cs" />
     <Compile Include="TestUtils\Extensions\FlaUiExtensions.cs" />
