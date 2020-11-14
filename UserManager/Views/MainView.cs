@@ -1,6 +1,5 @@
 ﻿using MvvmTools.Bindings;
 using MvvmTools.Core;
-using System;
 using System.Windows.Forms;
 using UserManager.Resources;
 using UserManager.ViewModels;
@@ -19,7 +18,7 @@ namespace UserManager.Views
             SetTranslations();
         }
 
-        private void InitializeDataBindings()
+        public void InitializeDataBindings()
         {
             this.BindTo(ViewModel)
                 .Click(this.btn_users, ViewModel.NavigateToUsersView)

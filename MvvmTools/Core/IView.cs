@@ -9,6 +9,8 @@ namespace MvvmTools.Core
         event EventHandler Load;
 
         void Show();
+
+        void InitializeDataBindings();
     }
 
     public interface IPartialView<TViewModel> : IView<TViewModel> where TViewModel : IViewModel

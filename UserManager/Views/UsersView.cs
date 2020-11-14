@@ -18,7 +18,7 @@ namespace UserManager.Views
             InitializeDataBindings();
         }
 
-        private void InitializeDataBindings()
+        public void InitializeDataBindings()
         {
             this.BindTo(ViewModel)
                 .For(this.dgv_userlist, _ => _.Users)

@@ -18,6 +18,7 @@ namespace UserManager.ViewModels
         private readonly ISettingProvider _settingProvider;
         private readonly IMessageDialog _messageDialog;
         private readonly IViewNavigator _viewNavigator;
+        private readonly ISet<string> _openedWindows = new HashSet<string>();
 
         public BindingList<LanguageDto> AvailableLanguages { get; }
 
@@ -29,7 +30,7 @@ namespace UserManager.ViewModels
             AvailableLanguages = new BindingList<LanguageDto>();
         }
 
-        public async Task Load() 
+        public async Task Load()
         {
             var languages = GetAvailableLanguages();
             AvailableLanguages.AddRange(languages);
@@ -73,8 +74,21 @@ namespace UserManager.ViewModels
                 message: General.LanguageChangeMessage);
         }
 
-        public void NavigateToUsersView() => _viewNavigator.Open<UsersViewModel>();
+        public void NavigateToUsersView() => NavigateTo<UsersViewModel>();
 
-        public void NavigateToRolesView() => _viewNavigator.Open<RolesViewModel>();
+        private void NavigateTo<TViewModel>() where TViewModel : IViewModel
+        {
+            if (_openedWindows.Contains(typeof(TViewModel).Name))
+            {
+                _messageDialog.ShowError(
+                    title: General.AttentionTitle,
+                    message: General.CannotOpenWindowsTwice);
+                return;
+            }
+            _openedWindows.Add(typeof(TViewModel).Name);
+            _viewNavigator.Open<TViewModel>();
+        }
+
+        public void NavigateToRolesView() => NavigateTo<RolesViewModel>();
     }
 }

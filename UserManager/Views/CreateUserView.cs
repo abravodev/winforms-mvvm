@@ -20,11 +20,11 @@ namespace UserManager.Views
         public void SetViewModel(CreateUserViewModel viewModel)
         {
             ViewModel = viewModel;
-            Task.Run(async () => await ViewModel.Load());
             InitializeDataBindings();
+            Task.Run(async () => await ViewModel.Load());
         }
 
-        private void InitializeDataBindings()
+        public void InitializeDataBindings()
         {
             this.ConfigureDefaultAction(ViewModel.CreateUserCommand);
             this.bt_save.Enabled = false;

@@ -61,6 +61,24 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention!.
+        /// </summary>
+        public static string AttentionTitle {
+            get {
+                return ResourceManager.GetString("AttentionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot open same windows simultaneously.
+        /// </summary>
+        public static string CannotOpenWindowsTwice {
+            get {
+                return ResourceManager.GetString("CannotOpenWindowsTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
