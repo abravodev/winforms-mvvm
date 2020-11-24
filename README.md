@@ -31,3 +31,18 @@ My advice is to use it in new views and, after gaining confidence, starting movi
 While building this, I've had to search for a lot of things in Google, so there are many inspirations (in no special order):
 
 [WFBind](https://github.com/mareklinka/WFBind) - [MvvmFx](https://github.com/MvvmFx/MvvmFx) - [Prism.WinForms](https://github.com/imasm/Prism.WinForms) - [CompositeWPFContrib](http://compositewpfcontrib.codeplex.com/) - [DevExpress MVVM Framework](https://docs.devexpress.com/WPF/15112/mvvm-framework)
+
+# Sample app
+## Setup
+To launch the app or pass the integration tests, you will need to recreate the database, using the `UserManager.DataAccess.Migrations` project. It is a console app that will run the pending migrations.
+
+## Features
+### Users
+- List users
+- Create user
+### Roles
+- List roles
+### Language
+- Change language of the app
+	- *This is not complete because I haven't found a proper way to keep a minimum number of resources yet*
+- Save it into user preferences
