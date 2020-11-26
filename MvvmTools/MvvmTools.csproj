@@ -34,6 +34,9 @@
     <Reference Include="AdvancedDataGridView, Version=1.1.24722.8, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DG.AdvancedDataGridView.1.1.24722.8\lib\net40\AdvancedDataGridView.dll</HintPath>
     </Reference>
+    <Reference Include="Easy.MessageHub, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Easy.MessageHub.5.0.0\lib\net45\Easy.MessageHub.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -73,9 +76,10 @@
     <Compile Include="Bindings\ReflectionUtils.cs" />
     <Compile Include="Components\GenericValidator.cs" />
     <Compile Include="Components\IMessageDialog.cs" />
-    <Compile Include="Components\IViewNavigator.cs" />
+    <Compile Include="Navigation\IViewNavigator.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
+    <Compile Include="Navigation\ViewClosedEvent.cs" />
     <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridView.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClause.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterConverter.cs" />
@@ -83,7 +87,7 @@
     <Compile Include="DependencyInjection\GreediestConstructorBehavior.cs" />
     <Compile Include="DependencyInjection\SimpleInjectorExtensions.cs" />
     <Compile Include="Components\ApplicationDispatcher.cs" />
-    <Compile Include="Components\ViewNavigator.cs" />
+    <Compile Include="Navigation\ViewNavigator.cs" />
     <Compile Include="Controls\BindableToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

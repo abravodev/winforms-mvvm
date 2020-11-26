@@ -3,7 +3,6 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using DialogResult = System.Windows.Forms.DialogResult;
 using UserManager.BusinessLogic.Model;
 using UserManager.Common.Extensions;
 using UserManager.IntegrationTests.TestUtils;
@@ -63,8 +62,8 @@ namespace UserManager.IntegrationTests
             var firstUser = usersTable.First();
             firstUser.RightClick();
             usersView.Get<Menu>("Context menu of Users list", ControlType.ToolBar).SelectMenuItem("Delete");
-            usersView.GetModalByTitle("Delete user").Choose(DialogResult.Yes);
-            usersView.GetModalByTitle("User deleted").Choose(DialogResult.OK);
+            usersView.GetModalByTitle("Delete user").Choose(DialogOption.Yes);
+            usersView.GetModalByTitle("User deleted").Choose(DialogOption.OK);
 
             var finalNumberOfUsers = GetUserRows(usersView).Length;
             finalNumberOfUsers.Should().BeLessThan(initialNumberOfUsers);
@@ -92,7 +91,7 @@ namespace UserManager.IntegrationTests
                 .Fill("Email", user.Email);
             creationForm.Get<Button>("Save").Click();
 
-            usersView.GetModalByTitle("User created").Choose(DialogResult.OK);
+            usersView.GetModalByTitle("User created").Choose(DialogOption.OK);
 
             return user;
         }

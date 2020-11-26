@@ -10,6 +10,7 @@ using UserManager.Providers;
 using MvvmTools.DependencyInjection;
 using Easy.MessageHub;
 using UserManager.BusinessLogic.DataAccess.Repositories;
+using MvvmTools.Navigation;
 
 namespace UserManager.Startup
 {

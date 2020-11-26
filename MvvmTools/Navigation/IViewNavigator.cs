@@ -1,6 +1,6 @@
 ﻿using MvvmTools.Core;
 
-namespace MvvmTools.Components
+namespace MvvmTools.Navigation
 {
     public interface IViewNavigator
     {

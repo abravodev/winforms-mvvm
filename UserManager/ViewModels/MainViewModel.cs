@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using UserManager.DTOs;
 using UserManager.Providers;
 using UserManager.Resources;
+using Easy.MessageHub;
+using MvvmTools.Navigation;
 
 namespace UserManager.ViewModels
 {
@@ -19,15 +21,23 @@ namespace UserManager.ViewModels
         private readonly IMessageDialog _messageDialog;
         private readonly IViewNavigator _viewNavigator;
         private readonly ISet<string> _openedWindows = new HashSet<string>();
+        private readonly IMessageHub _eventAggregator;
 
         public BindingList<LanguageDto> AvailableLanguages { get; }
 
-        public MainViewModel(ISettingProvider settingProvider, IMessageDialog messageDialog, IViewNavigator viewNavigator)
+        public MainViewModel(ISettingProvider settingProvider, IMessageDialog messageDialog, IViewNavigator viewNavigator, IMessageHub eventAggregator)
         {
             _settingProvider = settingProvider;
             _messageDialog = messageDialog;
             _viewNavigator = viewNavigator;
+            _eventAggregator = eventAggregator;
+            SubscribeToEvents();
             AvailableLanguages = new BindingList<LanguageDto>();
+        }
+
+        private void SubscribeToEvents()
+        {
+            _eventAggregator.Subscribe<ViewClosedEvent>(ViewClosed);
         }
 
         public async Task Load()
@@ -76,6 +86,8 @@ namespace UserManager.ViewModels
 
         public void NavigateToUsersView() => NavigateTo<UsersViewModel>();
 
+        public void NavigateToRolesView() => NavigateTo<RolesViewModel>();
+
         private void NavigateTo<TViewModel>() where TViewModel : IViewModel
         {
             if (_openedWindows.Contains(typeof(TViewModel).Name))
@@ -89,6 +101,9 @@ namespace UserManager.ViewModels
             _viewNavigator.Open<TViewModel>();
         }
 
-        public void NavigateToRolesView() => NavigateTo<RolesViewModel>();
+        private void ViewClosed(ViewClosedEvent evt)
+        {
+            _openedWindows.Remove(evt.ViewModelName);
+        }
     }
 }

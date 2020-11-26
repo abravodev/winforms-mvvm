@@ -33,5 +33,29 @@ namespace UserManager.IntegrationTests
                 .Contain(x => x.Text == "Spanish")
                 .And.Contain(x => x.Text == "English");
         }
+
+        [TestMethod]
+        public void MainView_only_allows_to_open_one_windows_type_at_the_same_time()
+        {
+            var mainWindow = App.GetMainWindow();
+            var gotoUsersButton = mainWindow.Get<Button>("Users");
+            gotoUsersButton.Click();
+            var usersView = App.GetUsersWindow();
+            usersView.Should().NotBeNull();
+
+            mainWindow.Focus();
+            mainWindow.Get<Button>("Roles").Click();
+
+            mainWindow.Focus();
+            gotoUsersButton.Click();
+            var errorModal = mainWindow.GetModalByTitle("Attention!");
+            errorModal.GetMessage().Should().Contain("Cannot open same window");
+
+            errorModal.Choose(DialogOption.OK);
+            usersView.Close();
+            mainWindow.Focus();
+            gotoUsersButton.Click();
+            App.GetUsersWindow().Should().NotBeNull();
+        }
     }
 }

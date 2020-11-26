@@ -1,4 +1,5 @@
 ﻿using MvvmTools.Components;
+using MvvmTools.Navigation;
 using Serilog;
 using System;
 using System.Windows.Forms;

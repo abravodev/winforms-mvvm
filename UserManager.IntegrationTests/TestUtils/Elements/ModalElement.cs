@@ -1,7 +1,6 @@
 ﻿using FlaUI.Core.AutomationElements;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace UserManager.IntegrationTests.TestUtils.Extensions
 {
@@ -11,18 +10,27 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
         {
         }
 
-        public void Choose(DialogResult dialogResult)
+        public void Choose(System.Windows.Forms.DialogResult dialogResult)
         {
             var automationId = DialogResultMapper.ToAutomationId(GetButtons().Count, dialogResult);
             FindFirstChild(x => x.ByAutomationId(automationId)).Click();
         }
 
-        public List<FlaUI.Core.AutomationElements.Button> GetButtons()
+        public void Choose(DialogOption dialogOption) => Choose((System.Windows.Forms.DialogResult) dialogOption);
+
+        public string GetMessage() => GetMessageElement().Text;
+
+        public TextBox GetMessageElement()
         {
-            return this.GetAllChildren<FlaUI.Core.AutomationElements.Button>().ToList();
+            return this.GetAllChildren<TextBox>().FirstOrDefault();
         }
 
-        public DialogResult[] GetOptions()
+        public List<FlaUI.Core.AutomationElements.Button> GetButtons()
+        {
+            return this.GetAllChildren<Button>().ToList();
+        }
+
+        public System.Windows.Forms.DialogResult[] GetOptions()
         {
             var buttons = GetButtons();
             return buttons
