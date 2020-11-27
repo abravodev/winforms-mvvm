@@ -2,6 +2,8 @@
 using MvvmTools.Core;
 using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MvvmTools.Bindings
@@ -13,13 +15,13 @@ namespace MvvmTools.Bindings
             dataGridView.DataSource = new BindingSource(items, null);
         }
 
-        public static void WithContextMenu<T>(this DataGridView dataGridView, params (string Name, ICommand<T> Command)[] menuItems)
+        public static void WithContextMenu<T>(this DataGridView dataGridView, params (string Name, ICommand<T> Command, Image Image)[] menuItems)
         {
             dataGridView.ContextMenuStrip = new ContextMenuStrip();
             dataGridView.ContextMenuStrip.AccessibleName = $"Context menu of {dataGridView.AccessibleName}";
             foreach (var menuItem in menuItems)
             {
-                dataGridView.ContextMenuStrip.Items.Add(menuItem.Name, null, new System.EventHandler((sender, e) =>
+                dataGridView.ContextMenuStrip.Items.Add(menuItem.Name, menuItem.Image, new EventHandler((sender, e) =>
                 {
                     var selectedUser = (T) dataGridView.ContextMenuStrip.Tag;
                     menuItem.Command.Execute(selectedUser);
@@ -52,9 +54,9 @@ namespace MvvmTools.Bindings
             return item;
         }
 
-        public static Bind<TBinding> WithContextMenu<TBinding, TSource>(this Bind<TBinding> item, DataGridView dataGridView, params (string Name, ICommand<TSource> Command)[] menuItems)
+        public static Bind<TBinding> WithContextMenu<TBinding, TSource>(this Bind<TBinding> item, DataGridView dataGridView, params MenuOption<TSource>[] menuItems)
         {
-            dataGridView.WithContextMenu(menuItems);
+            dataGridView.WithContextMenu(menuItems.Select(x => (x.Name, x.Command, x.Image)).ToArray());
             return item;
         }
     }

@@ -40,7 +40,7 @@
             this.tb_lastName = new System.Windows.Forms.TextBox();
             this.cb_role = new System.Windows.Forms.ComboBox();
             this.tlp_createActions = new System.Windows.Forms.TableLayoutPanel();
-            this.bt_save = new System.Windows.Forms.Button();
+            this.bt_save = new FontAwesome.Sharp.IconButton();
             this.bt_cancel = new System.Windows.Forms.Button();
             this.lbl_createUser = new System.Windows.Forms.Label();
             this.ep_createUser = new System.Windows.Forms.ErrorProvider(this.components);
@@ -198,6 +198,11 @@
             // bt_save
             // 
             this.bt_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_save.IconChar = FontAwesome.Sharp.IconChar.Save;
+            this.bt_save.IconColor = System.Drawing.Color.Black;
+            this.bt_save.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.bt_save.IconSize = 18;
+            this.bt_save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bt_save.Location = new System.Drawing.Point(3, 3);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(119, 23);
@@ -263,7 +268,7 @@
         private System.Windows.Forms.TextBox tb_lastName;
         private System.Windows.Forms.Label lbl_lastName;
         private System.Windows.Forms.TableLayoutPanel tlp_createActions;
-        private System.Windows.Forms.Button bt_save;
+        private FontAwesome.Sharp.IconButton bt_save;
         private System.Windows.Forms.Button bt_cancel;
         private System.Windows.Forms.Label lbl_createUser;
         private System.Windows.Forms.Label lbl_role;

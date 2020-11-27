@@ -30,21 +30,26 @@ namespace UserManager.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_users = new System.Windows.Forms.Button();
+            this.btn_users = new FontAwesome.Sharp.IconButton();
             this.ms_menu = new System.Windows.Forms.MenuStrip();
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_language = new MvvmTools.Controls.BindableToolStripMenuItem();
-            this.btn_roles = new System.Windows.Forms.Button();
+            this.btn_roles = new FontAwesome.Sharp.IconButton();
             this.ms_menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_users
             // 
+            this.btn_users.IconChar = FontAwesome.Sharp.IconChar.Users;
+            this.btn_users.IconColor = System.Drawing.Color.Black;
+            this.btn_users.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_users.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn_users.Location = new System.Drawing.Point(348, 92);
             this.btn_users.Name = "btn_users";
-            this.btn_users.Size = new System.Drawing.Size(75, 23);
+            this.btn_users.Size = new System.Drawing.Size(100, 48);
             this.btn_users.TabIndex = 0;
             this.btn_users.Text = "Users";
+            this.btn_users.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_users.UseVisualStyleBackColor = true;
             // 
             // ms_menu
@@ -73,11 +78,16 @@ namespace UserManager.Views
             // 
             // btn_roles
             // 
-            this.btn_roles.Location = new System.Drawing.Point(348, 121);
+            this.btn_roles.IconChar = FontAwesome.Sharp.IconChar.ShieldAlt;
+            this.btn_roles.IconColor = System.Drawing.Color.Black;
+            this.btn_roles.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_roles.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btn_roles.Location = new System.Drawing.Point(348, 148);
             this.btn_roles.Name = "btn_roles";
-            this.btn_roles.Size = new System.Drawing.Size(75, 23);
+            this.btn_roles.Size = new System.Drawing.Size(100, 48);
             this.btn_roles.TabIndex = 2;
             this.btn_roles.Text = "Roles";
+            this.btn_roles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_roles.UseVisualStyleBackColor = true;
             // 
             // MainView
@@ -100,11 +110,11 @@ namespace UserManager.Views
 
         #endregion
 
-        private System.Windows.Forms.Button btn_users;
+        private FontAwesome.Sharp.IconButton btn_users;
         private System.Windows.Forms.MenuStrip ms_menu;
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
         private BindableToolStripMenuItem tsmi_language;
-        private System.Windows.Forms.Button btn_roles;
+        private FontAwesome.Sharp.IconButton btn_roles;
     }
 }
 
