@@ -170,13 +170,13 @@
       <Project>{CE9A2929-ED77-489B-B161-6C10FD8A5D3A}</Project>
       <Name>UserManager.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserManager.Common\UserManager.Common.csproj">
-      <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
-      <Name>UserManager.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserManager.Resources\UserManager.Resources.csproj">
       <Project>{F9F4CD8D-C5A7-436B-ADFF-7DE3B4ACD363}</Project>
       <Name>UserManager.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinformsTools.Common\WinformsTools.Common.csproj">
+      <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
+      <Name>WinformsTools.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WinformsTools.MVVM\WinformsTools.MVVM.csproj">
       <Project>{695d683b-d18e-41d6-a533-2706fffab5e3}</Project>

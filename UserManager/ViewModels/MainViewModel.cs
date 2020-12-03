@@ -1,7 +1,7 @@
 ﻿using AutoMapper.Internal;
 using WinformsTools.MVVM.Components;
 using WinformsTools.MVVM.Core;
-using UserManager.Common.Extensions;
+using WinformsTools.Common.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;

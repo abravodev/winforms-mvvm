@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess.Repositories;
 using UserManager.BusinessLogic.Extensions;
 using UserManager.BusinessLogic.Model;
-using UserManager.Common.Extensions;
+using WinformsTools.Common.Extensions;
 using UserManager.DTOs;
 using UserManager.Events;
 using UserManager.Resources;

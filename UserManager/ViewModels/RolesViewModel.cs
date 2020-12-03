@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess.Repositories;
-using UserManager.Common.Extensions;
+using WinformsTools.Common.Extensions;
 using UserManager.DTOs;
 using UserManager.Resources;
 

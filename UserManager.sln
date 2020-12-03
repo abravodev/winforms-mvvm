@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Resources", "Us
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.IntegrationTests", "UserManager.IntegrationTests\UserManager.IntegrationTests.csproj", "{54DB615C-B529-4858-A122-619AAB7F3473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Common", "UserManager.Common\UserManager.Common.csproj", "{60420A36-6C7E-475C-9018-BDDD205798E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.Common", "WinformsTools.Common\WinformsTools.Common.csproj", "{60420A36-6C7E-475C-9018-BDDD205798E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Tests", "UserManager.Tests\UserManager.Tests.csproj", "{85225C45-E0F8-4AE1-868B-C2F33D508EA7}"
 EndProject
@@ -82,6 +82,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{695D683B-D18E-41D6-A533-2706FFFAB5E3} = {33111508-4E97-4E00-AAB8-186AB3CF1914}
+		{60420A36-6C7E-475C-9018-BDDD205798E3} = {33111508-4E97-4E00-AAB8-186AB3CF1914}
 		{2CBB6CA0-F8CE-460A-ACC1-F8AF0D7FB6E7} = {33111508-4E97-4E00-AAB8-186AB3CF1914}
 		{7FE966ED-222F-4A1C-80EE-D3DCDD2E724F} = {33111508-4E97-4E00-AAB8-186AB3CF1914}
 	EndGlobalSection

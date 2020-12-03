@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using UserManager.BusinessLogic.DataAccess.Repositories;
 using Serilog;
 using UserManager.BusinessLogic.Extensions;
-using UserManager.Common.Extensions;
+using WinformsTools.Common.Extensions;
 
 namespace UserManager.ViewModels
 {

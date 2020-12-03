@@ -7,8 +7,8 @@
     <ProjectGuid>{60420A36-6C7E-475C-9018-BDDD205798E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserManager.Common</RootNamespace>
-    <AssemblyName>UserManager.Common</AssemblyName>
+    <RootNamespace>WinformsTools.Common</RootNamespace>
+    <AssemblyName>WinformsTools.Common</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
