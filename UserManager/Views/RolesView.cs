@@ -1,5 +1,5 @@
-﻿using MvvmTools.Bindings;
-using MvvmTools.Core;
+﻿using WinformsTools.MVVM.Bindings;
+using WinformsTools.MVVM.Core;
 using System.Windows.Forms;
 using UserManager.ViewModels;
 

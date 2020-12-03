@@ -77,10 +77,6 @@
     <Analyzer Include="..\packages\NSubstitute.Analyzers.CSharp.1.0.14\analyzers\dotnet\cs\NSubstitute.Analyzers.Shared.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvvmTools\MvvmTools.csproj">
-      <Project>{695d683b-d18e-41d6-a533-2706fffab5e3}</Project>
-      <Name>MvvmTools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserManager.Resources\UserManager.Resources.csproj">
       <Project>{f9f4cd8d-c5a7-436b-adff-7de3b4acd363}</Project>
       <Name>UserManager.Resources</Name>
@@ -88,6 +84,10 @@
     <ProjectReference Include="..\UserManager\UserManager.csproj">
       <Project>{a4de0c11-8384-4d25-bb79-8e6bd4bfc971}</Project>
       <Name>UserManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinformsTools.MVVM\WinformsTools.MVVM.csproj">
+      <Project>{695d683b-d18e-41d6-a533-2706fffab5e3}</Project>
+      <Name>WinformsTools.MVVM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

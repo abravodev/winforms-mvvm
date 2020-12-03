@@ -1,4 +1,4 @@
-﻿using MvvmTools.Bindings;
+﻿using WinformsTools.MVVM.Bindings;
 
 namespace UserManager.DTOs
 {

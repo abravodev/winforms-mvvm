@@ -1,4 +1,4 @@
-﻿using MvvmTools.Controls;
+﻿using WinformsTools.MVVM.Controls;
 
 namespace UserManager.Views
 {
@@ -33,7 +33,7 @@ namespace UserManager.Views
             this.btn_users = new FontAwesome.Sharp.IconButton();
             this.ms_menu = new System.Windows.Forms.MenuStrip();
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_language = new MvvmTools.Controls.BindableToolStripMenuItem();
+            this.tsmi_language = new WinformsTools.MVVM.Controls.BindableToolStripMenuItem();
             this.btn_roles = new FontAwesome.Sharp.IconButton();
             this.ms_menu.SuspendLayout();
             this.SuspendLayout();

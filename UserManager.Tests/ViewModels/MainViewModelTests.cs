@@ -1,7 +1,7 @@
 ﻿using Easy.MessageHub;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvvmTools.Components;
-using MvvmTools.Navigation;
+using WinformsTools.MVVM.Components;
+using WinformsTools.MVVM.Navigation;
 using NSubstitute;
 using System;
 using UserManager.Providers;

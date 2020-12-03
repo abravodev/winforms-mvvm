@@ -1,8 +1,8 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvvmTools.IntegrationTestUtils.Extensions;
-using MvvmTools.IntegrationTestUtils.Elements;
+using WinformsTools.IntegrationTestUtils.Extensions;
+using WinformsTools.IntegrationTestUtils.Elements;
 using UserManager.IntegrationTests.TestUtils;
 
 namespace UserManager.IntegrationTests.Main

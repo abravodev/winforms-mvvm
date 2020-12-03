@@ -1,5 +1,5 @@
-﻿using MvvmTools.Bindings;
-using MvvmTools.Controls;
+﻿using WinformsTools.MVVM.Bindings;
+using WinformsTools.MVVM.Controls;
 using System.Globalization;
 
 namespace UserManager.DTOs

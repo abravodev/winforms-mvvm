@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MvvmTools.Bindings;
+using WinformsTools.MVVM.Bindings;
 using UserManager.BusinessLogic.Model;
 
 namespace UserManager.DTOs

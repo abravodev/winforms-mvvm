@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 using UserManager.ViewModels;
-using MvvmTools.Bindings;
-using MvvmTools.Validations;
-using MvvmTools.Core;
+using WinformsTools.MVVM.Bindings;
+using WinformsTools.MVVM.Validations;
+using WinformsTools.MVVM.Core;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.Model;
 

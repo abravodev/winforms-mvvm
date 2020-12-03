@@ -1,7 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using UserManager.IntegrationTests.TestUtils;
-using MvvmTools.IntegrationTestUtils.Extensions;
-using MvvmTools.IntegrationTestUtils.Elements;
+using WinformsTools.IntegrationTestUtils.Extensions;
+using WinformsTools.IntegrationTestUtils.Elements;
 
 namespace UserManager.IntegrationTests.Users
 {

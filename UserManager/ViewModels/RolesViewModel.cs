@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using MvvmTools.Bindings;
-using MvvmTools.Components;
-using MvvmTools.Core;
+using WinformsTools.MVVM.Bindings;
+using WinformsTools.MVVM.Components;
+using WinformsTools.MVVM.Core;
 using System;
 using System.ComponentModel;
 using System.Linq;

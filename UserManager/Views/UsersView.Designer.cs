@@ -1,4 +1,4 @@
-﻿using MvvmTools.Controls.DataGridViewControl;
+﻿using WinformsTools.MVVM.Controls.DataGridViewControl;
 
 namespace UserManager.Views
 {
@@ -30,7 +30,7 @@ namespace UserManager.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_userlist = new MvvmTools.Controls.DataGridViewControl.BindedAdvancedDataGridView();
+            this.dgv_userlist = new WinformsTools.MVVM.Controls.DataGridViewControl.BindedAdvancedDataGridView();
             this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.createUserView = new UserManager.Views.CreateUserView();
             this.pb_loading = new System.Windows.Forms.ProgressBar();

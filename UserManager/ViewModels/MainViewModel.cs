@@ -1,6 +1,6 @@
 ﻿using AutoMapper.Internal;
-using MvvmTools.Components;
-using MvvmTools.Core;
+using WinformsTools.MVVM.Components;
+using WinformsTools.MVVM.Core;
 using UserManager.Common.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using UserManager.DTOs;
 using UserManager.Providers;
 using UserManager.Resources;
 using Easy.MessageHub;
-using MvvmTools.Navigation;
+using WinformsTools.MVVM.Navigation;
 
 namespace UserManager.ViewModels
 {

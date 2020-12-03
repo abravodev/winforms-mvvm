@@ -3,8 +3,8 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using UserManager.BusinessLogic.Model;
-using MvvmTools.IntegrationTestUtils.Extensions;
-using MvvmTools.IntegrationTestUtils.Elements;
+using WinformsTools.IntegrationTestUtils.Extensions;
+using WinformsTools.IntegrationTestUtils.Elements;
 
 namespace UserManager.IntegrationTests.Users
 {

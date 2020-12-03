@@ -84,10 +84,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvvmTools.IntegrationTestUtils\MvvmTools.IntegrationTestUtils.csproj">
-      <Project>{2cbb6ca0-f8ce-460a-acc1-f8af0d7fb6e7}</Project>
-      <Name>MvvmTools.IntegrationTestUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserManager.BusinessLogic\UserManager.BusinessLogic.csproj">
       <Project>{ce9a2929-ed77-489b-b161-6c10fd8a5d3a}</Project>
       <Name>UserManager.BusinessLogic</Name>
@@ -99,6 +95,10 @@
     <ProjectReference Include="..\UserManager\UserManager.csproj">
       <Project>{a4de0c11-8384-4d25-bb79-8e6bd4bfc971}</Project>
       <Name>UserManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinformsTools.IntegrationTestUtils\WinformsTools.IntegrationTestUtils.csproj">
+      <Project>{2cbb6ca0-f8ce-460a-acc1-f8af0d7fb6e7}</Project>
+      <Name>WinformsTools.IntegrationTestUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

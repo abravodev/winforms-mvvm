@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTools", "MvvmTools\MvvmTools.csproj", "{695D683B-D18E-41D6-A533-2706FFFAB5E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.MVVM", "WinformsTools.MVVM\WinformsTools.MVVM.csproj", "{695D683B-D18E-41D6-A533-2706FFFAB5E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.DataAccess.Migrations", "UserManager.DataAccess.Migrations\UserManager.DataAccess.Migrations.csproj", "{2CB3FA12-FA7C-4A07-8475-8F7CCEC282D2}"
 EndProject
@@ -24,11 +24,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Common", "UserM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.Tests", "UserManager.Tests\UserManager.Tests.csproj", "{85225C45-E0F8-4AE1-868B-C2F33D508EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTools.IntegrationTestUtils", "MvvmTools.IntegrationTestUtils\MvvmTools.IntegrationTestUtils.csproj", "{2CBB6CA0-F8CE-460A-ACC1-F8AF0D7FB6E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.IntegrationTestUtils", "WinformsTools.IntegrationTestUtils\WinformsTools.IntegrationTestUtils.csproj", "{2CBB6CA0-F8CE-460A-ACC1-F8AF0D7FB6E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmTools.IntegrationTestUtils.Tests", "MvvmTools.IntegrationTestUtils.Tests\MvvmTools.IntegrationTestUtils.Tests.csproj", "{7FE966ED-222F-4A1C-80EE-D3DCDD2E724F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.IntegrationTestUtils.Tests", "WinformsTools.IntegrationTestUtils.Tests\WinformsTools.IntegrationTestUtils.Tests.csproj", "{7FE966ED-222F-4A1C-80EE-D3DCDD2E724F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{33111508-4E97-4E00-AAB8-186AB3CF1914}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinformsTools", "WinformsTools", "{33111508-4E97-4E00-AAB8-186AB3CF1914}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

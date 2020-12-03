@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using SimpleInjector;
 using UserManager.BusinessLogic.DataAccess;
-using MvvmTools.Components;
+using WinformsTools.MVVM.Components;
 using UserManager.Mappers;
 using UserManager.ViewModels;
 using UserManager.Views;
 using System.Configuration;
 using UserManager.Providers;
-using MvvmTools.DependencyInjection;
+using WinformsTools.MVVM.DependencyInjection;
 using Easy.MessageHub;
 using UserManager.BusinessLogic.DataAccess.Repositories;
-using MvvmTools.Navigation;
+using WinformsTools.MVVM.Navigation;
 
 namespace UserManager.Startup
 {

@@ -4,8 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using UserManager.Common.Extensions;
-using MvvmTools.IntegrationTestUtils.Extensions;
-using MvvmTools.IntegrationTestUtils.Elements;
+using WinformsTools.IntegrationTestUtils.Extensions;
+using WinformsTools.IntegrationTestUtils.Elements;
 using FlaUI.Core.Definitions;
 
 namespace UserManager.IntegrationTests.Users

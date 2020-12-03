@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using UserManager.IntegrationTests.TestUtils;
-using MvvmTools.IntegrationTestUtils.Extensions;
+using WinformsTools.IntegrationTestUtils.Extensions;
 
 namespace UserManager.IntegrationTests.Main
 {

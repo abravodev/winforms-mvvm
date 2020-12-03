@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Easy.MessageHub;
-using MvvmTools.Components;
-using MvvmTools.Core;
+using WinformsTools.MVVM.Components;
+using WinformsTools.MVVM.Core;
 using Serilog;
 using System;
 using System.ComponentModel;
