@@ -4,9 +4,9 @@ using FlaUI.Core.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UserManager.IntegrationTests.TestUtils.Elements;
+using MvvmTools.IntegrationTestUtils.Elements;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Extensions
 {
     public static class AutomationElementQueryExtensions
     {
@@ -54,7 +54,7 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
 
             public Func<AutomationElement, AutomationElement> Map { get; }
 
-            public static ElementInfo Native<TAutomationElement>(ControlType controlType) 
+            public static ElementInfo Native<TAutomationElement>(ControlType controlType)
                 where TAutomationElement : AutomationElement
             {
                 return new ElementInfo(typeof(TAutomationElement), controlType, x => x.As<TAutomationElement>());
@@ -62,8 +62,8 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
 
             public static ElementInfo Get<TAutomationElement>() where TAutomationElement : AutomationElement
             {
-                var info = ElementInfo.All.FirstOrDefault(x => x.Type == typeof(TAutomationElement));
-                if(info == null)
+                var info = All.FirstOrDefault(x => x.Type == typeof(TAutomationElement));
+                if (info == null)
                 {
                     throw new ArgumentException($"Invalid type = {typeof(TAutomationElement).Name}", nameof(TAutomationElement));
                 }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Elements
 {
     /// <summary>
     /// An exact copy of <see cref="DialogResult"/>, just to avoid namespace collisions when being used

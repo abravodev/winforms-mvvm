@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Elements
 {
     /// <summary>
     /// Basic mapper between <see cref="DialogResult"/> and <see cref="AutomationElement.AutomationId"/>.
@@ -24,7 +24,7 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
 
         public static DialogResult FromAutomationId(int numberOfOptions, string automationId)
         {
-            var result = (DialogResult) Enum.Parse(typeof(DialogResult), automationId);
+            var result = (DialogResult)Enum.Parse(typeof(DialogResult), automationId);
             if (result == DialogResult.Cancel && numberOfOptions == 1)
             {
                 return DialogResult.OK;

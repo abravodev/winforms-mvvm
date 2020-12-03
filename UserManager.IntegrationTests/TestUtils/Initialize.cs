@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UserManager.IntegrationTests.TestUtils;
 
-namespace UserManager.IntegrationTests
+namespace UserManager.IntegrationTests.TestUtils
 {
     [TestClass]
     public class Initialize

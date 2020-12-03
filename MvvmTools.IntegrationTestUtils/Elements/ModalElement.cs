@@ -1,8 +1,9 @@
 ﻿using FlaUI.Core.AutomationElements;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmTools.IntegrationTestUtils.Extensions;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Elements
 {
     public class ModalElement : AutomationElement
     {
@@ -16,7 +17,7 @@ namespace UserManager.IntegrationTests.TestUtils.Extensions
             FindFirstChild(x => x.ByAutomationId(automationId)).Click();
         }
 
-        public void Choose(DialogOption dialogOption) => Choose((System.Windows.Forms.DialogResult) dialogOption);
+        public void Choose(DialogOption dialogOption) => Choose((System.Windows.Forms.DialogResult)dialogOption);
 
         public string GetMessage() => GetMessageElement().Text;
 

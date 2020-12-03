@@ -3,7 +3,7 @@ using FlaUI.Core.Tools;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Extensions
 {
     public static class DataGridViewExtensions
     {

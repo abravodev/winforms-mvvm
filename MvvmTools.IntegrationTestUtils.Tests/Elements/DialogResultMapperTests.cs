@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Windows.Forms;
-using UserManager.IntegrationTests.TestUtils.Extensions;
+using MvvmTools.IntegrationTestUtils.Elements;
 
-namespace UserManager.IntegrationTests.TestUtils.Tests
+namespace MvvmTools.IntegrationTestUtils.Tests.Elements
 {
     [TestClass]
     public class DialogResultMapperTests

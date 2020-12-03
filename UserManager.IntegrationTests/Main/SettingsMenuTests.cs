@@ -3,12 +3,12 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using UserManager.IntegrationTests.TestUtils;
-using UserManager.IntegrationTests.TestUtils.Extensions;
+using MvvmTools.IntegrationTestUtils.Extensions;
 
-namespace UserManager.IntegrationTests
+namespace UserManager.IntegrationTests.Main
 {
     [TestClass]
-    public class MainViewTests : TestBase
+    public class SettingsMenuTests : TestBase
     {
         [TestMethod]
         public void MainView_has_a_main_menu_with_options()
@@ -32,30 +32,6 @@ namespace UserManager.IntegrationTests
             languageOption.Items.Should()
                 .Contain(x => x.Text == "Spanish")
                 .And.Contain(x => x.Text == "English");
-        }
-
-        [TestMethod]
-        public void MainView_only_allows_to_open_one_windows_type_at_the_same_time()
-        {
-            var mainWindow = App.GetMainWindow();
-            var gotoUsersButton = mainWindow.Get<Button>("Users");
-            gotoUsersButton.Click();
-            var usersView = App.GetUsersWindow();
-            usersView.Should().NotBeNull();
-
-            mainWindow.Focus();
-            mainWindow.Get<Button>("Roles").Click();
-
-            mainWindow.Focus();
-            gotoUsersButton.Click();
-            var errorModal = mainWindow.GetModalByTitle("Attention!");
-            errorModal.GetMessage().Should().Contain("Cannot open same window");
-
-            errorModal.Choose(DialogOption.OK);
-            usersView.Close();
-            mainWindow.Focus();
-            gotoUsersButton.Click();
-            App.GetUsersWindow().Should().NotBeNull();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Input;
 using FlaUI.Core.WindowsAPI;
-using UserManager.IntegrationTests.TestUtils.Elements;
+using MvvmTools.IntegrationTestUtils.Elements;
 
-namespace UserManager.IntegrationTests.TestUtils.Extensions
+namespace MvvmTools.IntegrationTestUtils.Extensions
 {
     public static class FlaUiExtensions
     {
