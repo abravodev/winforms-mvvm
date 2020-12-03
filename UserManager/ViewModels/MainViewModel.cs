@@ -25,7 +25,11 @@ namespace UserManager.ViewModels
 
         public BindingList<LanguageDto> AvailableLanguages { get; }
 
-        public MainViewModel(ISettingProvider settingProvider, IMessageDialog messageDialog, IViewNavigator viewNavigator, IMessageHub eventAggregator)
+        public MainViewModel(
+            ISettingProvider settingProvider,
+            IMessageDialog messageDialog,
+            IViewNavigator viewNavigator,
+            IMessageHub eventAggregator)
         {
             _settingProvider = settingProvider;
             _messageDialog = messageDialog;
@@ -49,20 +53,17 @@ namespace UserManager.ViewModels
         private List<LanguageDto> GetAvailableLanguages()
         {
             var currentCulture = _settingProvider.GetCurrentCulture();
-            return new List<LanguageDto>
-            {
-                CreateLanguageDto(language: "en", currentCulture),
-                CreateLanguageDto(language: "es", currentCulture)
-            };
+            return _settingProvider.GetAvailableCultures()
+                .Select(x => CreateLanguageDto(x, currentCulture))
+                .ToList();
         }
 
-        private LanguageDto CreateLanguageDto(string language, CultureInfo defaultUserCulture)
+        private LanguageDto CreateLanguageDto(CultureInfo culture, CultureInfo defaultUserCulture)
         {
-            var itemCulture = new CultureInfo(language);
             return new LanguageDto
             {
-                Culture = itemCulture,
-                Current = itemCulture.Equals(defaultUserCulture)
+                Culture = culture,
+                Current = culture.Equals(defaultUserCulture)
             };
         }
 

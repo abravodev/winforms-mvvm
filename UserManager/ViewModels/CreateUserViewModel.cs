@@ -64,14 +64,14 @@ namespace UserManager.ViewModels
 
         public bool CanCreateUser => GenericValidator.TryValidate(CreateUserInfo, out _);
 
-        public async Task<bool> CreateUser()
+        public async Task CreateUser()
         {
             try
             {
                 if (!GenericValidator.TryValidate(CreateUserInfo, out var validationResults))
                 {
                     _messageDialog.Show(validationResults);
-                    return false;
+                    return;
                 }
                 var newUser = _mapper.Map<User>(CreateUserInfo);
                 var createdId = await _userRepository.CreateUser(newUser);
@@ -79,13 +79,11 @@ namespace UserManager.ViewModels
                 _messageDialog.Show(
                     title: General.UserCreatedTitle,
                     message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdId));
-                return true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
                 _messageDialog.ShowError(title: General.UserCreationFailedTitle, message: ex.Message);
-                return false;
             }
             finally
             {

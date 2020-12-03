@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using UserManager.Properties;
 
 namespace UserManager.Providers
@@ -6,6 +7,11 @@ namespace UserManager.Providers
     public class SettingProvider : ISettingProvider
     {
         public static SettingProvider Instance { get; } = new SettingProvider();
+
+        public List<CultureInfo> GetAvailableCultures()
+        {
+            return new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("es") };
+        }
 
         public CultureInfo GetCurrentCulture()
         {

@@ -91,7 +91,7 @@ namespace UserManager.ViewModels
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                _messageDialog.ShowError(title:General.ErrorLoadingUsersTitle, message: ex.Message);
+                _messageDialog.ShowError(title: General.ErrorLoadingUsersTitle, message: ex.Message);
             }
             finally
             {

@@ -40,16 +40,7 @@ namespace UserManager.Startup
             container.RegisterSingleton<IMessageHub, MessageHub>();
         }
 
-        private static void RegisterMappers(Container container)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<UserProfile>();
-                cfg.AddProfile<RoleProfile>();
-            });
-
-            container.Register<IMapper>(() => config.CreateMapper(container.GetInstance));
-        }
+        private static void RegisterMappers(Container container) => AutomapperConfig.Config(container);
 
         private static void RegisterComponents(Container container)
         {
