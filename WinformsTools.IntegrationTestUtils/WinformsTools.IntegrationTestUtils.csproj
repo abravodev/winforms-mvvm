@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseAppWindow.cs" />
+    <Compile Include="Extensions\CustomLocalizedStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\DialogOption.cs" />
     <Compile Include="Elements\DialogResultMapper.cs" />
