@@ -2,6 +2,7 @@
 using UserManager.IntegrationTests.TestUtils;
 using WinformsTools.IntegrationTestUtils.Extensions;
 using WinformsTools.IntegrationTestUtils.Elements;
+using UserManager.Resources;
 
 namespace UserManager.IntegrationTests.Users
 {
@@ -18,7 +19,7 @@ namespace UserManager.IntegrationTests.Users
                 .Fill("Email", user.Email);
             creationForm.Get<Button>("Save").Click();
 
-            usersView.GetModalByTitle("User created").Choose(DialogOption.OK);
+            usersView.GetModalByTitle(General.UserCreatedTitle).Choose(DialogOption.OK);
 
             return user;
         }
@@ -35,7 +36,7 @@ namespace UserManager.IntegrationTests.Users
         protected Window NavigatetoUsersView()
         {
             var window = App.GetMainWindow();
-            window.Get<Button>("Users").Click();
+            window.Get<Button>(General.Users).Click();
             return App.GetUsersWindow();
         }
     }

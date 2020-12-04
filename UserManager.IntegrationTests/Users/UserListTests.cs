@@ -7,6 +7,7 @@ using WinformsTools.Common.Extensions;
 using WinformsTools.IntegrationTestUtils.Extensions;
 using WinformsTools.IntegrationTestUtils.Elements;
 using FlaUI.Core.Definitions;
+using UserManager.Resources;
 
 namespace UserManager.IntegrationTests.Users
 {
@@ -35,9 +36,9 @@ namespace UserManager.IntegrationTests.Users
             var initialNumberOfUsers = usersTable.Length;
             var firstUser = usersTable.First();
             firstUser.RightClick();
-            usersView.Get<Menu>("Context menu of Users list", ControlType.ToolBar).SelectMenuItem("Delete");
-            usersView.GetModalByTitle("Delete user").Choose(DialogOption.Yes);
-            usersView.GetModalByTitle("User deleted").Choose(DialogOption.OK);
+            usersView.Get<Menu>("Context menu of Users list", ControlType.ToolBar).SelectMenuItem(General.Delete);
+            usersView.GetModalByTitle(General.DeleteUserTitle).Choose(DialogOption.Yes);
+            usersView.GetModalByTitle(General.UserDeletedTitle).Choose(DialogOption.OK);
 
             var finalNumberOfUsers = GetUserRows(usersView).Length;
             finalNumberOfUsers.Should().BeLessThan(initialNumberOfUsers);

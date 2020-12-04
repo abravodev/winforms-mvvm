@@ -15,26 +15,26 @@ namespace UserManager
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ApplicationDispatcher.Configure();
+            Startup(new ExecutionParameters(args));
 
-            Startup();
             var navigator = IoCConfig.Container.GetInstance<IViewNavigator>();
             var mainView = navigator.Get<MainViewModel>() as Form;
             Application.Run(mainView);
             Log.CloseAndFlush();
         }
 
-        private static void Startup()
+        private static void Startup(ExecutionParameters parameters)
         {
             LogConfig.Config();
             ExceptionHandling.Config();
             IoCConfig.Config();
             ConfigureDapper.Config();
-            GlobalizationConfig.Config();
+            GlobalizationConfig.Config(parameters.Get("culture"));
         }
     }
 }

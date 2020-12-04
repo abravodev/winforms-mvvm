@@ -1,20 +1,19 @@
 ﻿using System.Globalization;
-using System.Threading;
 using UserManager.Providers;
+using WinformsTools.Common;
 
 namespace UserManager.Startup
 {
     public static class GlobalizationConfig
     {
-        public static void Config()
+        public static void Config(string overridingCulture)
         {
-            ConfigureCulture(SettingProvider.Instance.GetCurrentCulture());
-        }
+            if (!string.IsNullOrEmpty(overridingCulture))
+            {
+                SettingProvider.Instance.SetCurrentCulture(new CultureInfo(overridingCulture));
+            }
 
-        private static void ConfigureCulture(CultureInfo culture)
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture.Name);
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture.Name);
+            SystemContext.SetCulture(SettingProvider.Instance.GetCurrentCulture());
         }
     }
 }

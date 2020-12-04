@@ -88,6 +88,10 @@
       <Project>{ce9a2929-ed77-489b-b161-6c10fd8a5d3a}</Project>
       <Name>UserManager.BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserManager.Resources\UserManager.Resources.csproj">
+      <Project>{f9f4cd8d-c5a7-436b-adff-7de3b4acd363}</Project>
+      <Name>UserManager.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinformsTools.Common\WinformsTools.Common.csproj">
       <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
       <Name>WinformsTools.Common</Name>

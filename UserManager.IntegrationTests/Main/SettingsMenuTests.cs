@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using UserManager.IntegrationTests.TestUtils;
+using UserManager.Resources;
 using WinformsTools.IntegrationTestUtils.Extensions;
 
 namespace UserManager.IntegrationTests.Main
@@ -16,8 +17,8 @@ namespace UserManager.IntegrationTests.Main
             var window = App.GetMainWindow();
             window.Title.Should().Contain("UserManager");
 
-            window.Get<Button>("Users").Should().NotBeNull();
-            window.Get<Button>("Roles").Should().NotBeNull();
+            window.Get<Button>(General.Users).Should().NotBeNull();
+            window.Get<Button>(General.Roles).Should().NotBeNull();
         }
 
         [TestMethod]

@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="DTOs\LanguageDto.cs" />
     <Compile Include="DTOs\RoleSelectDto.cs" />
+    <Compile Include="Startup\ExecutionParameters.cs" />
     <Compile Include="Mappers\RoleProfile.cs" />
     <Compile Include="Startup\AutomapperConfig.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />

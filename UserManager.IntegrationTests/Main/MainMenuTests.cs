@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WinformsTools.IntegrationTestUtils.Extensions;
 using WinformsTools.IntegrationTestUtils.Elements;
 using UserManager.IntegrationTests.TestUtils;
+using UserManager.Resources;
 
 namespace UserManager.IntegrationTests.Main
 {
@@ -14,18 +15,18 @@ namespace UserManager.IntegrationTests.Main
         public void MainView_only_allows_to_open_one_windows_type_at_the_same_time()
         {
             var mainWindow = App.GetMainWindow();
-            var gotoUsersButton = mainWindow.Get<Button>("Users");
+            var gotoUsersButton = mainWindow.Get<Button>(General.Users);
             gotoUsersButton.Click();
             var usersView = App.GetUsersWindow();
             usersView.Should().NotBeNull();
 
             mainWindow.Focus();
-            mainWindow.Get<Button>("Roles").Click();
+            mainWindow.Get<Button>(General.Roles).Click();
 
             mainWindow.Focus();
             gotoUsersButton.Click();
-            var errorModal = mainWindow.GetModalByTitle("Attention!");
-            errorModal.GetMessage().Should().Contain("Cannot open same window");
+            var errorModal = mainWindow.GetModalByTitle(General.AttentionTitle);
+            errorModal.GetMessage().Should().Contain(General.CannotOpenWindowsTwice);
 
             errorModal.Choose(DialogOption.OK);
             usersView.Close();
