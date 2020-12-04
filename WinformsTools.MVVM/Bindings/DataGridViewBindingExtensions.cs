@@ -19,24 +19,39 @@ namespace WinformsTools.MVVM.Bindings
         {
             dataGridView.ContextMenuStrip = new ContextMenuStrip();
             dataGridView.ContextMenuStrip.AccessibleName = $"Context menu of {dataGridView.AccessibleName}";
-            foreach (var menuItem in menuItems)
-            {
-                dataGridView.ContextMenuStrip.Items.Add(menuItem.Name, menuItem.Image, new EventHandler((sender, e) =>
-                {
-                    var selectedUser = (T) dataGridView.ContextMenuStrip.Tag;
-                    menuItem.Command.Execute(selectedUser);
-                }));
-            }
 
             dataGridView.CellMouseDown += new DataGridViewCellMouseEventHandler((sender, e) =>
             {
-                if (e.Button == MouseButtons.Right)
+                if (e.Button != MouseButtons.Right)
                 {
-                    var selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem;
-                    dataGridView.ContextMenuStrip.Tag = selectedItem;
-                    dataGridView.ContextMenuStrip.Show(dataGridView, e.Location);
+                    return;
                 }
+
+                if (e.RowIndex == -1)
+                {
+                    // Click on header
+                    dataGridView.ContextMenuStrip.Items.Clear(); // No context menu
+                    return;
+                }
+
+                SetupContextMenuStrip(dataGridView.ContextMenuStrip, menuItems);
+                var selectedItem = dataGridView.Rows[e.RowIndex].DataBoundItem;
+                dataGridView.ContextMenuStrip.Tag = selectedItem;
+                dataGridView.ContextMenuStrip.Show(dataGridView, e.Location);
             });
+        }
+
+        private static void SetupContextMenuStrip<T>(ContextMenuStrip contextMenuStrip, (string Name, ICommand<T> Command, Image Image)[] menuItems)
+        {
+            contextMenuStrip.Items.Clear();
+            foreach (var menuItem in menuItems)
+            {
+                contextMenuStrip.Items.Add(menuItem.Name, menuItem.Image, new EventHandler((sender, e) =>
+                {
+                    var tag = (T)contextMenuStrip.Tag;
+                    menuItem.Command.Execute(tag);
+                }));
+            }
         }
 
         public static Bind<TBinding> For<TBinding, TDataGridView, TSource>(this Bind<TBinding> item, TDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
