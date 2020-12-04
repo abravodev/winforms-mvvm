@@ -1,47 +1,16 @@
-﻿using FlaUI.Core;
-using FlaUI.Core.AutomationElements;
-using FlaUI.Core.Tools;
-using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using WinformsTools.IntegrationTestUtils;
 
 namespace UserManager.IntegrationTests.TestUtils
 {
-    public class AppWindow : IDisposable
+    public class AppWindow : BaseAppWindow
     {
-        private const string ApplicationName = "UserManager";
-        private readonly AutomationBase _automation;
-        private readonly Application _app;
+        private const string APP_NAME = "UserManager";
+        protected override string ApplicationName => APP_NAME;
 
-        public AppWindow(string applicationPath)
-        {
-            _app = Application.Launch(applicationPath);
-            _automation = new FlaUI.UIA2.UIA2Automation();
-        }
+        public AppWindow(string applicationPath) : base(applicationPath) { }
 
-        public Window GetMainWindow() => _app.GetMainWindow(_automation);
+        public static AppWindow Open() => new AppWindow($"{APP_NAME}.exe");
 
-        public Window GetWindow(string title)
-        {
-            return Retry.WhileNull(() => GetWindows().SingleOrDefault(x => x.Title == title)).Result;
-        }
-
-        public Window[] GetWindows() => _app.GetAllTopLevelWindows(_automation);
-
-        public Window GetUsersWindow() => GetWindow("UsersView");
-
-        public void Close() => _app.Close();
-
-        public void Dispose() => _automation.Dispose();
-
-        public static AppWindow Open() => new AppWindow($"{ApplicationName}.exe");
-
-        public static void KillAllInstances()
-        {
-            foreach (var process in Process.GetProcessesByName(ApplicationName))
-            {
-                process.Kill();
-            }
-        }
+        public static void KillAllInstances() => KillAllInstances(APP_NAME);
     }
 }
