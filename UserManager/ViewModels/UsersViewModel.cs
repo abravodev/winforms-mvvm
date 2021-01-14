@@ -27,11 +27,10 @@ namespace UserManager.ViewModels
         private readonly IMessageHub _eventAggregator;
 
         private bool _loading;
-
         public bool Loading
         {
-            get { return _loading; }
-            private set { SetProperty(ref _loading, value); }
+            get => _loading;
+            private set => SetProperty(ref _loading, value);
         }
 
         public BindingList<UserListItemDto> Users { get; }

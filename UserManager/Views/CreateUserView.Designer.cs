@@ -44,6 +44,7 @@
             this.bt_cancel = new System.Windows.Forms.Button();
             this.lbl_createUser = new System.Windows.Forms.Label();
             this.ep_createUser = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pb_loading = new System.Windows.Forms.ProgressBar();
             this.tlp_createView.SuspendLayout();
             this.tlp_createFields.SuspendLayout();
             this.tlp_createActions.SuspendLayout();
@@ -59,17 +60,19 @@
             this.tlp_createView.Controls.Add(this.tlp_createFields, 0, 1);
             this.tlp_createView.Controls.Add(this.tlp_createActions, 0, 2);
             this.tlp_createView.Controls.Add(this.lbl_createUser, 0, 0);
+            this.tlp_createView.Controls.Add(this.pb_loading, 0, 4);
             this.tlp_createView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_createView.Location = new System.Drawing.Point(0, 0);
             this.tlp_createView.MaximumSize = new System.Drawing.Size(250, 0);
             this.tlp_createView.MinimumSize = new System.Drawing.Size(250, 0);
             this.tlp_createView.Name = "tlp_createView";
-            this.tlp_createView.RowCount = 4;
+            this.tlp_createView.RowCount = 5;
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlp_createView.Size = new System.Drawing.Size(250, 159);
+            this.tlp_createView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlp_createView.Size = new System.Drawing.Size(250, 179);
             this.tlp_createView.TabIndex = 9;
             // 
             // tlp_createFields
@@ -235,6 +238,16 @@
             this.ep_createUser.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.ep_createUser.ContainerControl = this;
             // 
+            // pb_loading
+            // 
+            this.pb_loading.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pb_loading.Location = new System.Drawing.Point(3, 162);
+            this.pb_loading.MarqueeAnimationSpeed = 20;
+            this.pb_loading.Name = "pb_loading";
+            this.pb_loading.Size = new System.Drawing.Size(244, 14);
+            this.pb_loading.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pb_loading.TabIndex = 11;
+            // 
             // CreateUserView
             // 
             this.AccessibleName = "Create User Form";
@@ -244,7 +257,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tlp_createView);
             this.Name = "CreateUserView";
-            this.Size = new System.Drawing.Size(250, 159);
+            this.Size = new System.Drawing.Size(250, 179);
             this.tlp_createView.ResumeLayout(false);
             this.tlp_createView.PerformLayout();
             this.tlp_createFields.ResumeLayout(false);
@@ -273,5 +286,6 @@
         private System.Windows.Forms.Label lbl_createUser;
         private System.Windows.Forms.Label lbl_role;
         private System.Windows.Forms.ComboBox cb_role;
+        private System.Windows.Forms.ProgressBar pb_loading;
     }
 }

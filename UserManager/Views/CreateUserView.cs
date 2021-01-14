@@ -31,7 +31,8 @@ namespace UserManager.Views
             this.BindTo(ViewModel)
                 .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo)
                 .Click(this.bt_save, _ => _.CreateUserCommand)
-                .Click(this.bt_cancel, _ => _.CancelUserCreationCommand);
+                .Click(this.bt_cancel, _ => _.CancelUserCreationCommand)
+                .WithLoading(this.tlp_createView, this.pb_loading, _ => _.Loading);
             this.BindTo(ViewModel.CreateUserInfo)
                 .For(this.tb_firstName, _ => _.FirstName)
                 .For(this.tb_lastName, _ => _.LastName)

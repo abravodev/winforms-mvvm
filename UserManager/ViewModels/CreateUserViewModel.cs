@@ -14,10 +14,11 @@ using WinformsTools.Common.Extensions;
 using UserManager.DTOs;
 using UserManager.Events;
 using UserManager.Resources;
+using WinformsTools.MVVM.Bindings;
 
 namespace UserManager.ViewModels
 {
-    public class CreateUserViewModel : IViewModel
+    public class CreateUserViewModel : BindableObject, IViewModel
     {
         private static ILogger _logger = Log.ForContext<CreateUserViewModel>();
 
@@ -26,6 +27,13 @@ namespace UserManager.ViewModels
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
         private readonly IMessageHub _eventAggregator;
+
+        private bool _loading;
+        public bool Loading
+        {
+            get => _loading;
+            private set => SetProperty(ref _loading, value);
+        }
 
         public CreateUserDto CreateUserInfo { get; }
 
@@ -68,6 +76,7 @@ namespace UserManager.ViewModels
         {
             try
             {
+                this.Loading = true;
                 if (!GenericValidator.TryValidate(CreateUserInfo, out var validationResults))
                 {
                     _messageDialog.Show(validationResults);
@@ -88,6 +97,7 @@ namespace UserManager.ViewModels
             finally
             {
                 ClearCreateForm();
+                this.Loading = false;
             }
         }
 
