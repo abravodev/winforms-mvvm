@@ -53,7 +53,7 @@ namespace UserManager.Views
             this.dgv_userlist.ReadOnly = true;
             this.dgv_userlist.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgv_userlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_userlist.Size = new System.Drawing.Size(528, 434);
+            this.dgv_userlist.Size = new System.Drawing.Size(562, 445);
             this.dgv_userlist.TabIndex = 0;
             // 
             // tlp_view
@@ -70,7 +70,7 @@ namespace UserManager.Views
             this.tlp_view.Padding = new System.Windows.Forms.Padding(5);
             this.tlp_view.RowCount = 1;
             this.tlp_view.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_view.Size = new System.Drawing.Size(800, 450);
+            this.tlp_view.Size = new System.Drawing.Size(834, 461);
             this.tlp_view.TabIndex = 9;
             // 
             // createUserView
@@ -81,7 +81,7 @@ namespace UserManager.Views
             this.createUserView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.createUserView.Location = new System.Drawing.Point(8, 8);
             this.createUserView.Name = "createUserView";
-            this.createUserView.Size = new System.Drawing.Size(250, 434);
+            this.createUserView.Size = new System.Drawing.Size(250, 445);
             this.createUserView.TabIndex = 1;
             // 
             // pb_loading
@@ -91,7 +91,7 @@ namespace UserManager.Views
             this.pb_loading.Location = new System.Drawing.Point(0, 0);
             this.pb_loading.MarqueeAnimationSpeed = 10;
             this.pb_loading.Name = "pb_loading";
-            this.pb_loading.Size = new System.Drawing.Size(800, 15);
+            this.pb_loading.Size = new System.Drawing.Size(834, 15);
             this.pb_loading.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.pb_loading.TabIndex = 10;
             // 
@@ -99,7 +99,7 @@ namespace UserManager.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(834, 461);
             this.Controls.Add(this.pb_loading);
             this.Controls.Add(this.tlp_view);
             this.Name = "UsersView";

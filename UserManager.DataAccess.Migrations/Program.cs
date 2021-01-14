@@ -44,7 +44,8 @@ namespace UserManager.DataAccess.Migrations
 
         private static void ExecuteCommand(IServiceProvider services, string command)
         {
-            Command.FromName(command).Execute(services);
+            var (commandName, commandArguments) = Command.FromString(command);
+            commandName.Execute(services, commandArguments);
         }
 
         private static void CreateDatabase(string connectionString)

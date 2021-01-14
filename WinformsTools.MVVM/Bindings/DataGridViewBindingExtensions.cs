@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Reflection;
+using WinformsTools.Common.Extensions;
 
 namespace WinformsTools.MVVM.Bindings
 {
@@ -13,6 +15,20 @@ namespace WinformsTools.MVVM.Bindings
         public static void AddBinding<TSource>(this DataGridView dataGridView, BindingList<TSource> items)
         {
             dataGridView.DataSource = new BindingSource(items, null);
+            ConfigureColumns<TSource>(dataGridView);
+        }
+
+        private static void ConfigureColumns<TSource>(DataGridView dataGridView)
+        {
+            var propertiesWithConfiguration = typeof(TSource)
+                .GetProperties()
+                .Where(x => x.HasCustomAttribute<TableColumnAttribute>());
+
+            foreach (var property in propertiesWithConfiguration)
+            {
+                var configuration = property.GetCustomAttribute<TableColumnAttribute>();
+                dataGridView.Columns[property.Name].AutoSizeMode = configuration.AutoSizeMode;
+            }
         }
 
         public static void WithContextMenu<T>(this DataGridView dataGridView, params (string Name, ICommand<T> Command, Image Image)[] menuItems)

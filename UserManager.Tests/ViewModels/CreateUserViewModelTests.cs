@@ -58,7 +58,7 @@ namespace UserManager.Tests.ViewModels
         }
 
         [TestMethod]
-        public async Task CanCreateUser_InvalidForm_ReturnsFalse()
+        public void CanCreateUser_InvalidForm_ReturnsFalse()
         {
             // Arrange
             FillUserInfo(email: "invalid email");
@@ -71,7 +71,7 @@ namespace UserManager.Tests.ViewModels
         }
 
         [TestMethod]
-        public async Task CanCreateUser_ValidForm_ReturnsTrue()
+        public void CanCreateUser_ValidForm_ReturnsTrue()
         {
             // Arrange
             FillUserInfo();
@@ -130,8 +130,8 @@ namespace UserManager.Tests.ViewModels
             await sut.CreateUserCommand.Execute();
 
             // Assert
-            await _userRepository.Received().CreateUser(ArgExt.AnyEquivalent(newUser));
-            _eventAggregator.Received().Publish(ArgExt.AnyEquivalent(new UserCreatedEvent(newUser)));
+            await _userRepository.Received().CreateUser(ArgExt.AnyEquivalent(newUser, ignore: nameof(User.CreationDate)));
+            _eventAggregator.Received().Publish(ArgExt.AnyEquivalent(new UserCreatedEvent(newUser), ignore: nameof(User.CreationDate)));
             _messageDialog.Show(
                 title: General.UserCreatedTitle,
                 message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdUserId));

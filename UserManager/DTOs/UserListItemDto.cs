@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Windows.Forms;
+using WinformsTools.MVVM.Bindings;
 
 namespace UserManager.DTOs
 {
@@ -20,6 +22,11 @@ namespace UserManager.DTOs
         public string Email { get; set; }
 
         [DisplayName("Role")]
+        [TableColumn(AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)]
         public string Role { get; set; }
+
+        [DisplayName("Creation Date")]
+        [TableColumn(AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)]
+        public string CreationDate { get; set; }
     }
 }

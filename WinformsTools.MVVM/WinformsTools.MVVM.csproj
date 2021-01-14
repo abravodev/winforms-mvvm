@@ -76,6 +76,7 @@
     <Compile Include="Bindings\ComboBoxSource.cs" />
     <Compile Include="Bindings\DataGridViewBindingExtensions.cs" />
     <Compile Include="Bindings\InverseBinding.cs" />
+    <Compile Include="Controls\DataGridViewControl\TableColumnAttribute.cs" />
     <Compile Include="Controls\IconExtensions.cs" />
     <Compile Include="Controls\MenuOption.cs" />
     <Compile Include="Bindings\ReflectionUtils.cs" />
@@ -106,6 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinformsTools.Common\WinformsTools.Common.csproj">
+      <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
+      <Name>WinformsTools.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
