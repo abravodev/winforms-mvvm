@@ -58,8 +58,11 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         /// <returns></returns>
         private static DataGridViewRow[] GetDataGridViewRow(DataGridView dataGridView)
         {
-            var rows = dataGridView.FindAllChildren(cf => cf.ByControlType(ControlType.Custom).Or(cf.ByControlType(ControlType.DataItem))
-                   .And(cf.ByName(CustomLocalizedStrings.DataGridViewHeader).Not()));
+            var rows = dataGridView.FindAllChildren(cf => 
+                cf.ByControlType(ControlType.Custom)
+                    .Or(cf.ByControlType(ControlType.DataItem))
+                .And(cf.ByName(CustomLocalizedStrings.DataGridViewHeader).Not())
+            );
             // Remove the last row if we have the "add" row
             if (dataGridView.HasAddRow)
             {
@@ -77,7 +80,9 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         /// <returns></returns>
         private static DataGridViewHeader GetDataGridViewHeader(DataGridView dataGridView)
         {
-            var header = dataGridView.FindFirstChild(cf => cf.ByName(CustomLocalizedStrings.DataGridViewHeader).Or(cf.ByControlType(ControlType.Header)));
+            var header = dataGridView.FindFirstChild(cf => 
+                cf.ByName(CustomLocalizedStrings.DataGridViewHeader)
+                    .Or(cf.ByControlType(ControlType.Header)));
             return header == null ? null : new DataGridViewHeader(header.FrameworkAutomationElement);
         }
 
@@ -88,7 +93,9 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         private static DataGridViewHeaderItem[] GetDataGridViewHeaderColumns(DataGridViewHeader dataGridViewHeader)
         {
             // WinForms uses Header control type, WPF uses HeaderItem control type
-            var headerItems = dataGridViewHeader.FindAllChildren(cf => cf.ByControlType(ControlType.Header).Or(cf.ByControlType(ControlType.HeaderItem)));
+            var headerItems = dataGridViewHeader.FindAllChildren(cf => 
+                cf.ByControlType(ControlType.Header)
+                    .Or(cf.ByControlType(ControlType.HeaderItem)));
             var convertedHeaderItems = headerItems.Select(x => new DataGridViewHeaderItem(x.FrameworkAutomationElement))
                 .ToList();
             // Remove the top-left header item if it exists (can be the first or last item)

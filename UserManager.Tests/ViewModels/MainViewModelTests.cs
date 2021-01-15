@@ -142,6 +142,8 @@ namespace UserManager.Tests.ViewModels
             sut.ChangeCurrentCulture(newLanguage);
 
             // Assert
+            newLanguage.Checked.Should().BeTrue();
+            newLanguage.Text.Should().Be(otherCulture.EnglishName);
             _settingProvider.Received().SetCurrentCulture(newLanguage.Culture);
             _messageDialog.Received().Show(
                 title: General.LanguageChangeTitle,

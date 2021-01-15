@@ -8,12 +8,12 @@ namespace UserManager.Startup
     {
         private const char ParameterSeparator = '=';
 
-        public ExecutionParameters(string[] parameters)
+        public ExecutionParameters(string[] parameters) : this(parameters.Select(x => Parse(x)))
         {
-            Parameters = parameters.Select(x => Parse(x)).ToDictionary(x => x.Name, x => x.Value);
+            
         }
 
-        public ExecutionParameters((string Name, string Value)[] parameters)
+        public ExecutionParameters(IEnumerable<(string Name, string Value)> parameters)
         {
             Parameters = parameters.ToDictionary(x => x.Name, x => x.Value);
         }
@@ -40,7 +40,17 @@ namespace UserManager.Startup
 
         public override string ToString()
         {
-            return string.Join(" ", Parameters.Select(x => $"{x.Key}{ParameterSeparator}{x.Value}"));
+            return string.Join(" ", Parameters.Select(x => ToString(x.Key, x.Value)));
+        }
+
+        private string ToString(string parameterName, string parameterValue)
+        {
+            if (parameterName.Equals(parameterValue))
+            {
+                return parameterName;
+            }
+
+            return $"{parameterName}{ParameterSeparator}{parameterValue}";
         }
     }
 }

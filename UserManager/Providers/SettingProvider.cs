@@ -6,7 +6,7 @@ namespace UserManager.Providers
 {
     public class SettingProvider : ISettingProvider
     {
-        public static SettingProvider Instance { get; } = new SettingProvider();
+        public static ISettingProvider Instance { get; } = new SettingProvider();
 
         public List<CultureInfo> GetAvailableCultures()
         {

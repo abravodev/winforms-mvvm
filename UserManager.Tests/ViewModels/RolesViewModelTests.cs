@@ -38,14 +38,17 @@ namespace UserManager.Tests.ViewModels
             // Arrange
             var role = Role.Basic;
             _roleRepository.GetAll().Returns(new List<Role> { role });
+            var listener = PropertyChangeListener.Start(sut);
 
             // Act
             await sut.Load();
 
             // Assert
+            var changes = listener.Stop().GetChanges<bool>(nameof(sut.Loading));
             sut.Roles.Should()
                 .HaveCount(1)
                 .And.ContainEquivalentOfMapped(role, _mapper);
+            changes.Should().Contain(x => x.Value == true);
         }
 
         [TestMethod]

@@ -9,9 +9,20 @@ namespace UserManager.Tests.TestUtils
     {
         public static void Test<TProfile>() where TProfile : Profile, new()
         {
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile<TProfile>());
+            var configuration = GetMapperConfiguration<TProfile>();
 
             configuration.AssertConfigurationIsValid();
+        }
+
+        public static IMapper GetMapper<TProfile>() where TProfile : Profile, new()
+        {
+            var configuration = GetMapperConfiguration<TProfile>();
+            return configuration.CreateMapper();
+        }
+
+        private static MapperConfiguration GetMapperConfiguration<TProfile>() where TProfile : Profile, new()
+        {
+            return new MapperConfiguration(cfg => cfg.AddProfile<TProfile>());
         }
     }
 }

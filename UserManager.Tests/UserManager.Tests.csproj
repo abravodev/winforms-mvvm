@@ -76,10 +76,12 @@
     <Compile Include="Mappers\RoleProfileTests.cs" />
     <Compile Include="Mappers\UserProfileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup\ExecutionParametersTests.cs" />
     <Compile Include="TestUtils\ArgExt.cs" />
     <Compile Include="TestUtils\IMessageHubExtensions.cs" />
     <Compile Include="TestUtils\MappingAssertions.cs" />
     <Compile Include="TestUtils\ObjectComparer.cs" />
+    <Compile Include="TestUtils\PropertyChangeListener.cs" />
     <Compile Include="TestUtils\TestMapperProfile.cs" />
     <Compile Include="ViewModels\CreateUserViewModelTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />

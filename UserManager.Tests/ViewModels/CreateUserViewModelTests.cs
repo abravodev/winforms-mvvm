@@ -125,17 +125,20 @@ namespace UserManager.Tests.ViewModels
             var createdUserId = 1;
             var newUser = _mapper.Map<User>(sut.CreateUserInfo);
             _userRepository.CreateUser(_mapper.Map<User>(sut.CreateUserInfo)).Returns(createdUserId);
+            var listener = PropertyChangeListener.Start(sut);
 
             // Act
             await sut.CreateUserCommand.Execute();
 
             // Assert
+            var changes = listener.Stop().GetChanges<bool>(nameof(CreateUserViewModel.Loading));
             await _userRepository.Received().CreateUser(ArgExt.AnyEquivalent(newUser, ignore: nameof(User.CreationDate)));
             _eventAggregator.Received().Publish(ArgExt.AnyEquivalent(new UserCreatedEvent(newUser), ignore: nameof(User.CreationDate)));
             _messageDialog.Show(
                 title: General.UserCreatedTitle,
                 message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdUserId));
             FormShouldBeEmpty();
+            changes.Should().Contain(x => x.Value == true);
         }
 
         [TestMethod]

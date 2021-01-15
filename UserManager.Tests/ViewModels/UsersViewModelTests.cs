@@ -6,12 +6,10 @@ using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserManager.BusinessLogic.DataAccess.Repositories;
 using UserManager.BusinessLogic.Model;
-using UserManager.DTOs;
 using UserManager.Events;
 using UserManager.Resources;
 using UserManager.Startup;
@@ -46,14 +44,17 @@ namespace UserManager.Tests.ViewModels
             // Arrange
             var user = MakeUser();
             _userRepository.GetAll().Returns(new List<User> { user });
+            var listener = PropertyChangeListener.Start(sut);
 
             // Act
             await sut.Load();
 
             // Assert
+            var changes = listener.Stop().GetChanges<bool>(nameof(sut.Loading));
             sut.Users.Should()
                 .HaveCount(1)
                 .And.ContainEquivalentOfMapped(user, _mapper);
+            changes.Should().Contain(x => x.Value == true);
         }
 
         [TestMethod]
