@@ -8,6 +8,8 @@
             <ModulePaths>
               <Exclude>
                 <ModulePath>.*Tests.dll</ModulePath>
+                <ModulePath>.*dapper.dll</ModulePath>
+                <ModulePath>.*fluentassertions.dll</ModulePath>
               </Exclude>
             </ModulePaths>
           </CodeCoverage>

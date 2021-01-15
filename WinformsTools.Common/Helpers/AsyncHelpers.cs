@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace WinformsTools.Common.Helpers
     /// <summary>
     /// <see href="https://social.msdn.microsoft.com/Forums/en-US/163ef755-ff7b-4ea5-b226-bbe8ef5f4796/is-there-a-pattern-for-calling-an-async-method-synchronously?forum=async"/>
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class AsyncHelpers
     {
         /// <summary>

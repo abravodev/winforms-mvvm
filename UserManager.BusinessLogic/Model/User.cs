@@ -9,7 +9,7 @@ namespace UserManager.BusinessLogic.Model
             this.CreationDate = DateTimeOffset.Now;
         }
 
-        public int Id { get; set; }
+        public int Id { get; }
 
         public string FirstName { get; set; }
 
@@ -19,6 +19,6 @@ namespace UserManager.BusinessLogic.Model
 
         public Role Role { get; set; }
 
-        public DateTimeOffset CreationDate { get; set; }
+        public DateTimeOffset CreationDate { get; }
     }
 }

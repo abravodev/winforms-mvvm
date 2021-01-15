@@ -64,9 +64,9 @@
     <Compile Include="DataAccess\Repositories\UserRepository.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Model\Email.cs" />
+    <Compile Include="Model\EmailAttribute.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinformsTools", "WinformsTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.Common.Tests", "WinformsTools.Common.Tests\WinformsTools.Common.Tests.csproj", "{784A9F05-96F7-4163-A7D1-EA321B2FC751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManager.BusinessLogic.Tests", "UserManager.BusinessLogic.Tests\UserManager.BusinessLogic.Tests.csproj", "{D59EA9A6-62BF-45C1-AF5A-1E73C5D432F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{784A9F05-96F7-4163-A7D1-EA321B2FC751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{784A9F05-96F7-4163-A7D1-EA321B2FC751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{784A9F05-96F7-4163-A7D1-EA321B2FC751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59EA9A6-62BF-45C1-AF5A-1E73C5D432F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59EA9A6-62BF-45C1-AF5A-1E73C5D432F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59EA9A6-62BF-45C1-AF5A-1E73C5D432F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59EA9A6-62BF-45C1-AF5A-1E73C5D432F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
