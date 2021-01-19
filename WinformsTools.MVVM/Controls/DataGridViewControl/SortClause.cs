@@ -5,6 +5,7 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
     public class SortClause
     {
         private readonly List<string> _sort = new List<string>();
+
         public string Clause => string.Join(",", _sort);
 
         public void AddSortClause(string clause)
@@ -15,8 +16,7 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
                 return;
             }
 
-            var column = clause.Replace("ASC", "").Replace("DESC", "").Trim();
-            var foundIndex = _sort.FindIndex(x => x.Contains(column));
+            int foundIndex = GetIndexOfClause(clause);
             if (foundIndex >= 0)
             {
                 _sort.RemoveAt(foundIndex);
@@ -26,6 +26,12 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
             {
                 _sort.Add(clause);
             }
+        }
+
+        private int GetIndexOfClause(string clause)
+        {
+            var column = clause.Replace("ASC", "").Replace("DESC", "").Trim();
+            return _sort.FindIndex(x => x.Contains(column));
         }
     }
 }

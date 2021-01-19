@@ -46,7 +46,7 @@ namespace WinformsTools.MVVM.DependencyInjection
             var viewRegistration = container.GetRegistration(typeof(TView)).Registration;
             viewRegistration.SuppressDiagnosticWarning(
                 type: DiagnosticType.DisposableTransientComponent,
-                justification: "Winforms registration supression");
+                justification: "Winforms registration suppression");
         }
     }
 }

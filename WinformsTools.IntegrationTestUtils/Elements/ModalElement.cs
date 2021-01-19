@@ -21,15 +21,9 @@ namespace WinformsTools.IntegrationTestUtils.Elements
 
         public string GetMessage() => GetMessageElement().Text;
 
-        public TextBox GetMessageElement()
-        {
-            return this.GetAllChildren<TextBox>().FirstOrDefault();
-        }
+        public TextBox GetMessageElement() => this.GetAllChildren<TextBox>().FirstOrDefault();
 
-        public List<FlaUI.Core.AutomationElements.Button> GetButtons()
-        {
-            return this.GetAllChildren<Button>().ToList();
-        }
+        public List<Button> GetButtons() => this.GetAllChildren<Button>().ToList();
 
         public System.Windows.Forms.DialogResult[] GetOptions()
         {

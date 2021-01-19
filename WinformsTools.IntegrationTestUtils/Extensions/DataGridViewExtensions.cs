@@ -16,16 +16,18 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         public static IEnumerable<IDictionary<string, DataGridViewCell>> ToDictionary(this DataGridView table)
         {
             var columns = GetCellNames(table);
-            foreach (var row in table.Rows)
-            {
-                yield return row.Cells.ToDictionary(columns);
-            }
+            return table.Rows.ToDictionary(columns);
         }
 
         public static IEnumerable<IDictionary<string, DataGridViewCell>> ToDictionary(this DataGridViewRow[] rows)
         {
             var table = rows[0].Parent.AsDataGridView();
             var columns = GetCellNames(table);
+            return rows.ToDictionary(columns);
+        }
+
+        private static IEnumerable<IDictionary<string, DataGridViewCell>> ToDictionary(this DataGridViewRow[] rows, List<string> columns)
+        {
             foreach (var row in rows)
             {
                 yield return row.Cells.ToDictionary(columns);
@@ -58,7 +60,7 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         /// <returns></returns>
         private static DataGridViewRow[] GetDataGridViewRow(DataGridView dataGridView)
         {
-            var rows = dataGridView.FindAllChildren(cf => 
+            var rows = dataGridView.FindAllChildren(cf =>
                 cf.ByControlType(ControlType.Custom)
                     .Or(cf.ByControlType(ControlType.DataItem))
                 .And(cf.ByName(CustomLocalizedStrings.DataGridViewHeader).Not())
@@ -80,7 +82,7 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         /// <returns></returns>
         private static DataGridViewHeader GetDataGridViewHeader(DataGridView dataGridView)
         {
-            var header = dataGridView.FindFirstChild(cf => 
+            var header = dataGridView.FindFirstChild(cf =>
                 cf.ByName(CustomLocalizedStrings.DataGridViewHeader)
                     .Or(cf.ByControlType(ControlType.Header)));
             return header == null ? null : new DataGridViewHeader(header.FrameworkAutomationElement);
@@ -93,7 +95,7 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
         private static DataGridViewHeaderItem[] GetDataGridViewHeaderColumns(DataGridViewHeader dataGridViewHeader)
         {
             // WinForms uses Header control type, WPF uses HeaderItem control type
-            var headerItems = dataGridViewHeader.FindAllChildren(cf => 
+            var headerItems = dataGridViewHeader.FindAllChildren(cf =>
                 cf.ByControlType(ControlType.Header)
                     .Or(cf.ByControlType(ControlType.HeaderItem)));
             var convertedHeaderItems = headerItems.Select(x => new DataGridViewHeaderItem(x.FrameworkAutomationElement))
