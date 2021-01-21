@@ -33,5 +33,8 @@ namespace WinformsTools.Common.Extensions
         }
 
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> source) => !source.Any();
+
+        public static string Joined<TSource>(this IEnumerable<TSource> source, string separator = ",") 
+            => string.Join(separator, source);
     }
 }

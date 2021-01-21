@@ -19,7 +19,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
             // Assert
             filter.Should().Be(
-                "(Name != null && ( Name = \"john\")) AND (Surname != null && ( Surname = \"doe\" OR  Surname = \"smith\")) AND (AGE != null && ( AGE = 18 OR  AGE = 65))");
+                "(Name != null && (Name = \"john\")) AND (Surname != null && (Surname = \"doe\" OR Surname = \"smith\")) AND (AGE != null && (AGE = 18 OR AGE = 65))");
         }
 
         private static FilterClause MakeFilter(params string[] clauses)
