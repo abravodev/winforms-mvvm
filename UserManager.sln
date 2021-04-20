@@ -10,7 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77B84A77-EB46-4E41-BDCF-8AC42D3348C1}"
 	ProjectSection(SolutionItems) = preProject
 		CodeCoverage.runsettings = CodeCoverage.runsettings
+		IntegrationTests.playlist = IntegrationTests.playlist
 		README.md = README.md
+		UnitTests.playlist = UnitTests.playlist
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformsTools.MVVM", "WinformsTools.MVVM\WinformsTools.MVVM.csproj", "{695D683B-D18E-41D6-A533-2706FFFAB5E3}"
