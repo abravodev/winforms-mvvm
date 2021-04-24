@@ -13,6 +13,7 @@ using Zuby.ADGV;
 
 namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 {
+    [TestClass]
     public class BindedAdvancedDataGridViewTests
     {
         public class Data
@@ -35,15 +36,13 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
         private static Data B_A = new Data("B", "A");
         private static Data B_B = new Data("B", "B");
 
-        private static BindedAdvancedDataGridView GetView(Data[] data)
+        private static BindedAdvancedDataGridView GetView(IEnumerable<Data> data)
         {
-            //var list = new AdvancedBindingList<Data>(data.ToList()); // With this, tags are not set properly
-            var list = new AdvancedBindingList<Data>();
+            var list = new AdvancedBindingList<Data>(data.ToList());
             var view = new BindedAdvancedDataGridView();
             view.PrepareForUnitTests();
             view.Bind(list);
             view.AddBinding(list);
-            list.AddRange(data.ToList());
 
             return view;
         }
@@ -236,6 +235,29 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             return new Data(
                 firstName: row.Cells[0].Value.ToString(),
                 lastName: row.Cells[1].Value.ToString());
+        }
+
+        [TestMethod]
+        public void Bind_EmptyList_SetRowsTag()
+        {
+            // Act
+            var list = new List<Data>();
+            var view = GetView(list);
+            list.AddRange(new[] { A_A, A_B, B_A, B_B });
+
+            // Assert
+            view.Rows.Cast<DataGridViewRow>().Select(x => x.Tag).Should().OnlyHaveUniqueItems();
+        }
+
+        [TestMethod]
+        public void Bind_NonEmptyList_SetRowsTag()
+        {
+            // Act
+            var list = new List<Data> { A_A, A_B, B_A, B_B };
+            var view = GetView(list);
+
+            // Assert
+            view.Rows.Cast<DataGridViewRow>().Select(x => x.Tag).Should().OnlyHaveUniqueItems();
         }
     }
 }

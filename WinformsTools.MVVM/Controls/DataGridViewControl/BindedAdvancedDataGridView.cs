@@ -19,7 +19,16 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
         {
             sourceList.FilterChanged += (sender, e) => FilterRows(sourceList.GetFiltered());
 
-            this.RowsAdded += (sender, e) => this.Rows[e.RowIndex].Tag = sourceList[e.RowIndex].GetHashCode();
+            this.RowsAdded += (sender, e) => SetRowTags(e, sourceList);
+        }
+
+        private void SetRowTags<T>(DataGridViewRowsAddedEventArgs e, AdvancedBindingList<T> sourceList)
+        {
+            for (var i = 0; i < e.RowCount; i++)
+            {
+                var rowIndex = e.RowIndex + i;
+                this.Rows[rowIndex].Tag = sourceList[rowIndex].GetHashCode();
+            }
         }
 
         private void FilterRows<T>(ICollection<T> filteredList)
