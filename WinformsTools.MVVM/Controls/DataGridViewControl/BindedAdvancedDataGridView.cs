@@ -3,6 +3,9 @@ using System.Linq.Dynamic;
 using System.Collections.Generic;
 using System.Linq;
 using WinformsTools.MVVM.Bindings;
+using System.Windows.Forms;
+using System;
+using WinformsTools.Common.Extensions;
 
 namespace WinformsTools.MVVM.Controls.DataGridViewControl
 {
@@ -12,34 +15,41 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
     /// </summary>
     public class BindedAdvancedDataGridView : AdvancedDataGridView
     {
-        private readonly FilterClause _filter = new FilterClause();
-
         public void Bind<T>(AdvancedBindingList<T> sourceList)
         {
-            ICollection<T> filteredList = sourceList;
+            sourceList.FilterChanged += (sender, e) => FilterRows(sourceList.GetFiltered());
 
-            FilterStringChanged += (sender, e) =>
+            this.RowsAdded += (sender, e) => this.Rows[e.RowIndex].Tag = sourceList[e.RowIndex].GetHashCode();
+        }
+
+        private void FilterRows<T>(ICollection<T> filteredList)
+        {
+            var rows = this.Rows.Cast<DataGridViewRow>();
+            EnforceTagUniqueness(rows);
+
+            foreach (var row in rows)
             {
-                if(e.FilterString == null)
+                var visible = filteredList.Any(x => x.GetHashCode() == (int)row.Tag);
+                if (row.Selected && !visible)
                 {
-                    return; // This may be caused by ourselves when updating the source list
+                    this.CurrentCell = null;
                 }
+                row.Visible = visible;
+            }
+        }
 
-                _filter.AddFilterClause(FilterString);
-                if (string.IsNullOrEmpty(FilterString))
-                {
-                    CleanFilter(); // For multiple filters, we cannot know which one was removed, so we remove all of them
-                    DataSource = filteredList = sourceList;
-                    return;
-                }
-
-                DataSource = filteredList = sourceList.Where(FilterConverter.Convert(_filter.Clause)).ToList();
-            };
-
-            sourceList.ListChanged += (sender, e) =>
+        private IEnumerable<DataGridViewRow> EnforceTagUniqueness(IEnumerable<DataGridViewRow> rows)
+        {
+            var rowsWithDuplicatedTag = rows.GroupBy(x => x.Tag).Where(x => x.Count() > 1);
+            if (rowsWithDuplicatedTag.Any())
             {
-                TriggerFilterStringChanged();
-            };
+                var info = rowsWithDuplicatedTag
+                    .Select(x => $"[Tag: {x.Key}, Rows: {x.Select(t => t.Index).Joined()}]")
+                    .Joined(";");
+                throw new InvalidOperationException($"Cannot filter rows with duplicated tag ({info})");
+            }
+
+            return rows;
         }
     }
 }

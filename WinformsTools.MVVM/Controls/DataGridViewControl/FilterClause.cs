@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WinformsTools.MVVM.Controls.DataGridViewControl
 {
@@ -16,6 +17,18 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
                 return;
             }
             _filter.Add(clause);
+        }
+
+        public void ClearColumn(string columnName)
+        {
+            var columnFilter = _filter.Single(x => x.Contains($"[{columnName}]"));
+            _filter.Remove(columnFilter);
+        }
+
+        public void TryClearColumn(string columnName)
+        {
+            var columnFilter = _filter.SingleOrDefault(x => x.Contains($"[{columnName}]"));
+            _filter.Remove(columnFilter);
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Dynamic;
+using WinformsTools.MVVM.Controls.DataGridViewControl;
 
 namespace WinformsTools.MVVM.Bindings
 {
@@ -28,7 +31,26 @@ namespace WinformsTools.MVVM.Bindings
 
         protected override bool IsSortedCore => _isSorted;
 
-        public string Filter { get; set; }
+        private string _filter;
+        public string Filter { get => _filter; set => ApplyFilter(value); }
+
+        public event EventHandler FilterChanged;
+
+        private void ApplyFilter(string stringFilter)
+        {
+            _filter = stringFilter;
+            FilterChanged.Invoke(this, new EventArgs());
+        }
+
+        public IList<T> GetFiltered()
+        {
+            if (string.IsNullOrEmpty(Filter))
+            {
+                return Items;
+            }
+
+            return Items.Where(FilterConverter.Convert(Filter)).ToList();
+        }
 
         public void ApplySort(ListSortDescriptionCollection sorts)
         {
