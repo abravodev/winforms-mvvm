@@ -11,6 +11,12 @@ Depending on the type of legacy project, the usage of MVVM can be limited becaus
 
 My advice is to use it in new views and, after gaining confidence, starting moving old views little by little.
 
+The ultimate objective is to reduce logic in views so much that, theoretically, they could be represented with XML (like XAML in WPF). If there's no real business logic in the view and there's only glue logic, you can build a comprehensive test suite full of unit tests for the rest of the code, and rely on end-to-end tests to check that the glue logic from views work.
+Keep in mind that end-to-end tests comes with some requirements:
+- They take more time to run
+- They will need a Desktop session: you are interacting with windows)
+- They cannot easily run in parallel: you are interacting with windows, so they would be stealing the focus to each other
+
 ## Technologies
 - **MVVM** - Custom made actually, but inspired by other tools [see Inspiration section](#Inspiration).
 
@@ -31,6 +37,15 @@ My advice is to use it in new views and, after gaining confidence, starting movi
 While building this, I've had to search for a lot of things in Google, so there are many inspirations (in no special order):
 
 [WFBind](https://github.com/mareklinka/WFBind) - [MvvmFx](https://github.com/MvvmFx/MvvmFx) - [Prism.WinForms](https://github.com/imasm/Prism.WinForms) - [CompositeWPFContrib](http://compositewpfcontrib.codeplex.com/) - [DevExpress MVVM Framework](https://docs.devexpress.com/WPF/15112/mvvm-framework)
+
+## Alternatives
+There are some alternatives to MVVM, let's review it:
+- **Do nothing**. That's the default option. It is true that you don't need a framework to build your app, but you will end up with hard-to-reason code or with building your own framework inadvertently.
+- **MVC**. Model View Controller. Examples:
+	- [shane-lab/winforms-mvc](https://github.com/shane-lab/winforms-mvc)
+- **MVP**. Model View Presenter. Examples:
+	- [mrts/winforms-mvp](https://github.com/mrts/winforms-mvp)
+	- [Los Techies - Model View Presenter Styles](https://lostechies.com/derekgreer/2008/11/23/model-view-presenter-styles/)
 
 # Sample app
 ## Setup
