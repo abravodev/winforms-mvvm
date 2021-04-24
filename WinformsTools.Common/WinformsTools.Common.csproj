@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\PropertyInfoExtensions.cs" />
-    <Compile Include="Helpers\AsyncHelpers.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Helpers\MagicToolbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
