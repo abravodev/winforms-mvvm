@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace WinformsTools.Common.Extensions
@@ -36,5 +37,8 @@ namespace WinformsTools.Common.Extensions
 
         public static string Joined<TSource>(this IEnumerable<TSource> source, string separator = ",") 
             => string.Join(separator, source);
+
+        public static string[] Split(this string source, string separator)
+            => source.Split(new string[] { separator }, StringSplitOptions.None);
     }
 }

@@ -3,7 +3,6 @@ using WinformsTools.MVVM.Bindings;
 using WinformsTools.MVVM.Components;
 using WinformsTools.MVVM.Core;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.DataAccess.Repositories;
@@ -15,7 +14,7 @@ namespace UserManager.ViewModels
 {
     public class RolesViewModel : BindableObject, IViewModel
     {
-        public BindingList<RoleListItemDto> Roles { get; }
+        public AdvancedBindingList<RoleListItemDto> Roles { get; }
 
         private bool _loading;
         private readonly IRoleRepository _roleRepository;
@@ -33,7 +32,7 @@ namespace UserManager.ViewModels
             _roleRepository = roleRepository;
             _messageDialog = messageDialog;
             _mapper = mapper;
-            this.Roles = new BindingList<RoleListItemDto>();
+            this.Roles = new AdvancedBindingList<RoleListItemDto>();
         }
 
         public async Task Load()

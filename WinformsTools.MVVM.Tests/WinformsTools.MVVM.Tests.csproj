@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedDataGridView, Version=1.1.25515.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.1.25515.10\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=5.10.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.5.10.3\lib\net47\FluentAssertions.dll</HintPath>
     </Reference>
@@ -51,15 +54,17 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\ReflectionUtilsTests.cs" />
+    <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridViewTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClauseTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterConverterTests.cs" />
-    <Compile Include="Controls\DataGridViewControl\SortClauseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUtils\DataGridViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -68,6 +73,10 @@
     <Analyzer Include="..\packages\FluentAssertions.Analyzers.0.11.4\analyzers\dotnet\cs\FluentAssertions.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WinformsTools.Common\WinformsTools.Common.csproj">
+      <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
+      <Name>WinformsTools.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinformsTools.MVVM\WinformsTools.MVVM.csproj">
       <Project>{695d683b-d18e-41d6-a533-2706fffab5e3}</Project>
       <Name>WinformsTools.MVVM</Name>

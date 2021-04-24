@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using WinformsTools.MVVM.Components;
@@ -33,7 +32,7 @@ namespace UserManager.ViewModels
             private set => SetProperty(ref _loading, value);
         }
 
-        public BindingList<UserListItemDto> Users { get; }
+        public AdvancedBindingList<UserListItemDto> Users { get; }
 
         public ICommand<UserListItemDto> DeleteUserCommand { get; }
 
@@ -48,7 +47,7 @@ namespace UserManager.ViewModels
             _mapper = mapper;
             _eventAggregator = eventAggregator;
 
-            this.Users = new BindingList<UserListItemDto>();
+            this.Users = new AdvancedBindingList<UserListItemDto>();
             this.DeleteUserCommand = Command.From<UserListItemDto>(DeleteUser);
             SubscribeToEvents();
         }

@@ -1,7 +1,6 @@
 ﻿using WinformsTools.MVVM.Controls.DataGridViewControl;
 using WinformsTools.MVVM.Core;
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,7 +11,7 @@ namespace WinformsTools.MVVM.Bindings
 {
     public static class DataGridViewBindingExtensions
     {
-        public static void AddBinding<TSource>(this DataGridView dataGridView, BindingList<TSource> items)
+        public static void AddBinding<TSource>(this DataGridView dataGridView, AdvancedBindingList<TSource> items)
         {
             dataGridView.DataSource = new BindingSource(items, null);
             ConfigureColumns<TSource>(dataGridView);
@@ -70,14 +69,14 @@ namespace WinformsTools.MVVM.Bindings
             }
         }
 
-        public static Bind<TBinding> For<TBinding, TDataGridView, TSource>(this Bind<TBinding> item, TDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+        public static Bind<TBinding> For<TBinding, TDataGridView, TSource>(this Bind<TBinding> item, TDataGridView datagridView, Func<TBinding, AdvancedBindingList<TSource>> items)
             where TDataGridView : DataGridView
         {
             datagridView.AddBinding(items(item._item));
             return item;
         }
 
-        public static Bind<TBinding> For<TBinding, TSource>(this Bind<TBinding> item, BindedAdvancedDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+        public static Bind<TBinding> For<TBinding, TSource>(this Bind<TBinding> item, BindedAdvancedDataGridView datagridView, Func<TBinding, AdvancedBindingList<TSource>> items)
         {
             var list = items(item._item);
             datagridView.Bind(list);
