@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Dapper.Contrib.Extensions;
+using System;
 
 namespace UserManager.BusinessLogic.Model
 {
+    [Table("[User]")]
     public class User
     {
         public User()
@@ -9,7 +11,8 @@ namespace UserManager.BusinessLogic.Model
             this.CreationDate = DateTimeOffset.Now;
         }
 
-        public int Id { get; }
+        [Key]
+        public int Id { get; private set; }
 
         public string FirstName { get; set; }
 

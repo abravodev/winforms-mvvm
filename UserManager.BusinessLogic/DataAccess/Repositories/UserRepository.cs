@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UserManager.BusinessLogic.Model;
@@ -18,11 +19,7 @@ namespace UserManager.BusinessLogic.DataAccess.Repositories
         {
             using (var connection = _context.GetOpenedConnection())
             {
-                return await connection.QueryFirstAsync<int>(@"
-                    INSERT INTO [USER] (FirstName, LastName, Email, Role, CreationDate) 
-                    OUTPUT INSERTED.Id
-                    VALUES(@FirstName, @LastName, @Email, @Role, @CreationDate)",
-                    new { user.FirstName, user.LastName, user.Email, user.Role, user.CreationDate });
+                return await connection.InsertAsync(user);
             }
         }
 
@@ -30,7 +27,7 @@ namespace UserManager.BusinessLogic.DataAccess.Repositories
         {
             using (var connection = _context.GetOpenedConnection())
             {
-                return await connection.QueryAsync<User>("SELECT * FROM [User]").ToListAsync();
+                return await connection.GetAllAsync<User>().ToListAsync();
             }
         }
 
@@ -38,8 +35,7 @@ namespace UserManager.BusinessLogic.DataAccess.Repositories
         {
             using (var connection = _context.GetOpenedConnection())
             {
-                return await connection
-                    .GetFirstAsync<User>("SELECT * FROM [User] WHERE Id = @Id", new { Id = id });
+                return await connection.GetAsync<User>(id);
             }
         }
 
