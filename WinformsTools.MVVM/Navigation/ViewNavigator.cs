@@ -4,6 +4,7 @@ using SimpleInjector;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformsTools.MVVM.Telemetry;
 
 namespace WinformsTools.MVVM.Navigation
 {
@@ -36,6 +37,7 @@ namespace WinformsTools.MVVM.Navigation
         private void SetupView<TViewModel>(IView<TViewModel> view) where TViewModel : IViewModel
         {
             view.Load += async (sender, e) => await Task.Run(view.ViewModel.Load);
+            view.Load += (sender, e) => Metrics.Log(new ViewEnteredMetric<TViewModel>(view));
             SetupViewForms(view);
         }
 

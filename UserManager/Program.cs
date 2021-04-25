@@ -31,6 +31,7 @@ namespace UserManager
         private static void Startup(ExecutionParameters parameters)
         {
             LogConfig.Config();
+            TelemetryConfig.Config();
             ExceptionHandling.Config();
             IoCConfig.Config();
             ConfigureDapper.Config();

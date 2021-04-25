@@ -45,11 +45,15 @@
     <Reference Include="FluentAssertions, Version=5.10.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.5.10.3\lib\net47\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.1.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.1.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -60,10 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings\ReflectionUtilsTests.cs" />
+    <Compile Include="Controls\ControlExtensionsTests.cs" />
     <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridViewTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClauseTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Telemetry\ClickMetricTests.cs" />
+    <Compile Include="TestUtils\SerilogFormatter.cs" />
+    <Compile Include="Telemetry\ViewEnteredMetricTests.cs" />
     <Compile Include="TestUtils\DataGridViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

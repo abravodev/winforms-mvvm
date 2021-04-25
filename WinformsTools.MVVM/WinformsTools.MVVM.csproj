@@ -78,6 +78,7 @@
     <Compile Include="Bindings\DataGridViewBindingExtensions.cs" />
     <Compile Include="Bindings\InverseBinding.cs" />
     <Compile Include="Bindings\PropertyComparer.cs" />
+    <Compile Include="Controls\ControlExtensions.cs" />
     <Compile Include="Controls\DataGridViewControl\TableColumnAttribute.cs" />
     <Compile Include="Controls\IconExtensions.cs" />
     <Compile Include="Controls\MenuOption.cs" />
@@ -104,6 +105,10 @@
     <Compile Include="Core\IView.cs" />
     <Compile Include="Core\IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Telemetry\ClickMetric.cs" />
+    <Compile Include="Telemetry\IMetric.cs" />
+    <Compile Include="Telemetry\Metrics.cs" />
+    <Compile Include="Telemetry\ViewEnteredMetric.cs" />
     <Compile Include="Validations\Validation.cs" />
   </ItemGroup>
   <ItemGroup>

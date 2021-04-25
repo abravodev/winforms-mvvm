@@ -21,8 +21,8 @@ namespace UserManager.Views
         public void InitializeDataBindings()
         {
             this.BindTo(ViewModel)
-                .Click(this.btn_users, ViewModel.NavigateToUsersView)
-                .Click(this.btn_roles, ViewModel.NavigateToRolesView);
+                .Click(this.btn_users, ViewModel.NavigateToUsersView).Log()
+                .Click(this.btn_roles, ViewModel.NavigateToRolesView).Log();
             LoadLanguageMenu();
         }
 
