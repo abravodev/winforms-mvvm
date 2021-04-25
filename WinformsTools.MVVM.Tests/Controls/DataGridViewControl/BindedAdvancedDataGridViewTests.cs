@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -39,11 +40,15 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
         private static BindedAdvancedDataGridView GetView(IEnumerable<Data> data)
         {
             var list = new AdvancedBindingList<Data>(data.ToList());
+            return GetView(list);
+        }
+
+        private static BindedAdvancedDataGridView GetView(AdvancedBindingList<Data> list)
+        {
             var view = new BindedAdvancedDataGridView();
             view.PrepareForUnitTests();
             view.Bind(list);
             view.AddBinding(list);
-
             return view;
         }
 
@@ -182,6 +187,55 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
                 filter.CleanFilter(nameof(Data.LastName));
                 AssertEquivalent(view, new[] { A_A, A_B, B_A, B_B });
+            }
+
+            [TestMethod]
+            public void RowsWithDuplicatedTag_ThrowException()
+            {
+                // Arrange
+                var list = new AdvancedBindingList<Data>(new List<Data> { A_A, A_B, B_A, B_B });
+                var view = GetView(list);
+                view.Rows[1].Tag = view.Rows[0].Tag; // Force tag duplication
+
+                // Act
+                Action action = () => list.Filter = $"[{nameof(Data.FirstName)}] IN ('A')";
+
+                // Assert
+                action.Should().Throw<InvalidOperationException>();
+            }
+
+            [TestMethod]
+            public void FilterOutSelectedCell_UnselectItAndSetItToNotVisible()
+            {
+                // Arrange
+                var view = GetView(new[] { A_A, A_B, B_A, B_B });
+                var filter = new AdvancedFilter(view);
+                var firstRow = view.Rows[0];
+                firstRow.Selected = true;
+
+                // Act
+                filter.Filter(nameof(Data.FirstName), new[] { 'B' });
+
+                // Assert
+                firstRow.Selected.Should().BeFalse();
+                view.CurrentCell.Should().BeNull();
+            }
+
+            [TestMethod]
+            public void FilterInSelectedCell_KeepItSelected()
+            {
+                // Arrange
+                var view = GetView(new[] { A_A, A_B, B_A, B_B });
+                var filter = new AdvancedFilter(view);
+                var firstRow = view.Rows[0];
+                firstRow.Selected = true;
+
+                // Act
+                filter.Filter(nameof(Data.FirstName), new[] { 'A' });
+
+                // Assert
+                firstRow.Selected.Should().BeTrue();
+                view.CurrentCell.Should().Be(firstRow.Cells[0]);
             }
 
             /// <summary>

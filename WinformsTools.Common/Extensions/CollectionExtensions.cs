@@ -39,6 +39,6 @@ namespace WinformsTools.Common.Extensions
             => string.Join(separator, source);
 
         public static string[] Split(this string source, string separator)
-            => source.Split(new string[] { separator }, StringSplitOptions.None);
+            => source?.Split(new string[] { separator }, StringSplitOptions.None) ?? throw new ArgumentNullException(nameof(source));
     }
 }

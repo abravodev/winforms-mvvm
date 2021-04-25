@@ -68,6 +68,7 @@
     <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridViewTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClauseTests.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterConverterTests.cs" />
+    <Compile Include="Core\CommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Telemetry\ClickMetricTests.cs" />
     <Compile Include="TestUtils\SerilogFormatter.cs" />

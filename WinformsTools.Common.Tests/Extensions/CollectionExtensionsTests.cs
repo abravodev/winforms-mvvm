@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using WinformsTools.Common.Extensions;
@@ -111,6 +112,34 @@ namespace WinformsTools.Common.Tests.Extensions
 
             // Assert
             isEmpty.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Split_NullString_ThrowException()
+        {
+            // Arrange
+            string text = null;
+
+            // Act
+            Action action = () => text.Split("any");
+
+            // Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [DataTestMethod]
+        [DataRow("", "", new[] { "" })]
+        [DataRow("", "-", new[] { "" })]
+        [DataRow("abc", "", new[] { "abc" })]
+        [DataRow("a-b-c", "-", new[] { "a", "b", "c" })]
+        [DataRow("astopbstopc", "stop", new[] { "a", "b", "c" })]
+        public void Split_AnyString_ReturnSplittedArray(string source, string separator, string[] expected)
+        {
+            // Act
+            var result = source.Split(separator);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
         }
     }
 }

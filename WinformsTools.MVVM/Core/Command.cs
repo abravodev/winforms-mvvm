@@ -21,7 +21,10 @@ namespace WinformsTools.MVVM.Core
 
         public static ICommand<T> From<T>(Func<T, Task> command) => new Command<T>(command);
 
-        public static ICommand<T> From<T>(Action<T> command) => new Command<T>(_ => Task.FromResult(command));
+        public static ICommand<T> From<T>(Action<T> command)
+        {
+            return new Command<T>(t => { command(t); return Task.CompletedTask; });
+        }
 
         public Task Execute() => _command();
     }
