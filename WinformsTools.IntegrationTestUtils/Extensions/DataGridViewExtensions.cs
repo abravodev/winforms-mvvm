@@ -1,6 +1,7 @@
 ﻿using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.Core.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +11,11 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
     {
         public static DataGridViewRow[] GetRows(this DataGridView table)
         {
+            if (table == null)
+            {
+                throw new ArgumentNullException(nameof(table));
+            }
+
             return Retry.WhileEmpty(() => GetDataGridViewRow(table)).Result;
         }
 

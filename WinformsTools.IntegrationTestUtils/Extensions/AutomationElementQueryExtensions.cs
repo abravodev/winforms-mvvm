@@ -19,7 +19,7 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
             where TAutomationElement : AutomationElement
         {
             var info = ElementInfo.Get<TAutomationElement>();
-            var element = automationElement.FindFirstDescendant(x => 
+            var element = automationElement.FindFirstDescendant(x =>
                 x.ByControlType(type).And(x.ByName(inputName)));
             return info.Map(element) as TAutomationElement;
         }
@@ -28,9 +28,18 @@ namespace WinformsTools.IntegrationTestUtils.Extensions
             where TAutomationElement : AutomationElement
         {
             var info = ElementInfo.Get<TAutomationElement>();
-            var element = automationElement.FindFirstDescendant(x => 
-                x.ByControlType(info.ControlType).And(x.ByName(inputName)));
+            var element = Retry.WhileNull(() => GetElement(automationElement, inputName, info)).Result;
+            if (element == null)
+            {
+                throw new ElementNotFoundException(info.ControlType, inputName);
+            }
             return info.Map(element) as TAutomationElement;
+        }
+
+        private static AutomationElement GetElement(AutomationElement automationElement, string inputName, ElementInfo info)
+        {
+            return automationElement.FindFirstDescendant(x =>
+                x.ByControlType(info.ControlType).And(x.ByName(inputName)));
         }
 
         public static TAutomationElement[] GetAllChildren<TAutomationElement>(this AutomationElement automationElement)
