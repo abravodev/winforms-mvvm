@@ -85,6 +85,13 @@
     <Compile Include="Bindings\ReflectionUtils.cs" />
     <Compile Include="Components\GenericValidator.cs" />
     <Compile Include="Components\IMessageDialog.cs" />
+    <Compile Include="Controls\SnackbarControl\SnackbarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SnackbarControl\SnackbarControl.Designer.cs">
+      <DependentUpon>SnackbarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SnackbarControl\SnackbarProvider.cs" />
     <Compile Include="Navigation\IViewNavigator.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
@@ -119,6 +126,11 @@
       <Project>{60420a36-6c7e-475c-9018-bddd205798e3}</Project>
       <Name>WinformsTools.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\SnackbarControl\SnackbarControl.resx">
+      <DependentUpon>SnackbarControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
