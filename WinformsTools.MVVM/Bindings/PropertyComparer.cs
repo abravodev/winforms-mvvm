@@ -54,24 +54,27 @@ namespace WinformsTools.MVVM.Bindings
         // Compare two property values of any type
         private int CompareAscending(object x, object y)
         {
-            int result;
+            if (x == null)
+                return (y == null) ? 0 : -1;
+
+            if (y == null)
+                return 1;
 
             // If values implement IComparer
             if (x is IComparable)
             {
-                result = ((IComparable)x).CompareTo(y);
+                return ((IComparable)x).CompareTo(y);
             }
+            
             // If values don't implement IComparer but are equivalent
-            else if (x.Equals(y))
+            if (x.Equals(y))
             {
-                result = 0;
+                return 0;
             }
+            
             // Values don't implement IComparer and are not equivalent,
             // so compare as typed values
-            else result = ((IComparable)x).CompareTo(y);
-
-            // Return result
-            return result;
+            return ((IComparable)x).CompareTo(y);
         }
 
         private int CompareDescending(object x, object y)

@@ -63,6 +63,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bindings\ListObjectComparerTests.cs" />
     <Compile Include="Bindings\ReflectionUtilsTests.cs" />
     <Compile Include="Controls\ControlExtensionsTests.cs" />
     <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridViewTests.cs" />

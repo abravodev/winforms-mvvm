@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace WinformsTools.MVVM.Bindings
 {
-    public static class ObjectComparer
+    public static class ListObjectComparer
     {
-        public static ObjectComparer<T> FromSort<T>(ListSortDescriptionCollection sorts)
+        public static ListObjectComparer<T> FromSort<T>(ListSortDescriptionCollection sorts)
         {
             var comparers = sorts.Cast<ListSortDescription>()
                 .Select(MakeComparer<T>)
                 .ToList();
-            return new ObjectComparer<T>(comparers);
+            return new ListObjectComparer<T>(comparers);
         }
 
         private static PropertyComparer<T> MakeComparer<T>(ListSortDescription sort)
@@ -20,11 +20,11 @@ namespace WinformsTools.MVVM.Bindings
         }
     }
 
-    public class ObjectComparer<T>
+    public class ListObjectComparer<T>
     {
         private readonly List<PropertyComparer<T>> _comparers;
 
-        public ObjectComparer(List<PropertyComparer<T>> comparers)
+        public ListObjectComparer(List<PropertyComparer<T>> comparers)
         {
             _comparers = comparers;
         }

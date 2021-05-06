@@ -58,7 +58,7 @@ namespace WinformsTools.MVVM.Bindings
             if (items != null)
             {
                 _sortDescriptions = sorts;
-                Comparison<T> comparer = ObjectComparer.FromSort<T>(sorts).CompareValuesByProperties;
+                Comparison<T> comparer = ListObjectComparer.FromSort<T>(sorts).CompareValuesByProperties;
                 items.Sort(comparer);
                 //_isSorted = false;
             }
