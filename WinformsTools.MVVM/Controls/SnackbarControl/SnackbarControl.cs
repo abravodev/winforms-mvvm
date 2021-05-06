@@ -8,6 +8,7 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
     {
         private readonly Control _host;
         private System.Timers.Timer _timer;
+        private int _initialHeight;
 
         public SnackbarControl(Control host)
         {
@@ -26,16 +27,18 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
         {
             Hide();
             this.Dock = DockStyle.Bottom;
+            _initialHeight = this.Height;
+            this.Height = 0;
         }
 
-        public void Show(string message) => Show(message, TimeSpan.FromSeconds(5));
+        public void Show(string message) => Show(message, TimeSpan.FromSeconds(2));
 
         public void Show(string message, TimeSpan showTime)
         {
             lbl_snackbarMessage.Text = message;
             this.BringToFront();
-            Show();
-            SetTimeout(showTime, Hide);
+            ShowAnimated();
+            SetTimeout(showTime, HideAnimated);
         }
 
         private void SetTimeout(TimeSpan delay, Action action)
@@ -48,6 +51,38 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
             };
             _timer.Elapsed += (sender, e) => ApplicationDispatcher.BeginInvoke(action);
             _timer.Start();
+        }
+
+        private void ShowAnimated()
+        {
+            Show();
+            Enlarge();
+        }
+
+        private void HideAnimated()
+        {
+            Shrink();
+            Hide();
+        }
+
+        private void Enlarge()
+        {
+            this.Height = 0;
+            while (this.Height < _initialHeight)
+            {
+                this.Height++;
+                Application.DoEvents();
+            }
+        }
+
+        private void Shrink()
+        {
+            this.Height = _initialHeight;
+            while (this.Height > 0)
+            {
+                this.Height--;
+                Application.DoEvents();
+            }
         }
     }
 }
