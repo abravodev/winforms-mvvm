@@ -91,10 +91,13 @@
     <Compile Include="Controls\SnackbarControl\SnackbarControl.Designer.cs">
       <DependentUpon>SnackbarControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SnackbarControl\SnackbarMessageProvider.cs" />
     <Compile Include="Controls\SnackbarControl\SnackbarProvider.cs" />
     <Compile Include="Navigation\IViewNavigator.cs" />
     <Compile Include="Components\MessageDialog.cs" />
     <Compile Include="Bindings\BindingExtensions.cs" />
+    <Compile Include="Navigation\RegisteredViews.cs" />
+    <Compile Include="Controls\SnackbarControl\SnackbarMessage.cs" />
     <Compile Include="Navigation\ViewClosedEvent.cs" />
     <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridView.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClause.cs" />

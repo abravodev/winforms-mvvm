@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using SimpleInjector;
+﻿using SimpleInjector;
 using UserManager.BusinessLogic.DataAccess;
 using WinformsTools.MVVM.Components;
-using UserManager.Mappers;
 using UserManager.ViewModels;
 using UserManager.Views;
 using System.Configuration;
@@ -11,6 +9,7 @@ using WinformsTools.MVVM.DependencyInjection;
 using Easy.MessageHub;
 using UserManager.BusinessLogic.DataAccess.Repositories;
 using WinformsTools.MVVM.Navigation;
+using WinformsTools.MVVM.Controls.SnackbarControl;
 
 namespace UserManager.Startup
 {
@@ -61,6 +60,8 @@ namespace UserManager.Startup
         {
             container.RegisterAsInterfaces<SettingProvider>();
             container.RegisterAsInterfaces<ViewNavigator>();
+            container.RegisterSingleton<IRegisteredViews>(() => new RegisteredViews());
+            container.RegisterAsInterfaces<SnackbarMessageProvider>();
         }
 
         private static void RegisterViews(Container container)

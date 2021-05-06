@@ -12,11 +12,16 @@ namespace WinformsTools.MVVM.Navigation
     {
         private readonly Container _container;
         private readonly IMessageHub _eventAggregator;
+        private readonly IRegisteredViews _registeredViews;
 
-        public ViewNavigator(Container container, IMessageHub eventAggregator)
+        public ViewNavigator(
+            Container container,
+            IMessageHub eventAggregator,
+            IRegisteredViews registeredViews)
         {
             _container = container;
             _eventAggregator = eventAggregator;
+            _registeredViews = registeredViews;
         }
 
         public void Open<TViewModel>() where TViewModel : IViewModel => Get<TViewModel>().Show();
@@ -39,6 +44,8 @@ namespace WinformsTools.MVVM.Navigation
             view.Load += async (sender, e) => await Task.Run(view.ViewModel.Load);
             view.Load += (sender, e) => Metrics.Log(new ViewEnteredMetric<TViewModel>(view));
             SetupViewForms(view);
+
+            _registeredViews.Add(view);
         }
 
         private void SetupViewForms<TViewModel>(IView<TViewModel> view) where TViewModel : IViewModel
