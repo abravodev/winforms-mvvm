@@ -16,7 +16,6 @@ namespace WinformsTools.MVVM.Bindings
     {
         private ListSortDescriptionCollection _sortDescriptions;
 
-        private List<PropertyComparer<T>> _comparers;
         private bool _isSorted;
 
         public AdvancedBindingList() { }
@@ -59,11 +58,8 @@ namespace WinformsTools.MVVM.Bindings
             if (items != null)
             {
                 _sortDescriptions = sorts;
-                _comparers = sorts.Cast<ListSortDescription>()
-                    .Select(sort => MakeComparer(sort))
-                    .ToList();
-
-                items.Sort(CompareValuesByProperties);
+                Comparison<T> comparer = ObjectComparer.FromSort<T>(sorts).CompareValuesByProperties;
+                items.Sort(comparer);
                 //_isSorted = false;
             }
             else
@@ -72,32 +68,7 @@ namespace WinformsTools.MVVM.Bindings
             }
 
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
-        }
-
-        private static PropertyComparer<T> MakeComparer(ListSortDescription sort)
-        {
-            return new PropertyComparer<T>(
-                sort.PropertyDescriptor,
-                sort.SortDirection);
-        }
-
-        private int CompareValuesByProperties(T x, T y)
-        {
-            if (x == null)
-                return (y == null) ? 0 : -1;
-
-            if (y == null)
-                return 1;
-
-            foreach (PropertyComparer<T> comparer in _comparers)
-            {
-                int retval = comparer.Compare(x, y);
-                if (retval != 0)
-                    return retval;
-            }
-
-            return 0;
-        }
+        }      
 
         public void RemoveFilter() => this.Filter = "";
 
