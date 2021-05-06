@@ -134,9 +134,6 @@ namespace UserManager.Tests.ViewModels
             var changes = listener.Stop().GetChanges<bool>(nameof(CreateUserViewModel.Loading));
             await _userRepository.Received().CreateUser(ArgExt.AnyEquivalent(newUser, ignore: nameof(User.CreationDate)));
             _eventAggregator.Received().Publish(ArgExt.AnyEquivalent(new UserCreatedEvent(newUser), ignore: nameof(User.CreationDate)));
-            _messageDialog.Show(
-                title: General.UserCreatedTitle,
-                message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdUserId));
             FormShouldBeEmpty();
             changes.Should().Contain(x => x.Value == true);
         }

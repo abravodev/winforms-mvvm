@@ -150,17 +150,11 @@
   <data name="UserCreatedMessage" xml:space="preserve">
     <value>Name = {0}, Id = {1}</value>
   </data>
-  <data name="UserCreatedTitle" xml:space="preserve">
-    <value>User created</value>
-  </data>
   <data name="UserCreationFailedTitle" xml:space="preserve">
     <value>Error in creation</value>
   </data>
   <data name="UserDeletedMessage" xml:space="preserve">
     <value>User '{0}' was deleted</value>
-  </data>
-  <data name="UserDeletedTitle" xml:space="preserve">
-    <value>User deleted</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>

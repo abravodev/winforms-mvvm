@@ -14,8 +14,10 @@ using UserManager.Events;
 using UserManager.Resources;
 using UserManager.Startup;
 using UserManager.Tests.TestUtils;
+using UserManager.Tests.TestUtils.Fakes;
 using UserManager.ViewModels;
 using WinformsTools.MVVM.Components;
+using WinformsTools.MVVM.Controls.SnackbarControl;
 
 namespace UserManager.Tests.ViewModels
 {
@@ -26,6 +28,8 @@ namespace UserManager.Tests.ViewModels
         private IMessageDialog _messageDialog;
         private IMapper _mapper;
         private IMessageHub _eventAggregator;
+        private ISnackbarMessage _snackbarMessage;
+        private ISnackbarProvider _snackbarProvider;
         private UsersViewModel sut;
 
         [TestInitialize]
@@ -35,7 +39,15 @@ namespace UserManager.Tests.ViewModels
             _messageDialog = Substitute.For<IMessageDialog>();
             _mapper = AutomapperConfig.GetMapperConfiguration().CreateMapper();
             _eventAggregator = Substitute.For<IMessageHub>();
-            sut = new UsersViewModel(_userRepository, _messageDialog, _mapper, _eventAggregator);
+            var snackbar = FakeSnackbarMessage.Create();
+            _snackbarMessage = snackbar.Message;
+            _snackbarProvider = snackbar.Provider;
+            sut = CreateUserViewModel();
+        }
+
+        private UsersViewModel CreateUserViewModel()
+        {
+            return new UsersViewModel(_userRepository, _messageDialog, _mapper, _eventAggregator, _snackbarProvider);
         }
 
         [TestMethod]
@@ -72,13 +84,13 @@ namespace UserManager.Tests.ViewModels
         }
 
         [TestMethod]
-        public async Task UserIsCreated_AddToUserList()
+        public async Task UserIsCreated_AddToUserListAndShowSnackbarMessage()
         {
             // Arrange
             var createdUser = MakeUser();
             Action<UserCreatedEvent> onUserCreatedEvent = null;
             _eventAggregator.GetAction<UserCreatedEvent>(action => onUserCreatedEvent = action);
-            var viewModel = new UsersViewModel(_userRepository, _messageDialog, _mapper, _eventAggregator);
+            var viewModel = CreateUserViewModel(); // Needed because it subscribes to the events in the constructor
             onUserCreatedEvent(new UserCreatedEvent(createdUser));
 
             // Act
@@ -88,6 +100,8 @@ namespace UserManager.Tests.ViewModels
             viewModel.Users.Should()
                 .HaveCount(1)
                 .And.ContainEquivalentOfMapped(createdUser, _mapper);
+            _snackbarMessage.Received().Show(
+                message: string.Format(General.UserCreatedMessage, createdUser.FirstName, createdUser.Id));
         }
 
         [TestMethod]
@@ -112,8 +126,7 @@ namespace UserManager.Tests.ViewModels
             // Assert
             await _userRepository.DidNotReceive().Remove(user.Id);
             sut.Users.Should().HaveCount(1);
-            _messageDialog.DidNotReceive().Show(
-                title: General.UserDeletedTitle,
+            _snackbarMessage.DidNotReceive().Show(
                 message: string.Format(General.UserDeletedMessage, userToDelete.Fullname));
         }
 
@@ -139,8 +152,7 @@ namespace UserManager.Tests.ViewModels
             // Assert
             await _userRepository.Received().Remove(user.Id);
             sut.Users.Should().BeEmpty();
-            _messageDialog.Received().Show(
-                title: General.UserDeletedTitle,
+            _snackbarMessage.Received().Show(
                 message: string.Format(General.UserDeletedMessage, userToDelete.Fullname));
         }
 

@@ -160,15 +160,6 @@ namespace UserManager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User created.
-        /// </summary>
-        public static string UserCreatedTitle {
-            get {
-                return ResourceManager.GetString("UserCreatedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error in creation.
         /// </summary>
         public static string UserCreationFailedTitle {
@@ -183,15 +174,6 @@ namespace UserManager.Resources {
         public static string UserDeletedMessage {
             get {
                 return ResourceManager.GetString("UserDeletedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User deleted.
-        /// </summary>
-        public static string UserDeletedTitle {
-            get {
-                return ResourceManager.GetString("UserDeletedTitle", resourceCulture);
             }
         }
         

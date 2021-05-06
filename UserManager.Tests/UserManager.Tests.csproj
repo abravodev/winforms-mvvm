@@ -84,6 +84,7 @@
     <Compile Include="TestUtils\PropertyChangeListener.cs" />
     <Compile Include="TestUtils\TestMapperProfile.cs" />
     <Compile Include="ViewModels\CreateUserViewModelTests.cs" />
+    <Compile Include="TestUtils\Fakes\FakeSnackbarMessage.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
     <Compile Include="ViewModels\RolesViewModelTests.cs" />
     <Compile Include="ViewModels\UsersViewModelTests.cs" />

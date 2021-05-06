@@ -85,9 +85,6 @@ namespace UserManager.ViewModels
                 var newUser = _mapper.Map<User>(CreateUserInfo);
                 var createdId = await _userRepository.CreateUser(newUser);
                 _eventAggregator.Publish(new UserCreatedEvent(newUser));
-                _messageDialog.Show(
-                    title: General.UserCreatedTitle,
-                    message: string.Format(General.UserCreatedMessage, newUser.FirstName, createdId));
             }
             catch (Exception ex)
             {

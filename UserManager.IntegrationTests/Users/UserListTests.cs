@@ -38,7 +38,6 @@ namespace UserManager.IntegrationTests.Users
             firstUser.RightClick();
             usersView.Get<Menu>("Context menu of Users list", ControlType.ToolBar).SelectMenuItem(General.Delete);
             usersView.GetModalByTitle(General.DeleteUserTitle).Choose(DialogOption.Yes);
-            usersView.GetModalByTitle(General.UserDeletedTitle).Choose(DialogOption.OK);
 
             var finalNumberOfUsers = GetUserRows(usersView).Length;
             finalNumberOfUsers.Should().BeLessThan(initialNumberOfUsers);

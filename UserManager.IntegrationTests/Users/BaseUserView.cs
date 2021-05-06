@@ -19,8 +19,6 @@ namespace UserManager.IntegrationTests.Users
                 .Fill("Email", user.Email);
             creationForm.Get<Button>("Save").Click();
 
-            usersView.GetModalByTitle(General.UserCreatedTitle).Choose(DialogOption.OK);
-
             return user;
         }
 

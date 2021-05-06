@@ -14,6 +14,7 @@ using UserManager.BusinessLogic.DataAccess.Repositories;
 using Serilog;
 using UserManager.BusinessLogic.Extensions;
 using WinformsTools.Common.Extensions;
+using WinformsTools.MVVM.Controls.SnackbarControl;
 
 namespace UserManager.ViewModels
 {
@@ -24,6 +25,7 @@ namespace UserManager.ViewModels
         private readonly IMessageDialog _messageDialog;
         private readonly IMapper _mapper;
         private readonly IMessageHub _eventAggregator;
+        private readonly ISnackbarProvider _snackbarProvider;
 
         private bool _loading;
         public bool Loading
@@ -40,12 +42,14 @@ namespace UserManager.ViewModels
             IUserRepository userRepository,
             IMessageDialog messageDialog,
             IMapper mapper,
-            IMessageHub eventAggregator)
+            IMessageHub eventAggregator,
+            ISnackbarProvider snackbarProvider)
         {
             _userRepository = userRepository;
             _messageDialog = messageDialog;
             _mapper = mapper;
             _eventAggregator = eventAggregator;
+            _snackbarProvider = snackbarProvider;
 
             this.Users = new AdvancedBindingList<UserListItemDto>();
             this.DeleteUserCommand = Command.From<UserListItemDto>(DeleteUser);
@@ -72,9 +76,7 @@ namespace UserManager.ViewModels
 
             await _userRepository.Remove(user.Id);
             Users.Remove(user);
-            _messageDialog.Show(
-                title: General.UserDeletedTitle,
-                message: string.Format(General.UserDeletedMessage, user.Fullname));
+            _snackbarProvider.Get(this).Show(string.Format(General.UserDeletedMessage, user.Fullname));
         }
 
         public async Task Load()
@@ -99,6 +101,8 @@ namespace UserManager.ViewModels
 
         public void OnUserCreated(UserCreatedEvent evt)
         {
+            var message = string.Format(General.UserCreatedMessage, evt.CreatedUser.FirstName, evt.CreatedUser.Id);
+            _snackbarProvider.Get(this).Show(message);
             Users.Add(_mapper.Map<UserListItemDto>(evt.CreatedUser));
         }
     }
