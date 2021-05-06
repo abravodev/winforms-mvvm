@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace UserManager.DataAccess.Migrations
 {
@@ -12,8 +13,10 @@ namespace UserManager.DataAccess.Migrations
         {
             string connectionString = ConfigurationManager.ConnectionStrings["UsersDatabase"].ConnectionString;
             var services = CreateServices(connectionString);
-            var command = args[0];
-            
+            var command = args.Any()
+                ? args[0]
+                : GetCommandFromUser();
+
             Loop(services, connectionString, command);
             Console.ReadKey();
         }
@@ -29,17 +32,24 @@ namespace UserManager.DataAccess.Migrations
             {
                 Console.Write(ex);
             }
-            
+
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Next: ");
 
-            var newCommand = Console.ReadLine();
+            var newCommand = GetCommandFromUser();
             if (string.IsNullOrEmpty(newCommand))
             {
                 return;
             }
             Loop(services, connectionString, newCommand);
+        }
+
+        private static string GetCommandFromUser()
+        {
+            var availableCommands = string.Join(",", Command.List.Select(x => x.Name));
+            Console.WriteLine($"Available commands: {availableCommands}");
+            return Console.ReadLine();
         }
 
         private static void ExecuteCommand(IServiceProvider services, string command)

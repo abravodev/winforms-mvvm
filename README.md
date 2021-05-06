@@ -49,7 +49,12 @@ There are some alternatives to MVVM, let's review it:
 
 # Sample app
 ## Setup
-To launch the app or pass the integration tests, you will need to recreate the database, using the `UserManager.DataAccess.Migrations` project. It is a console app that will run the pending migrations.
+To launch the app or pass the integration tests, you will need to recreate the database, using the `UserManager.DataAccess.Migrations` project. It is a console app that will run the pending migrations. It can accept an argument with the first command that you want to execute.
+
+#### Run through Visual Studio
+You can setup that the default action when you run the console app is to `MigrateToLatest`.
+
+This is set through `Project > Properties > Debug > Command Line Arguments`
 
 ## Features
 ### Users
