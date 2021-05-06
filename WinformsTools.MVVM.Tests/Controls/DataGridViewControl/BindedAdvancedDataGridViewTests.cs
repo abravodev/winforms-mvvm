@@ -190,21 +190,6 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             }
 
             [TestMethod]
-            public void RowsWithDuplicatedTag_ThrowException()
-            {
-                // Arrange
-                var list = new AdvancedBindingList<Data>(new List<Data> { A_A, A_B, B_A, B_B });
-                var view = GetView(list);
-                view.Rows[1].Tag = view.Rows[0].Tag; // Force tag duplication
-
-                // Act
-                Action action = () => list.Filter = $"[{nameof(Data.FirstName)}] IN ('A')";
-
-                // Assert
-                action.Should().Throw<InvalidOperationException>();
-            }
-
-            [TestMethod]
             public void FilterOutSelectedCell_UnselectItAndSetItToNotVisible()
             {
                 // Arrange
@@ -289,29 +274,6 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             return new Data(
                 firstName: row.Cells[0].Value.ToString(),
                 lastName: row.Cells[1].Value.ToString());
-        }
-
-        [TestMethod]
-        public void Bind_EmptyList_SetRowsTag()
-        {
-            // Act
-            var list = new List<Data>();
-            var view = GetView(list);
-            list.AddRange(new[] { A_A, A_B, B_A, B_B });
-
-            // Assert
-            view.Rows.Cast<DataGridViewRow>().Select(x => x.Tag).Should().OnlyHaveUniqueItems();
-        }
-
-        [TestMethod]
-        public void Bind_NonEmptyList_SetRowsTag()
-        {
-            // Act
-            var list = new List<Data> { A_A, A_B, B_A, B_B };
-            var view = GetView(list);
-
-            // Assert
-            view.Rows.Cast<DataGridViewRow>().Select(x => x.Tag).Should().OnlyHaveUniqueItems();
         }
     }
 }
