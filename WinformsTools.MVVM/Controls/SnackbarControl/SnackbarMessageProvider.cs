@@ -1,5 +1,4 @@
 ﻿using WinformsTools.MVVM.Core;
-using System.Windows.Forms;
 using WinformsTools.MVVM.Navigation;
 
 namespace WinformsTools.MVVM.Controls.SnackbarControl
@@ -15,8 +14,8 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
 
         public ISnackbarMessage Get<TViewModel>(TViewModel model) where TViewModel : IViewModel
         {
-            var view = _registeredViews.Get(model);
-            return new SnackbarMessage(view as Control);
+            var view = _registeredViews.GetControl(model);
+            return new SnackbarMessage(view);
         }
     }
 

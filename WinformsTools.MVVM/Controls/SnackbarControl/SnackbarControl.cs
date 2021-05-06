@@ -31,8 +31,6 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
             this.Height = 0;
         }
 
-        public void Show(string message) => Show(message, TimeSpan.FromSeconds(2));
-
         public void Show(string message, TimeSpan showTime)
         {
             lbl_snackbarMessage.Text = message;

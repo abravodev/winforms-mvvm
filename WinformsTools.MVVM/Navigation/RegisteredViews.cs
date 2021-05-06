@@ -11,6 +11,8 @@ namespace WinformsTools.MVVM.Navigation
         void Add<TViewModel>(IView<TViewModel> view) where TViewModel : IViewModel;
 
         IView<TViewModel> Get<TViewModel>(TViewModel model) where TViewModel : IViewModel;
+        
+        Control GetControl<TViewModel>(TViewModel model) where TViewModel : IViewModel;
     }
 
     public class RegisteredViews : IRegisteredViews
@@ -33,7 +35,12 @@ namespace WinformsTools.MVVM.Navigation
         {
             return _views
                 .Where(x => x is IView<TViewModel>)
-                .FirstOrDefault() as IView<TViewModel>;
+                .First() as IView<TViewModel>;
+        }
+
+        public Control GetControl<TViewModel>(TViewModel model) where TViewModel : IViewModel
+        {
+            return Get(model) as Control;
         }
     }
 }

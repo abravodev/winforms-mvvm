@@ -5,6 +5,8 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
 {
     public class SnackbarMessage : ISnackbarMessage
     {
+        private static readonly TimeSpan DefaultShowTime = TimeSpan.FromSeconds(2);
+
         private readonly Control _hostControl;
 
         public SnackbarMessage(Control hostControl)
@@ -19,7 +21,7 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
 
         public void Show(string message)
         {
-            SnackbarProvider.GetSnackbar(_hostControl).Show(message);
+            SnackbarProvider.GetSnackbar(_hostControl).Show(message, DefaultShowTime);
         }
     }
 
