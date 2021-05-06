@@ -190,7 +190,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             }
 
             [TestMethod]
-            public void FilterOutSelectedCell_UnselectItAndSetItToNotVisible()
+            public void FilterOutSelectedRow_UnselectItAndSetItToNotVisible()
             {
                 // Arrange
                 var view = GetView(new[] { A_A, A_B, B_A, B_B });
@@ -207,7 +207,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             }
 
             [TestMethod]
-            public void FilterInSelectedCell_KeepItSelected()
+            public void FilterInSelectedRow_KeepItSelected()
             {
                 // Arrange
                 var view = GetView(new[] { A_A, A_B, B_A, B_B });
@@ -220,6 +220,40 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
                 // Assert
                 firstRow.Selected.Should().BeTrue();
+                view.CurrentCell.Should().Be(firstRow.Cells[0]);
+            }
+
+            [TestMethod]
+            public void FilterOutSelectedCell_UnselectItAndSetItToNotVisible()
+            {
+                // Arrange
+                var view = GetView(new[] { A_A, A_B, B_A, B_B });
+                var filter = new AdvancedFilter(view);
+                var firstRow = view.Rows[0];
+                firstRow.Cells[0].Selected = true;
+
+                // Act
+                filter.Filter(nameof(Data.FirstName), new[] { 'B' });
+
+                // Assert
+                firstRow.Cells[0].Selected.Should().BeFalse();
+                view.CurrentCell.Should().BeNull();
+            }
+
+            [TestMethod]
+            public void FilterInSelectedCell_KeepItSelected()
+            {
+                // Arrange
+                var view = GetView(new[] { A_A, A_B, B_A, B_B });
+                var filter = new AdvancedFilter(view);
+                var firstRow = view.Rows[0];
+                firstRow.Cells[0].Selected = true;
+
+                // Act
+                filter.Filter(nameof(Data.FirstName), new[] { 'A' });
+
+                // Assert
+                firstRow.Cells[0].Selected.Should().BeTrue();
                 view.CurrentCell.Should().Be(firstRow.Cells[0]);
             }
 

@@ -23,7 +23,8 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
             foreach (var row in this.Rows.Cast<DataGridViewRow>())
             {
                 var visible = filteredList.Any(x => x.GetHashCode() == row.DataBoundItem.GetHashCode());
-                if (row.Selected && !visible)
+                bool isSelected = row.Selected || row.Cells.Cast<DataGridViewCell>().Any(x => x.Selected);
+                if (isSelected && !visible)
                 {
                     this.CurrentCell = null;
                 }
