@@ -1,0 +1,14 @@
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <TestResultsFolderPath>..\TestResults</TestResultsFolderPath>
+    </PropertyGroup>
+
+    <Target Name="AfterClean">
+        <CallTarget Targets="CleanTestResults" />
+    </Target>
+
+    <Target Name="CleanTestResults" Condition="Exists('$(TestResultsFolderPath)')">
+        <Message Text="Clearing $(TestResultsFolderPath)..." Importance="High" />
+        <RemoveDir Directories="$(TestResultsFolderPath)" />
+    </Target>
+</Project>
