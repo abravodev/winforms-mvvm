@@ -36,15 +36,15 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
         private static Data B_A = new Data("B", "A");
         private static Data B_B = new Data("B", "B");
 
-        private static BindedAdvancedDataGridView GetView(IEnumerable<Data> data)
+        private static AdvancedDataGridView GetView(IEnumerable<Data> data)
         {
             var list = new BindingList<Data>(data.ToList());
             return GetView(list);
         }
 
-        private static BindedAdvancedDataGridView GetView(BindingList<Data> list)
+        private static AdvancedDataGridView GetView(BindingList<Data> list)
         {
-            var view = new BindedAdvancedDataGridView();
+            var view = new AdvancedDataGridView();
             view.PrepareForUnitTests();
             view.AddAdvancedBinding(list);
             return view;
@@ -107,7 +107,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
                 AssertEquivalent(view, new[] { B_A, B_B, A_A, A_B });
             }
 
-            private void Sort(BindedAdvancedDataGridView view, string headerName, ListSortDirection sortDirection)
+            private void Sort(AdvancedDataGridView view, string headerName, ListSortDirection sortDirection)
             {
                 var column = view.Columns.Cast<DataGridViewColumn>().First(x => x.HeaderText == headerName);
 
@@ -221,14 +221,14 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
             }
         }
 
-        private static void AssertEquivalent(BindedAdvancedDataGridView view, IEnumerable<Data> data)
+        private static void AssertEquivalent(AdvancedDataGridView view, IEnumerable<Data> data)
         {
             var actualRows = GetRows(view).Select(x => x.ToString()).Joined(", ");
             var expectedDataRows = data.Select(x => x.ToString()).Joined(", ");
             actualRows.Should().Be(expectedDataRows);
         }
 
-        private static IEnumerable<Data> GetRows(BindedAdvancedDataGridView view)
+        private static IEnumerable<Data> GetRows(AdvancedDataGridView view)
         {
             return view.Rows.Cast<DataGridViewRow>().Select(FromRow);
         }

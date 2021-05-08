@@ -100,7 +100,6 @@
     <Compile Include="Navigation\RegisteredViews.cs" />
     <Compile Include="Controls\SnackbarControl\SnackbarMessage.cs" />
     <Compile Include="Navigation\ViewClosedEvent.cs" />
-    <Compile Include="Controls\DataGridViewControl\BindedAdvancedDataGridView.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterClause.cs" />
     <Compile Include="Controls\DataGridViewControl\FilterConverter.cs" />
     <Compile Include="DependencyInjection\GreediestConstructorBehavior.cs" />

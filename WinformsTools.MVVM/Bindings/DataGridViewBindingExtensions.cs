@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using WinformsTools.Common.Extensions;
 using System.ComponentModel;
+using Zuby.ADGV;
 
 namespace WinformsTools.MVVM.Bindings
 {
@@ -84,7 +85,7 @@ namespace WinformsTools.MVVM.Bindings
             return item;
         }
 
-        public static Bind<TBinding> For<TBinding, TSource>(this Bind<TBinding> item, BindedAdvancedDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
+        public static Bind<TBinding> For<TBinding, TSource>(this Bind<TBinding> item, AdvancedDataGridView datagridView, Func<TBinding, BindingList<TSource>> items)
         {
             var list = items(item._item);
             datagridView.AddAdvancedBinding(list);

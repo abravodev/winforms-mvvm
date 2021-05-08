@@ -30,7 +30,7 @@ namespace UserManager.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_userlist = new WinformsTools.MVVM.Controls.DataGridViewControl.BindedAdvancedDataGridView();
+            this.dgv_userlist = new Zuby.ADGV.AdvancedDataGridView();
             this.tlp_view = new System.Windows.Forms.TableLayoutPanel();
             this.createUserView = new UserManager.Views.CreateUserView();
             this.pb_loading = new System.Windows.Forms.ProgressBar();
@@ -113,7 +113,7 @@ namespace UserManager.Views
 
         #endregion
 
-        private BindedAdvancedDataGridView dgv_userlist;
+        private Zuby.ADGV.AdvancedDataGridView dgv_userlist;
         private System.Windows.Forms.TableLayoutPanel tlp_view;
         private System.Windows.Forms.ProgressBar pb_loading;
         private CreateUserView createUserView;
