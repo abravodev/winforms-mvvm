@@ -20,7 +20,7 @@ namespace WinformsTools.Common.Tests.Helpers
             var anyClass = new AnyClass();
             var receivedSender = default(object);
             var receivedEventArgs = default(EventArgs);
-            var anyEventArgs = new EventArgs();
+            var anyEventArgs = EventArgs.Empty;
             anyClass.Event += (sender, e) => { receivedSender = sender; receivedEventArgs = e; };
 
             // Act

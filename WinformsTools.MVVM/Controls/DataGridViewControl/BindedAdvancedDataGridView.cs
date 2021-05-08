@@ -1,9 +1,6 @@
 ﻿using Zuby.ADGV;
-using System.Linq.Dynamic;
-using System.Collections.Generic;
-using System.Linq;
-using WinformsTools.MVVM.Bindings;
-using System.Windows.Forms;
+using System.ComponentModel;
+using System;
 
 namespace WinformsTools.MVVM.Controls.DataGridViewControl
 {
@@ -11,25 +8,12 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
     /// <see href="https://github.com/davidegironi/advanceddatagridview/issues/24"/>
     /// <see href="https://github.com/OceanAirdrop/AdvancedDataGridViewDataModel"/>
     /// </summary>
+    [Obsolete("You can use AdvancedDataGridView")]
     public class BindedAdvancedDataGridView : AdvancedDataGridView
     {
-        public void Bind<T>(AdvancedBindingList<T> sourceList)
+        public void Bind<T>(BindingList<T> sourceList)
         {
-            sourceList.FilterChanged += (sender, e) => FilterRows(sourceList.GetFiltered());
-        }
-
-        private void FilterRows<T>(ICollection<T> filteredList)
-        {
-            foreach (var row in this.Rows.Cast<DataGridViewRow>())
-            {
-                var visible = filteredList.Any(x => x.GetHashCode() == row.DataBoundItem.GetHashCode());
-                bool isSelected = row.Selected || row.Cells.Cast<DataGridViewCell>().Any(x => x.Selected);
-                if (isSelected && !visible)
-                {
-                    this.CurrentCell = null;
-                }
-                row.Visible = visible;
-            }
+            
         }
     }
 }

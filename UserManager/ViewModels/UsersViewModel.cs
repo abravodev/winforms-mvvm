@@ -15,6 +15,7 @@ using Serilog;
 using UserManager.BusinessLogic.Extensions;
 using WinformsTools.Common.Extensions;
 using WinformsTools.MVVM.Controls.SnackbarControl;
+using System.ComponentModel;
 
 namespace UserManager.ViewModels
 {
@@ -34,7 +35,7 @@ namespace UserManager.ViewModels
             private set => SetProperty(ref _loading, value);
         }
 
-        public AdvancedBindingList<UserListItemDto> Users { get; }
+        public BindingList<UserListItemDto> Users { get; }
 
         public ICommand<UserListItemDto> DeleteUserCommand { get; }
 
@@ -51,7 +52,7 @@ namespace UserManager.ViewModels
             _eventAggregator = eventAggregator;
             _snackbarProvider = snackbarProvider;
 
-            this.Users = new AdvancedBindingList<UserListItemDto>();
+            this.Users = new BindingList<UserListItemDto>();
             this.DeleteUserCommand = Command.From<UserListItemDto>(DeleteUser);
             SubscribeToEvents();
         }

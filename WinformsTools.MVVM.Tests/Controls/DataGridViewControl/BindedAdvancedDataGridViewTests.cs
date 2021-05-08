@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -39,16 +38,15 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
         private static BindedAdvancedDataGridView GetView(IEnumerable<Data> data)
         {
-            var list = new AdvancedBindingList<Data>(data.ToList());
+            var list = new BindingList<Data>(data.ToList());
             return GetView(list);
         }
 
-        private static BindedAdvancedDataGridView GetView(AdvancedBindingList<Data> list)
+        private static BindedAdvancedDataGridView GetView(BindingList<Data> list)
         {
             var view = new BindedAdvancedDataGridView();
             view.PrepareForUnitTests();
-            view.Bind(list);
-            view.AddBinding(list);
+            view.AddAdvancedBinding(list);
             return view;
         }
 
@@ -161,7 +159,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
                 var filter = new AdvancedFilter(view);
 
                 // Act/Assert
-                filter.Filter(nameof(Data.FirstName), new[]{'A'});
+                filter.Filter(nameof(Data.FirstName), new[] { 'A' });
                 AssertEquivalent(view, new[] { A_A, A_B });
 
                 filter.Filter(nameof(Data.LastName), new[] { 'A' });
@@ -187,74 +185,6 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
                 filter.CleanFilter(nameof(Data.LastName));
                 AssertEquivalent(view, new[] { A_A, A_B, B_A, B_B });
-            }
-
-            [TestMethod]
-            public void FilterOutSelectedRow_UnselectItAndSetItToNotVisible()
-            {
-                // Arrange
-                var view = GetView(new[] { A_A, A_B, B_A, B_B });
-                var filter = new AdvancedFilter(view);
-                var firstRow = view.Rows[0];
-                firstRow.Selected = true;
-
-                // Act
-                filter.Filter(nameof(Data.FirstName), new[] { 'B' });
-
-                // Assert
-                firstRow.Selected.Should().BeFalse();
-                view.CurrentCell.Should().BeNull();
-            }
-
-            [TestMethod]
-            public void FilterInSelectedRow_KeepItSelected()
-            {
-                // Arrange
-                var view = GetView(new[] { A_A, A_B, B_A, B_B });
-                var filter = new AdvancedFilter(view);
-                var firstRow = view.Rows[0];
-                firstRow.Selected = true;
-
-                // Act
-                filter.Filter(nameof(Data.FirstName), new[] { 'A' });
-
-                // Assert
-                firstRow.Selected.Should().BeTrue();
-                view.CurrentCell.Should().Be(firstRow.Cells[0]);
-            }
-
-            [TestMethod]
-            public void FilterOutSelectedCell_UnselectItAndSetItToNotVisible()
-            {
-                // Arrange
-                var view = GetView(new[] { A_A, A_B, B_A, B_B });
-                var filter = new AdvancedFilter(view);
-                var firstRow = view.Rows[0];
-                firstRow.Cells[0].Selected = true;
-
-                // Act
-                filter.Filter(nameof(Data.FirstName), new[] { 'B' });
-
-                // Assert
-                firstRow.Cells[0].Selected.Should().BeFalse();
-                view.CurrentCell.Should().BeNull();
-            }
-
-            [TestMethod]
-            public void FilterInSelectedCell_KeepItSelected()
-            {
-                // Arrange
-                var view = GetView(new[] { A_A, A_B, B_A, B_B });
-                var filter = new AdvancedFilter(view);
-                var firstRow = view.Rows[0];
-                firstRow.Cells[0].Selected = true;
-
-                // Act
-                filter.Filter(nameof(Data.FirstName), new[] { 'A' });
-
-                // Assert
-                firstRow.Cells[0].Selected.Should().BeTrue();
-                view.CurrentCell.Should().Be(firstRow.Cells[0]);
             }
 
             /// <summary>
@@ -300,7 +230,7 @@ namespace WinformsTools.MVVM.Tests.Controls.DataGridViewControl
 
         private static IEnumerable<Data> GetRows(BindedAdvancedDataGridView view)
         {
-            return view.Rows.Cast<DataGridViewRow>().Where(x => x.Visible).Select(FromRow);
+            return view.Rows.Cast<DataGridViewRow>().Select(FromRow);
         }
 
         private static Data FromRow(DataGridViewRow row)

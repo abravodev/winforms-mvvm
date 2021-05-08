@@ -14,13 +14,63 @@ namespace WinformsTools.MVVM.Bindings
     /// <typeparam name="T"></typeparam>
     public class AdvancedBindingList<T> : BindingList<T>, IBindingListView
     {
-        private ListSortDescriptionCollection _sortDescriptions;
+        private ListSortDescriptionCollection _sortDescriptions = new ListSortDescriptionCollection();
 
         private bool _isSorted;
+        private BindingList<T> _source;
+        private IList<T> SourceItems => _source ?? Items;
 
         public AdvancedBindingList() { }
 
         public AdvancedBindingList(IList<T> list) : base(list) { }
+
+        public AdvancedBindingList(BindingList<T> source)
+        {
+            _source = source;
+            _source.ListChanged += (sender, e) => SyncSource(e);
+            if (_source.Any())
+            {
+                this.Recalculate();
+            }
+        }
+
+        private void SyncSource(ListChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Filter) || _sortDescriptions.Count > 0)
+            {
+                this.Recalculate();
+                return;
+            }
+
+            if (e.ListChangedType == ListChangedType.ItemAdded)
+            {
+                this.Insert(e.NewIndex, _source[e.NewIndex]);
+                return;
+            }
+
+            if (e.ListChangedType == ListChangedType.ItemDeleted)
+            {
+                this.RemoveAt(e.NewIndex);
+                return;
+            }
+
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                this[e.NewIndex] = _source[e.NewIndex];
+                return;
+            }
+
+            if (e.ListChangedType == ListChangedType.ItemMoved)
+            {
+                var item = this[e.OldIndex];
+                this.Remove(item);
+                this.Insert(e.NewIndex, item);
+                return;
+            }
+
+            // For rest of cases, we replace the whole thing
+            this.Replace(_source);
+        }
 
         public ListSortDescriptionCollection SortDescriptions => _sortDescriptions;
 
@@ -33,22 +83,42 @@ namespace WinformsTools.MVVM.Bindings
         private string _filter;
         public string Filter { get => _filter; set => ApplyFilter(value); }
 
-        public event EventHandler FilterChanged;
-
         private void ApplyFilter(string stringFilter)
         {
             _filter = stringFilter;
-            FilterChanged.Invoke(this, new EventArgs());
+            this.Replace(GetFiltered());
+        }
+
+        private void Replace(IList<T> items)
+        {
+            this.Clear();
+            foreach (var item in items)
+            {
+                this.Add(item);
+            }
+        }
+
+        private void Recalculate()
+        {
+            ApplyFilter(Filter);
+            ApplySort(_sortDescriptions);
+        }
+
+        private IList<T> SortedSourceItems()
+        {
+            var items = SourceItems.ToList();
+            SortList(items);
+            return items;
         }
 
         public IList<T> GetFiltered()
         {
             if (string.IsNullOrEmpty(Filter))
             {
-                return Items;
+                return SortedSourceItems();
             }
 
-            return Items.Where(FilterConverter.Convert(Filter)).ToList();
+            return SortedSourceItems().Where(FilterConverter.Convert(Filter)).ToList();
         }
 
         public void ApplySort(ListSortDescriptionCollection sorts)
@@ -58,8 +128,7 @@ namespace WinformsTools.MVVM.Bindings
             if (items != null)
             {
                 _sortDescriptions = sorts;
-                Comparison<T> comparer = ListObjectComparer.FromSort<T>(sorts).CompareValuesByProperties;
-                items.Sort(comparer);
+                SortList(items);
                 //_isSorted = false;
             }
             else
@@ -68,7 +137,13 @@ namespace WinformsTools.MVVM.Bindings
             }
 
             this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
-        }      
+        }
+
+        private void SortList(List<T> items)
+        {
+            Comparison<T> comparer = ListObjectComparer.FromSort<T>(_sortDescriptions).CompareValuesByProperties;
+            items.Sort(comparer);
+        }
 
         public void RemoveFilter() => this.Filter = "";
 
