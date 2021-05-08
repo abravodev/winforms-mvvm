@@ -26,11 +26,14 @@ namespace UserManager.BusinessLogic.Model
             }
         }
 
+        /// <summary>
+        /// Validate email based on <see cref="EmailAddressAttribute"/>
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool IsValid(string email)
         {
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(email);
-            return match.Success;
+            return new EmailAddressAttribute().IsValid(email);
         }
     }
 }

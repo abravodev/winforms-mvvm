@@ -22,12 +22,13 @@ namespace UserManager.BusinessLogic.Tests.Model
             action.Should().Throw<ValidationException>();
         }
 
-        [TestMethod]
-        public void Constructor_ValidEmail_ReturnCreatedEmail()
+        [DataTestMethod]
+        [DataRow("valid_email@mail.com")]
+        [DataRow("valid.email@mail.com")]
+        [DataRow("valid_email@mail.info")]
+        [DataRow("valid_email@subdomain.mail.info")]
+        public void Constructor_ValidEmail_ReturnCreatedEmail(string validEmailAddress)
         {
-            // Arrange
-            var validEmailAddress = "valid_email@mail.com";
-
             // Act
             var email = new Email(validEmailAddress);
 
