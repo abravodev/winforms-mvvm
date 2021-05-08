@@ -22,17 +22,12 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
         private static string GetColumnFilter(string columnFilter)
         {
             var (columName, filterValues) = GetFilter(columnFilter);
-            var posibleValues = filterValues.Select(filterValue =>
-            {
-                return IsNumber(filterValue)
-                    ? $"{columName} = {filterValue}"
-                    : $"{columName} = '{filterValue}'";
-            }).Joined(" OR ");
+            var posibleValues = filterValues
+                .Select(filterValue => $"{columName} = {filterValue}")
+                .Joined(" OR ");
 
             return $"({columName} != null && ({posibleValues}))";
         }
-
-        private static bool IsNumber(string value) => double.TryParse(value, out double _);
 
         private static (string Name, List<string> Values) GetFilter(string columnFilter)
         {
@@ -42,9 +37,8 @@ namespace WinformsTools.MVVM.Controls.DataGridViewControl
             // get string between square brackets
             var columName = columnFilterData[0].Split('[', ']')[1].Trim();
 
-            // remove any single quotes before testing if filter is a num or not
             var filterValues = columnFilterData[1].Split(',')
-                .Select(x => x.Replace("'", "").Trim())
+                .Select(x => x.Trim())
                 .ToList();
             
             return (columName, filterValues);
