@@ -26,6 +26,13 @@ namespace UserManager.Views
                 .WithContextMenu(this.dgv_userlist,
                     MenuOption.Create(General.Delete, ViewModel.DeleteUserCommand, IconChar.Times))
                 .WithLoading(this.tlp_view, this.pb_loading, _ => _.Loading);
+            dgv_userlist.RowsAdded += (sender, e) => ShowUserCount();
+            dgv_userlist.RowsRemoved += (sender, e) => ShowUserCount();
+        }
+
+        private void ShowUserCount()
+        {
+            this.lbl_userCount.Text = $"Total users: {this.dgv_userlist.RowCount}";
         }
     }
 }
