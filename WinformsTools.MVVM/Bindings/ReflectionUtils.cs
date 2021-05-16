@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using WinformsTools.Common.Extensions;
 
 namespace WinformsTools.MVVM.Bindings
 {
@@ -9,6 +11,11 @@ namespace WinformsTools.MVVM.Bindings
         {
             var body = (MemberExpression)action.Body;
             return body.Member.Name;
+        }
+
+        public static string GetFullPath<TSource, TProperty>(Expression<Func<TSource, TProperty>> action)
+        {
+            return action.Body.ToString().Split('.').Skip(1).Joined(".");
         }
 
         public static void SetValue<TSource, TProperty>(TSource item, Expression<Func<TSource, TProperty>> member, TProperty value)

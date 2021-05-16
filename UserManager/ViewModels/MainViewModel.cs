@@ -12,6 +12,7 @@ using UserManager.Providers;
 using UserManager.Resources;
 using Easy.MessageHub;
 using WinformsTools.MVVM.Navigation;
+using UserManager.BusinessLogic.DataAccess;
 
 namespace UserManager.ViewModels
 {
@@ -22,19 +23,24 @@ namespace UserManager.ViewModels
         private readonly IViewNavigator _viewNavigator;
         private readonly ISet<string> _openedWindows = new HashSet<string>();
         private readonly IMessageHub _eventAggregator;
+        private readonly IDatabaseService _databaseService;
 
         public BindingList<LanguageDto> AvailableLanguages { get; }
+
+        public DatabaseConnectionDto DatabaseConnection { get; } = new DatabaseConnectionDto();
 
         public MainViewModel(
             ISettingProvider settingProvider,
             IMessageDialog messageDialog,
             IViewNavigator viewNavigator,
-            IMessageHub eventAggregator)
+            IMessageHub eventAggregator,
+            IDatabaseService databaseService)
         {
             _settingProvider = settingProvider;
             _messageDialog = messageDialog;
             _viewNavigator = viewNavigator;
             _eventAggregator = eventAggregator;
+            _databaseService = databaseService;
             SubscribeToEvents();
             AvailableLanguages = new BindingList<LanguageDto>();
         }
@@ -45,6 +51,18 @@ namespace UserManager.ViewModels
         }
 
         public async Task Load()
+        {
+            SetupMenu();
+            await ShowDatabaseConnectionStatus();
+        }
+
+        private async Task ShowDatabaseConnectionStatus()
+        {
+            this.DatabaseConnection.Name = _databaseService.GetName();
+            this.DatabaseConnection.Connected = await _databaseService.CanConnectToDatabase();
+        }
+
+        private void SetupMenu()
         {
             var languages = GetAvailableLanguages();
             AvailableLanguages.AddRange(languages);

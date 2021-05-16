@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using WinformsTools.MVVM.Bindings;
 
 namespace WinformsTools.MVVM.Tests.Bindings
@@ -10,6 +11,8 @@ namespace WinformsTools.MVVM.Tests.Bindings
         private class Dummy
         {
             public int Age { get; set; }
+
+            public DateTime BirthDate { get; set; }
         }
 
         [TestMethod]
@@ -47,6 +50,26 @@ namespace WinformsTools.MVVM.Tests.Bindings
 
             // Assert
             dummy.Age.Should().Be(newAge);
+        }
+
+        [TestMethod]
+        public void GetFullPath_BirthDateYear()
+        {
+            // Act
+            var fullPath = ReflectionUtils.GetFullPath<Dummy, int>(x => x.BirthDate.Year);
+
+            // Assert
+            fullPath.Should().Be("BirthDate.Year");
+        }
+
+        [TestMethod]
+        public void GetFullPath_Age()
+        {
+            // Act
+            var fullPath = ReflectionUtils.GetFullPath<Dummy, int>(x => x.Age);
+
+            // Assert
+            fullPath.Should().Be("Age");
         }
     }
 }

@@ -17,7 +17,20 @@ namespace WinformsTools.MVVM.Bindings
         public static void AddInverseBinding<TControl>(this TControl control, string propertyName, object dataSource, string dataMember) 
             where TControl : Control
         {
-            control.DataBindings.Add(new InverseBinding(propertyName, dataSource, dataMember));
+            var inverseBinding = new ConversionBinding<bool, bool>(
+                propertyName,
+                dataSource,
+                dataMember,
+                converter: new InverseBoolConverter());
+            control.AddBinding(inverseBinding);
+        }
+
+        public static void AddBinding<TControl, TSource, TDestination>(
+            this TControl control,
+            ConversionBinding<TSource, TDestination> binding)
+            where TControl : Control
+        {
+            control.DataBindings.Add(binding);
         }
 
         public static Bind<TItem> BindTo<TView, TItem>(this TView view, TItem item)

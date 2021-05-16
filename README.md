@@ -2,7 +2,7 @@
 
 > *If you can, use WPF. If you can't, keep reading*
 
-[![CI](https://github.com/abravodev/winforms-mvvm/actions/workflows/main.yml/badge.svg)](https://github.com/abravodev/winforms-mvvm/actions/workflows/main.yml)
+[![CI](https://github.com/abravodev/winforms-mvvm/actions/workflows/ci.yml/badge.svg)](https://github.com/abravodev/winforms-mvvm/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a sample app built with Windows Forms and using the architectural pattern of [Model-View-ViewModel (MVVM)](https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/february/patterns-wpf-apps-with-the-model-view-viewmodel-design-pattern).

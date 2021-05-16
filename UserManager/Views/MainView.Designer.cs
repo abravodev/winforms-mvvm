@@ -35,6 +35,7 @@ namespace UserManager.Views
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_language = new WinformsTools.MVVM.Controls.BindableToolStripMenuItem();
             this.btn_roles = new FontAwesome.Sharp.IconButton();
+            this.lbl_databaseConnectionString = new System.Windows.Forms.Label();
             this.ms_menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,11 +91,21 @@ namespace UserManager.Views
             this.btn_roles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_roles.UseVisualStyleBackColor = true;
             // 
+            // lbl_databaseConnectionString
+            // 
+            this.lbl_databaseConnectionString.AutoSize = true;
+            this.lbl_databaseConnectionString.Location = new System.Drawing.Point(697, 428);
+            this.lbl_databaseConnectionString.Name = "lbl_databaseConnectionString";
+            this.lbl_databaseConnectionString.Size = new System.Drawing.Size(91, 13);
+            this.lbl_databaseConnectionString.TabIndex = 3;
+            this.lbl_databaseConnectionString.Text = "Connection to DB";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_databaseConnectionString);
             this.Controls.Add(this.btn_roles);
             this.Controls.Add(this.btn_users);
             this.Controls.Add(this.ms_menu);
@@ -115,6 +126,7 @@ namespace UserManager.Views
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
         private BindableToolStripMenuItem tsmi_language;
         private FontAwesome.Sharp.IconButton btn_roles;
+        private System.Windows.Forms.Label lbl_databaseConnectionString;
     }
 }
 

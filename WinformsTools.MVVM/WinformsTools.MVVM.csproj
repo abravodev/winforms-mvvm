@@ -75,8 +75,9 @@
     <Compile Include="Bindings\ClickBindingExtensions.cs" />
     <Compile Include="Bindings\ComboBoxExtensions.cs" />
     <Compile Include="Bindings\ComboBoxSource.cs" />
+    <Compile Include="Bindings\ConversionBinding.cs" />
     <Compile Include="Bindings\DataGridViewBindingExtensions.cs" />
-    <Compile Include="Bindings\InverseBinding.cs" />
+    <Compile Include="Bindings\Converters\InverseBoolConverter.cs" />
     <Compile Include="Bindings\ListObjectComparer.cs" />
     <Compile Include="Bindings\PropertyComparer.cs" />
     <Compile Include="Controls\ControlExtensions.cs" />

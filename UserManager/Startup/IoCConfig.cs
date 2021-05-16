@@ -52,6 +52,7 @@ namespace UserManager.Startup
                 conectionString: ConfigurationManager.ConnectionStrings["UsersDatabase"].ConnectionString
             );
             container.RegisterInstance(databaseConfig);
+            container.RegisterAsInterfaces<DatabaseService>();
             container.RegisterAsInterfaces<UserRepository>();
             container.RegisterAsInterfaces<RoleRepository>();
         }

@@ -57,6 +57,8 @@
     <Compile Include="DataAccess\DapperExtensions.cs" />
     <Compile Include="DataAccess\DatabaseContext.cs" />
     <Compile Include="DataAccess\ConfigureDapper.cs" />
+    <Compile Include="DataAccess\DatabaseService.cs" />
+    <Compile Include="DataAccess\IDatabaseService.cs" />
     <Compile Include="DataAccess\Mappers\IntTypeHandler.cs" />
     <Compile Include="DataAccess\Mappers\RoleMapper.cs" />
     <Compile Include="DataAccess\Repositories\IRoleRepository.cs" />

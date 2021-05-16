@@ -21,10 +21,16 @@ namespace WinformsTools.MVVM.Bindings
             return this;
         }
 
+        public ConversionBind<TBinding, TControl, TProperty> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty)
+            where TControl : Control
+        {
+            return new ConversionBind<TBinding, TControl, TProperty>(_item, control, controlProperty);
+        }
+
         public Bind<TBinding> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty, Expression<Func<TBinding, TProperty>> member)
             where TControl : Control
         {
-            control.DataBindings.Add(ReflectionUtils.GetPropertyName(controlProperty), _item, ReflectionUtils.GetPropertyName(member));
+            control.DataBindings.Add(ReflectionUtils.GetPropertyName(controlProperty), _item, ReflectionUtils.GetFullPath(member));
             return this;
         }
 
@@ -37,8 +43,8 @@ namespace WinformsTools.MVVM.Bindings
         }
 
         public Bind<TBinding> For<TProperty, TDisplayProperty, TValueProperty>(
-            ComboBox comboBox, 
-            Func<TBinding, BindingList<TProperty>> member, 
+            ComboBox comboBox,
+            Func<TBinding, BindingList<TProperty>> member,
             Expression<Func<TProperty, TDisplayProperty>> displayMember,
             Expression<Func<TProperty, TValueProperty>> valueMember)
         {

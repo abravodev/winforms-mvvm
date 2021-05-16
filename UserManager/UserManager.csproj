@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="Events\UserCreatedEvent.cs" />
     <Compile Include="DTOs\RoleListItemDto.cs" />
+    <Compile Include="DTOs\DatabaseConnectionDto.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="Views\CreateUserView.cs">
       <SubType>UserControl</SubType>

@@ -3,6 +3,7 @@ using WinformsTools.MVVM.Core;
 using System.Windows.Forms;
 using UserManager.Resources;
 using UserManager.ViewModels;
+using System.Drawing;
 
 namespace UserManager.Views
 {
@@ -22,7 +23,10 @@ namespace UserManager.Views
         {
             this.BindTo(ViewModel)
                 .Click(this.btn_users, ViewModel.NavigateToUsersView).Log()
-                .Click(this.btn_roles, ViewModel.NavigateToRolesView).Log();
+                .Click(this.btn_roles, ViewModel.NavigateToRolesView).Log()
+                .For(this.lbl_databaseConnectionString, _ => _.Text, _ => _.DatabaseConnection.Name)
+                .For(this.lbl_databaseConnectionString, _ => _.ForeColor)
+                    .WithConverter(_ => _.DatabaseConnection.Connected, source => source ? Color.Green : Color.Red);
             LoadLanguageMenu();
         }
 

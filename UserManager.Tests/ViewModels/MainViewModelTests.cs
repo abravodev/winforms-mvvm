@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using FluentAssertions;
+using UserManager.BusinessLogic.DataAccess;
 
 namespace UserManager.Tests.ViewModels
 {
@@ -24,6 +25,7 @@ namespace UserManager.Tests.ViewModels
         private IMessageDialog _messageDialog;
         private IViewNavigator _viewNavigator;
         private IMessageHub _eventAggregator;
+        private IDatabaseService _databaseService;
         private MainViewModel sut;
 
         [TestInitialize]
@@ -33,7 +35,13 @@ namespace UserManager.Tests.ViewModels
             _messageDialog = Substitute.For<IMessageDialog>();
             _viewNavigator = Substitute.For<IViewNavigator>();
             _eventAggregator = Substitute.For<IMessageHub>();
-            sut = new MainViewModel(_settingProvider, _messageDialog, _viewNavigator, _eventAggregator);
+            _databaseService = Substitute.For<IDatabaseService>();
+            sut = CreateViewModel();
+        }
+
+        private MainViewModel CreateViewModel()
+        {
+            return new MainViewModel(_settingProvider, _messageDialog, _viewNavigator, _eventAggregator, _databaseService);
         }
 
         [TestMethod]
@@ -79,7 +87,7 @@ namespace UserManager.Tests.ViewModels
             // Arrange
             Action<ViewClosedEvent> onClosedEvent = null;
             _eventAggregator.GetAction<ViewClosedEvent>(action => onClosedEvent = action);
-            var viewModel = new MainViewModel(_settingProvider, _messageDialog, _viewNavigator, _eventAggregator);
+            var viewModel = CreateViewModel();
             viewModel.NavigateToUsersView();
             onClosedEvent(ViewClosedEvent.Create<UsersView, UsersViewModel>());
 
@@ -106,6 +114,24 @@ namespace UserManager.Tests.ViewModels
             sut.AvailableLanguages.Should().HaveCount(2)
                 .And.Contain(x => x.Culture == currentCulture && x.Current)
                 .And.Contain(x => x.Culture == otherCulture && !x.Current);
+        }
+
+        [TestMethod]
+        [DataRow("anyDatabase", true)]
+        [DataRow("anyDatabase", false)]
+        public async Task Load_ShowDatabaseConnectionStatus(string databaseName, bool connected)
+        {
+            // Arrange
+            _databaseService.GetName().Returns(databaseName);
+            _databaseService.CanConnectToDatabase().Returns(connected);
+            _settingProvider.GetAvailableCultures().Returns(new List<CultureInfo>());
+
+            // Act
+            await sut.Load();
+
+            // Assert
+            sut.DatabaseConnection.Name.Should().Be(databaseName);
+            sut.DatabaseConnection.Connected.Should().Be(connected);
         }
 
         [TestMethod]
