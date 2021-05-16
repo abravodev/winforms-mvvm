@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using FluentAssertions;
 using UserManager.BusinessLogic.DataAccess;
+using UserManager.DTOs;
 
 namespace UserManager.Tests.ViewModels
 {
@@ -117,9 +118,9 @@ namespace UserManager.Tests.ViewModels
         }
 
         [TestMethod]
-        [DataRow("anyDatabase", true)]
-        [DataRow("anyDatabase", false)]
-        public async Task Load_ShowDatabaseConnectionStatus(string databaseName, bool connected)
+        [DataRow("anyDatabase", true, ConnectionStatus.Connected)]
+        [DataRow("anyDatabase", false, ConnectionStatus.Disconnected)]
+        public async Task Load_ShowDatabaseConnectionStatus(string databaseName, bool connected, ConnectionStatus status)
         {
             // Arrange
             _databaseService.GetName().Returns(databaseName);
@@ -127,11 +128,12 @@ namespace UserManager.Tests.ViewModels
             _settingProvider.GetAvailableCultures().Returns(new List<CultureInfo>());
 
             // Act
+            sut.DatabaseConnection.ConnectionStatus.Should().Be(ConnectionStatus.Connecting);
             await sut.Load();
 
             // Assert
             sut.DatabaseConnection.Name.Should().Be(databaseName);
-            sut.DatabaseConnection.Connected.Should().Be(connected);
+            sut.DatabaseConnection.ConnectionStatus.Should().Be(status);
         }
 
         [TestMethod]

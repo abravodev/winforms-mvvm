@@ -11,11 +11,18 @@ namespace UserManager.DTOs
             set { SetProperty(ref _name, value); }
         }
 
-        private bool _connected;
-        public bool Connected
+        private ConnectionStatus _connectionStatus;
+        public ConnectionStatus ConnectionStatus
         {
-            get { return _connected; }
-            set { SetProperty(ref _connected, value); }
+            get { return _connectionStatus; }
+            set { SetProperty(ref _connectionStatus, value); }
         }
+    }
+
+    public enum ConnectionStatus
+    {
+        Connecting,
+        Connected,
+        Disconnected
     }
 }

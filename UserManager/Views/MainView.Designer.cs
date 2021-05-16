@@ -35,8 +35,12 @@ namespace UserManager.Views
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_language = new WinformsTools.MVVM.Controls.BindableToolStripMenuItem();
             this.btn_roles = new FontAwesome.Sharp.IconButton();
+            this.flp_connection = new System.Windows.Forms.FlowLayoutPanel();
+            this.ic_connectionStatus = new FontAwesome.Sharp.IconPictureBox();
             this.lbl_databaseConnectionString = new System.Windows.Forms.Label();
             this.ms_menu.SuspendLayout();
+            this.flp_connection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ic_connectionStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_users
@@ -91,13 +95,42 @@ namespace UserManager.Views
             this.btn_roles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_roles.UseVisualStyleBackColor = true;
             // 
+            // flp_connection
+            // 
+            this.flp_connection.AutoSize = true;
+            this.flp_connection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flp_connection.Controls.Add(this.ic_connectionStatus);
+            this.flp_connection.Controls.Add(this.lbl_databaseConnectionString);
+            this.flp_connection.Location = new System.Drawing.Point(681, 422);
+            this.flp_connection.Name = "flp_connection";
+            this.flp_connection.Size = new System.Drawing.Size(107, 16);
+            this.flp_connection.TabIndex = 4;
+            // 
+            // ic_connectionStatus
+            // 
+            this.ic_connectionStatus.BackColor = System.Drawing.SystemColors.Control;
+            this.ic_connectionStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ic_connectionStatus.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            this.ic_connectionStatus.IconColor = System.Drawing.SystemColors.ControlText;
+            this.ic_connectionStatus.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.ic_connectionStatus.IconSize = 16;
+            this.ic_connectionStatus.Location = new System.Drawing.Point(0, 0);
+            this.ic_connectionStatus.Margin = new System.Windows.Forms.Padding(0);
+            this.ic_connectionStatus.Name = "ic_connectionStatus";
+            this.ic_connectionStatus.Size = new System.Drawing.Size(16, 16);
+            this.ic_connectionStatus.TabIndex = 5;
+            this.ic_connectionStatus.TabStop = false;
+            // 
             // lbl_databaseConnectionString
             // 
+            this.lbl_databaseConnectionString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_databaseConnectionString.AutoSize = true;
-            this.lbl_databaseConnectionString.Location = new System.Drawing.Point(697, 428);
+            this.lbl_databaseConnectionString.Location = new System.Drawing.Point(16, 0);
+            this.lbl_databaseConnectionString.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_databaseConnectionString.Name = "lbl_databaseConnectionString";
-            this.lbl_databaseConnectionString.Size = new System.Drawing.Size(91, 13);
-            this.lbl_databaseConnectionString.TabIndex = 3;
+            this.lbl_databaseConnectionString.Size = new System.Drawing.Size(91, 16);
+            this.lbl_databaseConnectionString.TabIndex = 4;
             this.lbl_databaseConnectionString.Text = "Connection to DB";
             // 
             // MainView
@@ -105,7 +138,7 @@ namespace UserManager.Views
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lbl_databaseConnectionString);
+            this.Controls.Add(this.flp_connection);
             this.Controls.Add(this.btn_roles);
             this.Controls.Add(this.btn_users);
             this.Controls.Add(this.ms_menu);
@@ -114,6 +147,9 @@ namespace UserManager.Views
             this.Text = "UserManager | winforms-mvvm";
             this.ms_menu.ResumeLayout(false);
             this.ms_menu.PerformLayout();
+            this.flp_connection.ResumeLayout(false);
+            this.flp_connection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ic_connectionStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,6 +162,8 @@ namespace UserManager.Views
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
         private BindableToolStripMenuItem tsmi_language;
         private FontAwesome.Sharp.IconButton btn_roles;
+        private System.Windows.Forms.FlowLayoutPanel flp_connection;
+        private FontAwesome.Sharp.IconPictureBox ic_connectionStatus;
         private System.Windows.Forms.Label lbl_databaseConnectionString;
     }
 }
