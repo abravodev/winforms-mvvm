@@ -1,10 +1,13 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: 
+      - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 env:
   SOLUTION_NAME: UserManager.sln
