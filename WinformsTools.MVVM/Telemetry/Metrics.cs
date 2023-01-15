@@ -2,7 +2,7 @@
 
 namespace WinformsTools.MVVM.Telemetry
 {
-    public class Metrics
+    public static class Metrics
     {
         private static Action<IMetric> _onLog;
 
@@ -11,6 +11,6 @@ namespace WinformsTools.MVVM.Telemetry
             _onLog = onLog;
         }
 
-        public static void Log(IMetric metric) => _onLog(metric);
+        public static void Log(IMetric metric) => _onLog?.Invoke(metric);
     }
 }

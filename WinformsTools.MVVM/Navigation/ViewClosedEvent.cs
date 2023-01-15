@@ -19,8 +19,8 @@ namespace WinformsTools.MVVM.Navigation
             return new ViewClosedEvent(view.GetType().Name, typeof(TViewModel).Name);
         }
 
-        public static ViewClosedEvent Create<TView, TViewModel>() 
-            where TView : IView<TViewModel> 
+        public static ViewClosedEvent Create<TView, TViewModel>()
+            where TView : IView<TViewModel>
             where TViewModel : IViewModel
         {
             return new ViewClosedEvent(typeof(TView).Name, typeof(TViewModel).Name);

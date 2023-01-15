@@ -8,7 +8,7 @@ namespace UserManager.Startup
     {
         public static void Config()
         {
-            var logger = Serilog.Log.ForContext<Metrics>()
+            var logger = Serilog.Log.ForContext(typeof(Metrics))
                 .ForContext("UserName", GetUserName());
 
             Metrics.Configure(metric => LogMetric(metric, logger));

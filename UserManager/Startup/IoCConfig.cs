@@ -53,6 +53,7 @@ namespace UserManager.Startup
             );
             container.RegisterInstance(databaseConfig);
             container.RegisterAsInterfaces<DatabaseService>();
+            container.RegisterAsInterfaces<DatabaseRepository>();
             container.RegisterAsInterfaces<UserRepository>();
             container.RegisterAsInterfaces<RoleRepository>();
         }

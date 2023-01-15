@@ -1,30 +1,28 @@
-﻿using Dapper;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System;
-using System.Data.SqlClient;
+using UserManager.BusinessLogic.DataAccess.Repositories;
 
 namespace UserManager.BusinessLogic.DataAccess
 {
     public class DatabaseService : IDatabaseService
     {
         private readonly DatabaseContext _databaseContext;
+        private readonly IDatabaseRepository _databaseRepository;
 
-        public DatabaseService(DatabaseContext databaseContext)
+        public DatabaseService(DatabaseContext databaseContext, IDatabaseRepository databaseRepository)
         {
             _databaseContext = databaseContext;
+            _databaseRepository = databaseRepository;
         }
 
-        public string GetName() => new SqlConnectionStringBuilder(_databaseContext.ConnectionString).InitialCatalog;
+        public string GetName() => _databaseContext.ConnectionInfo.InitialCatalog;
 
         public async Task<bool> CanConnectToDatabase()
         {
             try
             {
-                using (var connection = _databaseContext.GetOpenedConnection())
-                {
-                    var databaseVersion = await connection.QueryAsync<string>("SELECT @@version");
-                    return true;
-                }
+                var databaseVersion = await _databaseRepository.GetDatabaseVersion();
+                return true;
             }
             catch (Exception)
             {

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.ComponentModel;
 using WinformsTools.MVVM.Bindings;
 
@@ -16,7 +17,19 @@ namespace WinformsTools.MVVM.Tests.Bindings
         }
 
         [TestMethod]
-        public void AdvandedBindingList_should_be_in_sync_with_source_list()
+        public void Can_be_constructed_with_empty_list()
+        {
+            // Act
+            var emptyList = new AdvancedBindingList<User>(new List<User>());
+            var list = new AdvancedBindingList<User>();
+
+            // Assert
+            list.Should().BeEmpty();
+            list.Should().BeEquivalentTo(emptyList);
+        }
+
+        [TestMethod]
+        public void Is_in_sync_with_source_list()
         {
             var firstUser = new User { FirstName = "John", LastName = "Doe" };
             var secondUser = new User { FirstName = "Joe", LastName = "Average" };
@@ -35,6 +48,25 @@ namespace WinformsTools.MVVM.Tests.Bindings
 
             firstUser.LastName = "Smith";
             advancedList[0].LastName.Should().Be("Smith");
+        }
+
+        [TestMethod]
+        public void Can_remove_filter()
+        {
+            // Arrange
+            var user = new User { FirstName = "Jack" };
+            var source = new BindingList<User> { user };
+            var list = new AdvancedBindingList<User>(source);
+            list.Should().Contain(user);
+            list.Filter = "[FirstName] IN ('john')";
+            list.Should().BeEmpty();
+
+            // Act
+            list.RemoveFilter();
+
+            // Assert
+            list.Should().Contain(user);
+            list.Filter.Should().BeEmpty();
         }
     }
 }

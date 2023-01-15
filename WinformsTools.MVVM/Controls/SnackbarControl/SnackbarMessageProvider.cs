@@ -14,7 +14,7 @@ namespace WinformsTools.MVVM.Controls.SnackbarControl
 
         public ISnackbarMessage Get<TViewModel>(TViewModel model) where TViewModel : IViewModel
         {
-            var view = _registeredViews.GetControl(model);
+            var view = _registeredViews.GetControl<TViewModel>();
             return new SnackbarMessage(view);
         }
     }

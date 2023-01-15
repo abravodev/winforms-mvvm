@@ -5,14 +5,16 @@ namespace UserManager.BusinessLogic.DataAccess
 {
     public class DatabaseContext
     {
+        private readonly string _connectionString;
+
         public DatabaseContext(string conectionString)
         {
-            ConnectionString = conectionString;
+            _connectionString = conectionString;
         }
 
-        public string ConnectionString { get; }
+        public virtual SqlConnectionStringBuilder ConnectionInfo => new SqlConnectionStringBuilder(_connectionString);
 
-        protected virtual IDbConnection GetConnection() => new SqlConnection(ConnectionString);
+        protected virtual IDbConnection GetConnection() => new SqlConnection(_connectionString);
 
         /// <summary>
         /// Returns an opened connection <see cref="IDbConnection"/>

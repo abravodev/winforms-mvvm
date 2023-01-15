@@ -11,11 +11,49 @@ namespace WinformsTools.MVVM.Tests.Bindings
     [TestClass]
     public class ListObjectComparerTests
     {
-        private class ListItem
+        public class ListItem
         {
             public string FirstColumn { get; set; }
 
             public string SecondColumn { get; set; }
+        }
+
+        public static IEnumerable<object[]> CompareValuesByProperties_ListContainsNull_ReturnedNullFirst_Data
+        {
+            get
+            {
+                var itemWithValue = new ListItem { FirstColumn = "Something" };
+                yield return new object[]
+                {
+                    new List<ListItem> { null, itemWithValue },
+                    new List<ListItem> { null, itemWithValue }
+                };
+
+                yield return new object[]
+                {
+                    new List<ListItem> { null, itemWithValue, null },
+                    new List<ListItem> { null, null, itemWithValue }
+                };
+            }
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(CompareValuesByProperties_ListContainsNull_ReturnedNullFirst_Data), DynamicDataSourceType.Property)]
+        public void CompareValuesByProperties_ListContainsNull_ReturnedNullFirst(List<ListItem> list, List<ListItem> expected)
+        {
+            // Arrange
+            var descriptor = typeof(ListItem).GetProperty(nameof(ListItem.FirstColumn));
+            var sortCollection = new[]
+            {
+                new ListSortDescription(GetPropertyDescriptor(descriptor), ListSortDirection.Ascending)
+            };
+            var comparer = ListObjectComparer.FromSort<ListItem>(new ListSortDescriptionCollection(sortCollection));
+
+            // Act
+            list.Sort(comparer.CompareValuesByProperties);
+
+            // Assert
+            list.Should().BeEquivalentTo(expected);
         }
 
         [TestMethod]

@@ -61,6 +61,8 @@
     <Compile Include="DataAccess\IDatabaseService.cs" />
     <Compile Include="DataAccess\Mappers\IntTypeHandler.cs" />
     <Compile Include="DataAccess\Mappers\RoleMapper.cs" />
+    <Compile Include="DataAccess\Repositories\DatabaseRepository.cs" />
+    <Compile Include="DataAccess\Repositories\IDatabaseRepository.cs" />
     <Compile Include="DataAccess\Repositories\IRoleRepository.cs" />
     <Compile Include="DataAccess\Mappers\EmailMapper.cs" />
     <Compile Include="DataAccess\Repositories\IUserRepository.cs" />

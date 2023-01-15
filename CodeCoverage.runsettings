@@ -14,8 +14,15 @@
               </Include>
               <Exclude>
                 <ModulePath>.*Tests.dll$</ModulePath>
+				<ModulePath>.*TestUtils.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
+			<Sources>
+			  <Exclude>
+				<Source>.*\\*.Designer.cs</Source>
+			  </Exclude>
+			</Sources>
+			  
             <Attributes>
               <Exclude>
                 <Attribute>^System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Attribute>
