@@ -6,6 +6,7 @@ using UserManager.ViewModels;
 using System.Drawing;
 using UserManager.DTOs;
 using System;
+using WinformsTools.MVVM.Controls;
 
 namespace UserManager.Views
 {
@@ -29,6 +30,7 @@ namespace UserManager.Views
                 .For(this.lbl_databaseConnectionString, _ => _.Text, _ => _.DatabaseConnection.Name)
                 .For(this.lbl_databaseConnectionString, _ => _.ForeColor)
                     .WithConverter(_ => _.DatabaseConnection.ConnectionStatus, new StatusToColorConverter())
+                .WithTooltipOn(this.lbl_databaseConnectionString, _ => _.DatabaseConnection.Server, dependsOn: _ => _.DatabaseConnection)
                 .For(this.ic_connectionStatus, _ => _.IconColor)
                     .WithConverter(_ => _.DatabaseConnection.ConnectionStatus, new StatusToColorConverter());
             LoadLanguageMenu();

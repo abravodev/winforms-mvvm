@@ -17,6 +17,8 @@ namespace UserManager.BusinessLogic.DataAccess
 
         public string GetName() => _databaseContext.ConnectionInfo.InitialCatalog;
 
+        public string GetServer() => _databaseContext.ConnectionInfo.DataSource;
+
         public async Task<bool> CanConnectToDatabase()
         {
             try

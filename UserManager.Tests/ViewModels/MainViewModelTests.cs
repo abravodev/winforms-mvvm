@@ -118,12 +118,13 @@ namespace UserManager.Tests.ViewModels
         }
 
         [TestMethod]
-        [DataRow("anyDatabase", true, ConnectionStatus.Connected)]
-        [DataRow("anyDatabase", false, ConnectionStatus.Disconnected)]
-        public async Task Load_ShowDatabaseConnectionStatus(string databaseName, bool connected, ConnectionStatus status)
+        [DataRow("anyDatabase", "anyServer", true, ConnectionStatus.Connected)]
+        [DataRow("anyDatabase", "anyServer", false, ConnectionStatus.Disconnected)]
+        public async Task Load_ShowDatabaseConnectionStatus(string databaseName, string databaseServer, bool connected, ConnectionStatus status)
         {
             // Arrange
             _databaseService.GetName().Returns(databaseName);
+            _databaseService.GetServer().Returns(databaseServer);
             _databaseService.CanConnectToDatabase().Returns(connected);
             _settingProvider.GetAvailableCultures().Returns(new List<CultureInfo>());
 
@@ -133,6 +134,7 @@ namespace UserManager.Tests.ViewModels
 
             // Assert
             sut.DatabaseConnection.Name.Should().Be(databaseName);
+            sut.DatabaseConnection.Server.Should().Be(databaseServer);
             sut.DatabaseConnection.ConnectionStatus.Should().Be(status);
         }
 

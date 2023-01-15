@@ -34,7 +34,11 @@ namespace WinformsTools.MVVM.Bindings
             return this;
         }
 
-        public Bind<TBinding> For<TControl, TProperty>(TControl control, Expression<Func<TControl, TProperty>> controlProperty, Expression<Func<TBinding, TProperty>> member, Func<TBinding, BindableObject> dependsOn)
+        public Bind<TBinding> For<TControl, TProperty>(
+            TControl control,
+            Expression<Func<TControl, TProperty>> controlProperty,
+            Expression<Func<TBinding, TProperty>> member,
+            Func<TBinding, BindableObject> dependsOn)
             where TControl : Control
         {
             var binding = control.DataBindings.Add(ReflectionUtils.GetPropertyName(controlProperty), _item, ReflectionUtils.GetPropertyName(member));
@@ -92,6 +96,14 @@ namespace WinformsTools.MVVM.Bindings
         {
             For(progressBar, _ => _.Visible, member);
             topControl.AddInverseBinding(nameof(topControl.Enabled), _item, ReflectionUtils.GetPropertyName(member));
+            return this;
+        }
+
+        public Bind<TBinding> WithTooltipOn<TControl>(TControl control, Func<TBinding, string> member, Func<TBinding, BindableObject> dependsOn)
+            where TControl : Control
+        {
+            var tooltip = new ToolTip();
+            dependsOn(_item).PropertyChanged += (sender, args) => tooltip.SetToolTip(control, member(_item));
             return this;
         }
     }

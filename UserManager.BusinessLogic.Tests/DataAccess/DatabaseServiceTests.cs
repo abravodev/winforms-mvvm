@@ -42,6 +42,20 @@ namespace UserManager.BusinessLogic.Tests.DataAccess
         }
 
         [TestMethod]
+        public void GetServer_ReturnNameOfTheDatabaseServer()
+        {
+            // Arrange
+            var connectionInfo = new SqlConnectionStringBuilder { DataSource = "anyDatabaseServer" };
+            _databaseContext.ConnectionInfo.Returns(connectionInfo);
+
+            // Act
+            var name = sut.GetServer();
+
+            // Assert
+            name.Should().Be(connectionInfo.DataSource);
+        }
+
+        [TestMethod]
         public async Task CanConnectToDatabase_FailedToConnect_ReturnFalse()
         {
             // Arrange

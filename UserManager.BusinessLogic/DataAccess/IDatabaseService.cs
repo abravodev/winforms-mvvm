@@ -7,5 +7,6 @@ namespace UserManager.BusinessLogic.DataAccess
         string GetName();
 
         Task<bool> CanConnectToDatabase();
+        string GetServer();
     }
 }

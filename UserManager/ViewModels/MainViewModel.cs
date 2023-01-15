@@ -59,6 +59,7 @@ namespace UserManager.ViewModels
         private async Task ShowDatabaseConnectionStatus()
         {
             this.DatabaseConnection.Name = _databaseService.GetName();
+            this.DatabaseConnection.Server = _databaseService.GetServer();
             var connected = await _databaseService.CanConnectToDatabase();
             this.DatabaseConnection.ConnectionStatus = connected
                 ? ConnectionStatus.Connected

@@ -11,6 +11,13 @@ namespace UserManager.DTOs
             set { SetProperty(ref _name, value); }
         }
 
+        private string _server;
+        public string Server
+        {
+            get { return _server; }
+            set { SetProperty(ref _server, value); }
+        }
+
         private ConnectionStatus _connectionStatus;
         public ConnectionStatus ConnectionStatus
         {
