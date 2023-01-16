@@ -45,10 +45,10 @@ While building this, I've had to search for a lot of things in Google, so there 
 There are some alternatives to MVVM, let's review it:
 - **Do nothing**. That's the default option. It is true that you don't need a framework to build your app, but you will end up with hard-to-reason code or with building your own framework inadvertently.
 - **MVC**. Model View Controller. Examples:
-	- [shane-lab/winforms-mvc](https://github.com/shane-lab/winforms-mvc)
+    - [shane-lab/winforms-mvc](https://github.com/shane-lab/winforms-mvc)
 - **MVP**. Model View Presenter. Examples:
-	- [mrts/winforms-mvp](https://github.com/mrts/winforms-mvp)
-	- [Los Techies - Model View Presenter Styles](https://lostechies.com/derekgreer/2008/11/23/model-view-presenter-styles/)
+    - [mrts/winforms-mvp](https://github.com/mrts/winforms-mvp)
+    - [Los Techies - Model View Presenter Styles](https://lostechies.com/derekgreer/2008/11/23/model-view-presenter-styles/)
 
 # Sample app
 ## Setup
@@ -67,5 +67,55 @@ This is set through `Project > Properties > Debug > Command Line Arguments`
 - List roles
 ### Language
 - Change language of the app
-	- *This is not complete because I haven't found a proper way to keep a minimum number of resources yet*
+    - *This is not complete because I haven't found a proper way to keep a minimum number of resources yet*
 - Save it into user preferences
+
+# Toolbox features
+## Bindings
+You can use bindings for data properties:
+```csharp
+this.BindTo(ViewModel)
+
+    // Bind the 'Text' property of 'tb_firstName' to the value of 'FirstName' in the ViewModel
+    .For(this.tb_firstName, _ => _.Text, _ => _.FirstName)
+    .For(this.tb_firstName, _ => _.FirstName) // A more concise version
+
+    // Bind the 'ForeColor' property of lbl_status to the value of 'DatabaseConnection.ConnectionStatus' in the ViewModel
+    // In this case, we're using a custom converter (StatusToColorConverter) to map from an enum to a color
+    .For(this.lbl_status, _ => _.ForeColor)
+        .WithConverter(_ => _.DatabaseConnection.ConnectionStatus, new StatusToColorConverter())
+
+    // It also works with DataGridViews mapped to an in-memory list
+    .For(this.dgv_userlist, _ => _.Users)
+
+    // Bind the tooltip text on 'lbl_databaseConnectionString' to the value of DatabaseConnection.Server in the ViewModel
+    .WithTooltipOn(this.lbl_databaseConnectionString, _ => _.DatabaseConnection.Server, dependsOn: _ => _.DatabaseConnection)
+```
+You can use bindings for behaviours:
+```csharp
+this.BindTo(ViewModel)
+
+    // Make the button 'bt_save' enabled based on a boolean property in the viewmodel
+    .For(this.bt_save, _ => _.Enabled, _ => _.CanCreateUser, dependsOn: _ => _.CreateUserInfo)
+
+    // When someone clicks on 'btn_users', the command 'NavigateToUsersView' in the ViewModel will execute
+    .Click(this.bt_save, _ => _.CreateUserCommand)
+    .Click(this.bt_save, () => Console.WriteLine("Button pressed")); // It can be an anonymous action
+
+    // Include contextual menus in DataGridViews or any other control
+    .WithContextMenu(this.dgv_userlist,
+        // We set the menu option text, the action on clicked and the icon (optional)
+        MenuOption.Create(General.Delete, ViewModel.DeleteUserCommand, IconChar.Times))
+```
+Add validation to your form:
+```csharp
+// ep_createUser is the ErrorProvider of the form
+this.WithValidation(ep_createUser)
+
+    // Make the email 'TextBox' required
+    .On(this.tb_email).FieldRequired();
+```
+## Other good stuff:
+- `IMessageDialog` so that you don't depend on the `MessageBox`
+- `SnackbarControl` to notify the user after you make an action. And a `ISnackbarMessage` for using it in your VMs.
+- `IViewNavigator` to navigate between views
